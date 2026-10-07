@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>EduSpark Craft Quest</title>
 
 <style>
@@ -13,12 +13,11 @@
 
 html,body{
   margin:0;
-  padding:0;
   width:100%;
   height:100%;
   overflow:hidden;
-  font-family:Arial, sans-serif;
-  background:#75cfff;
+  font-family:Arial,sans-serif;
+  background:#72cfff;
 }
 
 #game{
@@ -27,42 +26,37 @@ html,body{
   overflow:hidden;
 }
 
-/* SKY */
 #sky{
   position:absolute;
   inset:0;
-  background:linear-gradient(#69c9ff 0%,#bdeeff 68%,#e8f9ff 100%);
-  z-index:0;
+  background:linear-gradient(#63c8ff,#c7f1ff 72%,#eaffff);
 }
 
-/* SUN */
 #sun{
   position:absolute;
-  width:110px;
-  height:110px;
+  width:105px;
+  height:105px;
+  right:80px;
+  top:50px;
   border-radius:50%;
-  background:#ffe36b;
-  right:90px;
-  top:55px;
-  box-shadow:0 0 45px #fff3a0;
+  background:#ffe66b;
+  box-shadow:0 0 55px #fff4a3;
 }
 
-/* CLOUDS */
 .cloud{
   position:absolute;
   width:170px;
   height:55px;
-  background:white;
+  background:#fff;
   border-radius:50px;
   opacity:.9;
-  z-index:1;
 }
 
 .cloud:before,
 .cloud:after{
   content:"";
   position:absolute;
-  background:white;
+  background:#fff;
   border-radius:50%;
 }
 
@@ -77,92 +71,81 @@ html,body{
   width:90px;
   height:90px;
   right:20px;
-  top:-48px;
+  top:-45px;
 }
 
-.c1{left:8%;top:90px;}
-.c2{left:45%;top:150px;transform:scale(.8);}
-.c3{left:72%;top:105px;transform:scale(.65);}
+.c1{left:8%;top:90px}
+.c2{left:45%;top:150px;transform:scale(.8)}
+.c3{left:75%;top:100px;transform:scale(.65)}
 
-/* WORLD */
 #world{
   position:absolute;
   left:0;
   top:0;
-  width:6000px;
+  width:7000px;
   height:100%;
-  z-index:3;
+  z-index:5;
 }
 
-/* HILLS */
 .hill{
   position:absolute;
   bottom:150px;
-  width:500px;
+  width:520px;
   height:300px;
-  background:#58b957;
+  background:#52b653;
   border-radius:50% 50% 0 0;
   opacity:.8;
 }
 
-.h1{left:300px;}
-.h2{left:1300px;transform:scale(1.3);}
-.h3{left:2500px;transform:scale(.9);}
-.h4{left:3700px;transform:scale(1.5);}
-.h5{left:5000px;transform:scale(.8);}
+.h1{left:250px}
+.h2{left:1200px;transform:scale(1.25)}
+.h3{left:2350px;transform:scale(.9)}
+.h4{left:3500px;transform:scale(1.4)}
+.h5{left:4850px;transform:scale(.9)}
+.h6{left:6000px;transform:scale(1.3)}
 
-/* GROUND */
 #ground{
   position:absolute;
   left:0;
   bottom:0;
-  width:6000px;
+  width:7000px;
   height:155px;
   background:
     repeating-linear-gradient(
       90deg,
-      rgba(255,255,255,.08) 0px,
-      rgba(255,255,255,.08) 48px,
-      transparent 48px,
-      transparent 96px
+      rgba(255,255,255,.08) 0 45px,
+      transparent 45px 90px
     ),
-    linear-gradient(#65c653 0 22px,#9b632f 22px 100%);
-  border-top:8px solid #3f9c39;
+    linear-gradient(#63c84e 0 23px,#985f31 23px 100%);
+  border-top:8px solid #3d9c39;
 }
 
-/* BLOCKS */
-.block{
+.water{
   position:absolute;
-  width:52px;
-  height:52px;
-  border-radius:5px;
-  box-shadow:
-    inset 0 5px rgba(255,255,255,.15),
-    inset 0 -6px rgba(0,0,0,.18),
-    0 4px 5px rgba(0,0,0,.15);
-  cursor:pointer;
+  bottom:155px;
+  height:95px;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      #29a9df 0 16px,
+      #5bcbed 16px 25px
+    );
+  border-top:5px solid #a6efff;
 }
 
-.grass{background:#61c84e;}
-.dirt{background:#9b6335;}
-.stone{background:#777;}
-.gold{background:#f5c542;}
-.crystal{background:#67e8f9;}
-
-/* TREES */
 .tree{
   position:absolute;
-  width:110px;
-  height:210px;
+  width:115px;
+  height:215px;
 }
 
 .trunk{
   position:absolute;
   width:35px;
-  height:105px;
-  left:38px;
+  height:110px;
+  left:40px;
   bottom:0;
-  background:#82502b;
+  background:#7b4b29;
   border-radius:8px;
 }
 
@@ -170,60 +153,59 @@ html,body{
   position:absolute;
   width:115px;
   height:115px;
-  left:-3px;
-  top:15px;
-  background:#268b3d;
+  left:0;
+  top:10px;
   border-radius:50%;
+  background:#21883a;
   box-shadow:
-    25px -15px 0 #35a94b,
-    -20px 15px 0 #2f9b42,
-    30px 30px 0 #23813a;
+    25px -15px 0 #37aa4b,
+    -20px 15px 0 #2c9b43,
+    30px 30px 0 #237d37;
 }
 
-/* ROCK */
 .rock{
   position:absolute;
-  width:75px;
-  height:50px;
-  background:#666;
-  border-radius:45% 45% 20% 20%;
-  box-shadow:inset 8px 8px rgba(255,255,255,.12);
+  width:80px;
+  height:52px;
+  border-radius:50% 55% 25% 25%;
+  background:#686868;
+  box-shadow:inset 8px 7px rgba(255,255,255,.15);
 }
 
-/* WATER */
-.water{
+.block{
   position:absolute;
-  height:100px;
-  background:
-    repeating-linear-gradient(
-      0deg,
-      #28a9e0 0px,
-      #28a9e0 18px,
-      #55c9ef 18px,
-      #55c9ef 27px
-    );
-  border-top:5px solid #a6edff;
-  opacity:.95;
+  width:52px;
+  height:52px;
+  border-radius:6px;
+  box-shadow:
+    inset 0 5px rgba(255,255,255,.15),
+    inset 0 -7px rgba(0,0,0,.2),
+    0 4px 5px rgba(0,0,0,.18);
+  cursor:pointer;
 }
+
+.gold{background:#f5c542}
+.stone{background:#777}
+.crystal{background:#63e8f5}
 
 /* PLAYER */
+
 #player{
   position:fixed;
-  width:54px;
-  height:82px;
-  z-index:50;
-  transition:transform .08s;
+  width:58px;
+  height:90px;
+  z-index:80;
 }
 
-.head{
+.playerHead{
   position:absolute;
-  width:42px;
-  height:42px;
-  left:6px;
+  width:44px;
+  height:44px;
+  left:7px;
   top:0;
   background:#ffc58a;
-  border-radius:12px;
   border:3px solid #333;
+  border-radius:12px;
 }
 
 .eye{
@@ -235,237 +217,298 @@ html,body{
   top:13px;
 }
 
-.eye1{left:15px;}
-.eye2{right:15px;}
+.eye1{left:14px}
+.eye2{right:14px}
 
-.body{
+.playerBody{
   position:absolute;
-  width:42px;
-  height:35px;
-  left:6px;
-  top:39px;
-  background:#2674e8;
-  border-radius:8px;
+  width:44px;
+  height:37px;
+  left:7px;
+  top:41px;
+  background:#2675e8;
   border:3px solid #333;
+  border-radius:8px;
 }
 
 .leg{
   position:absolute;
-  width:15px;
-  height:28px;
-  background:#303b55;
+  width:16px;
+  height:29px;
   bottom:-25px;
+  background:#303b55;
   border-radius:5px;
 }
 
-.leg1{left:9px;}
-.leg2{right:9px;}
+.leg1{left:10px}
+.leg2{right:10px}
 
 .walk .leg1{
-  animation:walk1 .16s infinite alternate;
+  animation:walk1 .14s infinite alternate;
 }
 
 .walk .leg2{
-  animation:walk2 .16s infinite alternate;
+  animation:walk2 .14s infinite alternate;
 }
 
 @keyframes walk1{
-  from{transform:rotate(15deg);}
-  to{transform:rotate(-15deg);}
+  from{transform:rotate(16deg)}
+  to{transform:rotate(-16deg)}
 }
 
 @keyframes walk2{
-  from{transform:rotate(-15deg);}
-  to{transform:rotate(15deg);}
+  from{transform:rotate(-16deg)}
+  to{transform:rotate(16deg)}
 }
 
-/* ENEMY */
-.enemy{
-  position:absolute;
-  width:58px;
-  height:78px;
-  z-index:30;
-}
+/* PLAYER SHIELD */
 
-.enemyHead{
+#shield{
   position:absolute;
-  width:52px;
-  height:45px;
-  background:#d94a4a;
-  border:3px solid #551d1d;
-  border-radius:10px;
-}
-
-.enemyEye{
-  position:absolute;
-  width:8px;
-  height:10px;
-  background:#fff;
-  top:12px;
-}
-
-.enemyEye:after{
-  content:"";
-  position:absolute;
-  width:4px;
-  height:5px;
-  background:#111;
-  left:2px;
-  top:2px;
-}
-
-.ee1{left:10px;}
-.ee2{right:10px;}
-
-.enemyBody{
-  position:absolute;
-  width:48px;
-  height:34px;
-  left:2px;
-  top:42px;
-  background:#782fbd;
-  border:3px solid #45126c;
-  border-radius:8px;
-}
-
-/* COINS */
-.coin{
-  position:absolute;
-  width:28px;
-  height:28px;
+  inset:-12px;
+  border:4px solid #58e9ff;
   border-radius:50%;
-  background:#ffd52e;
-  border:4px solid #e79f00;
-  box-shadow:0 0 15px #ffe76b;
-  animation:coinSpin .7s infinite alternate;
+  opacity:0;
+  animation:shieldPulse .7s infinite alternate;
 }
 
-@keyframes coinSpin{
-  from{transform:scaleX(1);}
-  to{transform:scaleX(.45);}
+@keyframes shieldPulse{
+  from{transform:scale(.95);opacity:.5}
+  to{transform:scale(1.05);opacity:.9}
 }
 
 /* KEY */
-#key{
+
+#playerKey{
   position:absolute;
-  width:54px;
-  height:54px;
-  z-index:25;
+  width:25px;
+  height:25px;
+  right:-17px;
+  top:30px;
   display:none;
-  animation:keyFloat .8s infinite alternate;
+  z-index:90;
 }
 
 .keyRing{
   position:absolute;
-  width:27px;
-  height:27px;
-  border:7px solid #ffd42a;
+  width:17px;
+  height:17px;
+  border:5px solid #ffd52a;
   border-radius:50%;
 }
 
 .keyStem{
   position:absolute;
-  width:32px;
-  height:9px;
-  background:#ffd42a;
-  left:23px;
-  top:18px;
-  border-radius:5px;
+  left:13px;
+  top:7px;
+  width:17px;
+  height:6px;
+  background:#ffd52a;
+  border-radius:4px;
 }
 
 .keyTooth{
   position:absolute;
+  left:24px;
+  top:7px;
+  width:5px;
+  height:11px;
+  background:#ffd52a;
+}
+
+/* COINS */
+
+.coin{
+  position:absolute;
+  width:29px;
+  height:29px;
+  border-radius:50%;
+  background:#ffd52e;
+  border:4px solid #e59b00;
+  box-shadow:0 0 18px #ffe76b;
+  animation:coinFloat .7s infinite alternate;
+}
+
+@keyframes coinFloat{
+  from{transform:translateY(0) scaleX(1)}
+  to{transform:translateY(-10px) scaleX(.65)}
+}
+
+.coin.collect{
+  animation:coinCollect .4s forwards;
+}
+
+@keyframes coinCollect{
+  to{
+    transform:translateY(-80px) scale(2);
+    opacity:0;
+  }
+}
+
+/* ENEMY */
+
+.enemy{
+  position:absolute;
+  width:70px;
+  height:100px;
+  z-index:65;
+}
+
+.enemyHead{
+  position:absolute;
+  width:56px;
+  height:48px;
+  left:7px;
+  background:#dc4a4a;
+  border:3px solid #551d1d;
+  border-radius:12px;
+}
+
+.enemyEye{
+  position:absolute;
   width:9px;
-  height:15px;
-  background:#ffd42a;
-  left:42px;
-  top:18px;
+  height:11px;
+  top:13px;
+  background:#fff;
+}
+
+.enemyEye:after{
+  content:"";
+  position:absolute;
+  width:5px;
+  height:6px;
+  left:2px;
+  top:3px;
+  background:#111;
+}
+
+.ee1{left:10px}
+.ee2{right:10px}
+
+.enemyBody{
+  position:absolute;
+  width:52px;
+  height:40px;
+  left:9px;
+  top:45px;
+  background:#772db9;
+  border:3px solid #43106a;
+  border-radius:9px;
+}
+
+.enemyArm{
+  position:absolute;
+  width:12px;
+  height:35px;
+  top:47px;
+  background:#e05b5b;
+  border-radius:8px;
+}
+
+.arm1{left:-2px;transform:rotate(25deg)}
+.arm2{right:-2px;transform:rotate(-25deg)}
+
+.enemyHealth{
+  position:absolute;
+  top:-18px;
+  left:7px;
+  width:56px;
+  height:8px;
+  background:#333;
+  border-radius:5px;
+  overflow:hidden;
+}
+
+.enemyHealthBar{
+  width:100%;
+  height:100%;
+  background:#46e15b;
 }
 
 /* GATE */
+
 #gate{
   position:absolute;
-  left:5550px;
+  left:6550px;
   bottom:155px;
-  width:150px;
-  height:260px;
-  z-index:20;
+  width:160px;
+  height:270px;
+  z-index:50;
 }
 
 .gatePost{
   position:absolute;
-  width:25px;
-  height:260px;
+  width:28px;
+  height:270px;
   bottom:0;
-  background:#5a3b28;
-  border-radius:5px;
+  background:#573923;
+  border-radius:6px;
 }
 
-.gp1{left:0;}
-.gp2{right:0;}
+.gp1{left:0}
+.gp2{right:0}
 
 .gateTop{
   position:absolute;
-  left:0;
-  top:0;
-  width:150px;
-  height:30px;
-  background:#6d472c;
+  width:160px;
+  height:32px;
+  background:#70492c;
   border-radius:8px;
 }
 
 .gateBars{
   position:absolute;
-  left:25px;
-  right:25px;
+  left:30px;
+  right:30px;
   bottom:0;
-  height:230px;
+  height:238px;
   display:flex;
-  justify-content:space-around;
+  justify-content:space-between;
 }
 
 .gateBars span{
-  width:13px;
-  height:230px;
-  background:#855c38;
+  width:14px;
+  height:238px;
+  background:#855d39;
   border-radius:6px;
 }
 
 .lock{
   position:absolute;
-  width:35px;
-  height:42px;
+  width:38px;
+  height:44px;
+  left:61px;
+  top:115px;
   background:#ffca28;
-  border:5px solid #7c5410;
-  border-radius:7px;
-  left:58px;
-  top:110px;
+  border:5px solid #76510b;
+  border-radius:8px;
 }
 
 .lock:before{
   content:"";
   position:absolute;
   width:20px;
-  height:20px;
-  border:5px solid #7c5410;
+  height:22px;
+  left:4px;
+  top:-27px;
+  border:5px solid #76510b;
   border-bottom:0;
   border-radius:15px 15px 0 0;
-  left:3px;
-  top:-25px;
 }
 
 /* HUD */
+
 #hud{
   position:fixed;
   left:15px;
   top:15px;
-  z-index:100;
+  z-index:200;
+  min-width:235px;
+  padding:13px 15px;
+  border-radius:16px;
   background:rgba(0,0,0,.72);
   color:white;
-  padding:12px 15px;
-  border-radius:15px;
-  min-width:210px;
-  border:2px solid rgba(255,255,255,.25);
+  border:2px solid rgba(255,255,255,.2);
 }
 
 .stat{
@@ -474,43 +517,60 @@ html,body{
 }
 
 #zone{
-  color:#7df58b;
+  color:#7dff91;
 }
 
 #missionStatus{
-  margin-top:7px;
+  margin-top:8px;
+  color:#ffe56c;
   font-size:13px;
-  color:#ffe66d;
+  line-height:1.3;
 }
 
-/* MISSION BUTTON */
-#missionBtn{
+#boostStatus{
+  color:#62eaff;
+  font-size:13px;
+}
+
+/* BUTTONS */
+
+#missionBtn,
+#boostBtn{
   position:fixed;
-  right:18px;
-  top:18px;
-  z-index:110;
+  z-index:210;
   border:0;
-  border-radius:14px;
-  padding:14px 18px;
-  background:#7b4dff;
   color:white;
-  font-size:15px;
   font-weight:bold;
-  box-shadow:0 5px 0 #4821a5;
+  border-radius:14px;
+  padding:13px 17px;
   cursor:pointer;
 }
 
-#missionBtn:active{
-  transform:translateY(4px);
-  box-shadow:0 1px 0 #4821a5;
+#missionBtn{
+  right:18px;
+  top:18px;
+  background:#7046ed;
+  box-shadow:0 5px 0 #41219a;
+}
+
+#boostBtn{
+  right:18px;
+  top:75px;
+  background:#00a7d9;
+  box-shadow:0 5px 0 #00617e;
+}
+
+#boostBtn.active{
+  background:#ff8a00;
 }
 
 /* CONTROLS */
+
 #controls{
   position:fixed;
   left:15px;
   bottom:20px;
-  z-index:110;
+  z-index:220;
   display:flex;
   gap:10px;
 }
@@ -519,36 +579,37 @@ html,body{
   width:65px;
   height:65px;
   border-radius:18px;
-  border:2px solid rgba(255,255,255,.5);
+  border:2px solid rgba(255,255,255,.55);
   background:rgba(0,0,0,.55);
-  color:white;
-  font-size:27px;
+  color:#fff;
+  font-size:26px;
   font-weight:bold;
 }
 
 /* POPUP */
+
 #overlay{
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,.65);
-  z-index:300;
+  z-index:400;
   display:none;
   align-items:center;
   justify-content:center;
+  background:rgba(0,0,0,.68);
 }
 
 #panel{
-  width:min(470px,92%);
-  background:white;
-  border-radius:24px;
+  width:min(480px,92%);
   padding:25px;
+  background:#fff;
+  border-radius:24px;
   text-align:center;
-  box-shadow:0 20px 60px rgba(0,0,0,.4);
+  box-shadow:0 20px 70px rgba(0,0,0,.45);
 }
 
 #panel h2{
   margin-top:0;
-  color:#5530d9;
+  color:#5834d7;
 }
 
 .answer{
@@ -558,14 +619,10 @@ html,body{
   padding:14px;
   border:0;
   border-radius:13px;
-  background:#eef0ff;
+  background:#edf0ff;
   font-size:17px;
   font-weight:bold;
   cursor:pointer;
-}
-
-.answer:hover{
-  background:#dcdcff;
 }
 
 #closeBtn{
@@ -578,93 +635,108 @@ html,body{
 }
 
 /* START */
+
 #startScreen{
   position:fixed;
   inset:0;
-  z-index:500;
-  background:linear-gradient(135deg,#25205f,#4e35c7,#16a4d8);
+  z-index:600;
   display:flex;
   justify-content:center;
   align-items:center;
   text-align:center;
-  color:white;
+  color:#fff;
+  background:linear-gradient(135deg,#25205f,#5136c7,#11a6d9);
 }
 
 .startBox{
-  width:min(600px,90%);
+  width:min(650px,92%);
 }
 
 .startBox h1{
-  font-size:48px;
-  margin:0 0 10px;
+  font-size:50px;
+  margin:0 0 12px;
   text-shadow:0 5px 0 rgba(0,0,0,.25);
 }
 
 .startBox p{
   font-size:18px;
-  opacity:.95;
 }
 
 #startBtn{
   margin-top:20px;
-  padding:18px 40px;
+  padding:18px 42px;
   border:0;
   border-radius:18px;
+  background:#ffd43b;
+  color:#3b2b00;
   font-size:21px;
   font-weight:bold;
-  background:#ffd43b;
-  color:#3c2b00;
-  cursor:pointer;
-  box-shadow:0 7px 0 #b17c00;
+  box-shadow:0 7px 0 #a97600;
 }
 
-#startBtn:active{
-  transform:translateY(5px);
-  box-shadow:0 2px 0 #b17c00;
-}
+/* COMPLETE */
 
-/* ZONE COMPLETE */
 #complete{
   position:fixed;
   inset:0;
-  z-index:450;
-  background:rgba(14,20,50,.92);
-  color:white;
+  z-index:500;
   display:none;
   align-items:center;
   justify-content:center;
   text-align:center;
+  color:#fff;
+  background:rgba(12,18,50,.94);
 }
 
 .completeBox{
+  width:min(560px,92%);
   padding:35px;
-  width:min(550px,90%);
-  background:linear-gradient(135deg,#5337d9,#1a9fdd);
   border-radius:30px;
-  box-shadow:0 20px 70px rgba(0,0,0,.5);
+  background:linear-gradient(135deg,#5535d8,#169ed9);
 }
 
 .completeBox h1{
-  font-size:40px;
+  font-size:42px;
 }
 
 #continueBtn{
+  padding:15px 30px;
   border:0;
   border-radius:14px;
-  padding:15px 30px;
-  font-weight:bold;
-  font-size:18px;
-  cursor:pointer;
   background:#ffd43b;
+  font-size:18px;
+  font-weight:bold;
 }
 
-/* MOBILE */
+/* NOTIFICATION */
+
+#toast{
+  position:fixed;
+  left:50%;
+  bottom:110px;
+  transform:translateX(-50%) translateY(30px);
+  z-index:350;
+  padding:14px 22px;
+  background:rgba(0,0,0,.85);
+  color:white;
+  border-radius:15px;
+  opacity:0;
+  transition:.3s;
+  pointer-events:none;
+  font-weight:bold;
+}
+
+#toast.show{
+  opacity:1;
+  transform:translateX(-50%) translateY(0);
+}
+
 @media(max-width:700px){
+
   #sun{
     width:70px;
     height:70px;
-    right:30px;
-    top:55px;
+    right:25px;
   }
 
   .startBox h1{
@@ -672,12 +744,13 @@ html,body{
   }
 
   #hud{
-    transform:scale(.85);
+    transform:scale(.82);
     transform-origin:top left;
   }
 
-  #missionBtn{
-    transform:scale(.85);
+  #missionBtn,
+  #boostBtn{
+    transform:scale(.82);
     transform-origin:top right;
   }
 }
@@ -688,1103 +761,1383 @@ html,body{
 
 <div id="game">
 
-  <div id="sky"></div>
-  <div id="sun"></div>
+<div id="sky"></div>
+<div id="sun"></div>
 
-  <div class="cloud c1"></div>
-  <div class="cloud c2"></div>
-  <div class="cloud c3"></div>
+<div class="cloud c1"></div>
+<div class="cloud c2"></div>
+<div class="cloud c3"></div>
 
-  <div id="world">
+<div id="world">
 
-    <div class="hill h1"></div>
-    <div class="hill h2"></div>
-    <div class="hill h3"></div>
-    <div class="hill h4"></div>
-    <div class="hill h5"></div>
+<div class="hill h1"></div>
+<div class="hill h2"></div>
+<div class="hill h3"></div>
+<div class="hill h4"></div>
+<div class="hill h5"></div>
+<div class="hill h6"></div>
 
-    <div class="water" style="left:900px;bottom:155px;width:430px;"></div>
-    <div class="water" style="left:3250px;bottom:155px;width:500px;"></div>
+<div class="water"
+style="left:850px;width:450px;"></div>
 
-    <div id="ground"></div>
+<div class="water"
+style="left:3300px;width:520px;"></div>
 
-    <!-- TREES -->
-    <div class="tree" style="left:300px;bottom:155px;">
-      <div class="leaves"></div><div class="trunk"></div>
-    </div>
+<div id="ground"></div>
 
-    <div class="tree" style="left:650px;bottom:155px;transform:scale(1.2);">
-      <div class="leaves"></div><div class="trunk"></div>
-    </div>
+<!-- TREES -->
 
-    <div class="tree" style="left:1450px;bottom:155px;">
-      <div class="leaves"></div><div class="trunk"></div>
-    </div>
+<div class="tree" style="left:280px;bottom:155px">
+<div class="leaves"></div><div class="trunk"></div>
+</div>
 
-    <div class="tree" style="left:1900px;bottom:155px;transform:scale(.8);">
-      <div class="leaves"></div><div class="trunk"></div>
-    </div>
+<div class="tree" style="left:650px;bottom:155px;transform:scale(1.15)">
+<div class="leaves"></div><div class="trunk"></div>
+</div>
 
-    <div class="tree" style="left:2700px;bottom:155px;transform:scale(1.25);">
-      <div class="leaves"></div><div class="trunk"></div>
-    </div>
+<div class="tree" style="left:1400px;bottom:155px">
+<div class="leaves"></div><div class="trunk"></div>
+</div>
 
-    <div class="tree" style="left:4050px;bottom:155px;">
-      <div class="leaves"></div><div class="trunk"></div>
-    </div>
+<div class="tree" style="left:1900px;bottom:155px;transform:scale(.85)">
+<div class="leaves"></div><div class="trunk"></div>
+</div>
 
-    <div class="tree" style="left:4700px;bottom:155px;transform:scale(1.15);">
-      <div class="leaves"></div><div class="trunk"></div>
-    </div>
+<div class="tree" style="left:2500px;bottom:155px;transform:scale(1.25)">
+<div class="leaves"></div><div class="trunk"></div>
+</div>
 
-    <!-- ROCKS -->
-    <div class="rock" style="left:520px;bottom:155px;"></div>
-    <div class="rock" style="left:1150px;bottom:155px;"></div>
-    <div class="rock" style="left:2200px;bottom:155px;"></div>
-    <div class="rock" style="left:3500px;bottom:155px;"></div>
-    <div class="rock" style="left:4400px;bottom:155px;"></div>
+<div class="tree" style="left:4050px;bottom:155px">
+<div class="leaves"></div><div class="trunk"></div>
+</div>
 
-    <!-- RESOURCE BLOCKS -->
-    <div class="block gold resource" data-value="5"
-         style="left:780px;bottom:220px;"></div>
+<div class="tree" style="left:4750px;bottom:155px;transform:scale(1.2)">
+<div class="leaves"></div><div class="trunk"></div>
+</div>
 
-    <div class="block stone resource" data-value="2"
-         style="left:1550px;bottom:210px;"></div>
+<div class="tree" style="left:5800px;bottom:155px;transform:scale(.9)">
+<div class="leaves"></div><div class="trunk"></div>
+</div>
 
-    <div class="block crystal resource" data-value="10"
-         style="left:2450px;bottom:225px;"></div>
+<!-- ROCKS -->
 
-    <div class="block gold resource" data-value="5"
-         style="left:3150px;bottom:210px;"></div>
+<div class="rock" style="left:520px;bottom:155px"></div>
+<div class="rock" style="left:1150px;bottom:155px"></div>
+<div class="rock" style="left:2150px;bottom:155px"></div>
+<div class="rock" style="left:3500px;bottom:155px"></div>
+<div class="rock" style="left:4400px;bottom:155px"></div>
+<div class="rock" style="left:5350px;bottom:155px"></div>
 
-    <div class="block crystal resource" data-value="10"
-         style="left:3900px;bottom:225px;"></div>
+<!-- RESOURCES -->
 
-    <div class="block gold resource" data-value="5"
-         style="left:4750px;bottom:215px;"></div>
+<div class="block gold resource"
+data-value="5"
+style="left:780px;bottom:220px"></div>
 
-    <!-- COINS -->
-    <div class="coin coinItem" style="left:420px;bottom:285px;"></div>
-    <div class="coin coinItem" style="left:1000px;bottom:270px;"></div>
-    <div class="coin coinItem" style="left:1700px;bottom:290px;"></div>
-    <div class="coin coinItem" style="left:2300px;bottom:275px;"></div>
-    <div class="coin coinItem" style="left:3000px;bottom:290px;"></div>
-    <div class="coin coinItem" style="left:3650px;bottom:280px;"></div>
-    <div class="coin coinItem" style="left:4300px;bottom:300px;"></div>
-    <div class="coin coinItem" style="left:5000px;bottom:280px;"></div>
+<div class="block stone resource"
+data-value="2"
+style="left:1550px;bottom:210px"></div>
 
-    <!-- ENEMIES -->
-    <div class="enemy enemyItem" data-x="1250"
-         style="left:1250px;bottom:155px;">
-      <div class="enemyHead">
-        <span class="enemyEye ee1"></span>
-        <span class="enemyEye ee2"></span>
-      </div>
-      <div class="enemyBody"></div>
-    </div>
+<div class="block crystal resource"
+data-value="10"
+style="left:2450px;bottom:225px"></div>
 
-    <div class="enemy enemyItem" data-x="2850"
-         style="left:2850px;bottom:155px;">
-      <div class="enemyHead">
-        <span class="enemyEye ee1"></span>
-        <span class="enemyEye ee2"></span>
-      </div>
-      <div class="enemyBody"></div>
-    </div>
+<div class="block gold resource"
+data-value="5"
+style="left:3150px;bottom:210px"></div>
 
-    <div class="enemy enemyItem" data-x="4550"
-         style="left:4550px;bottom:155px;">
-      <div class="enemyHead">
-        <span class="enemyEye ee1"></span>
-        <span class="enemyEye ee2"></span>
-      </div>
-      <div class="enemyBody"></div>
-    </div>
+<div class="block crystal resource"
+data-value="10"
+style="left:3900px;bottom:225px"></div>
 
-    <!-- KEY -->
-    <div id="key">
-      <div class="keyRing"></div>
-      <div class="keyStem"></div>
-      <div class="keyTooth"></div>
-    </div>
+<div class="block gold resource"
+data-value="5"
+style="left:4750px;bottom:215px"></div>
 
-    <!-- GATE -->
-    <div id="gate">
-      <div class="gateTop"></div>
-      <div class="gatePost gp1"></div>
-      <div class="gatePost gp2"></div>
+<div class="block crystal resource"
+data-value="15"
+style="left:5550px;bottom:225px"></div>
 
-      <div class="gateBars">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
+<!-- COINS -->
 
-      <div class="lock"></div>
-    </div>
+<div class="coin coinItem" style="left:430px;bottom:285px"></div>
+<div class="coin coinItem" style="left:980px;bottom:275px"></div>
+<div class="coin coinItem" style="left:1650px;bottom:290px"></div>
+<div class="coin coinItem" style="left:2300px;bottom:280px"></div>
+<div class="coin coinItem" style="left:2950px;bottom:290px"></div>
+<div class="coin coinItem" style="left:3650px;bottom:280px"></div>
+<div class="coin coinItem" style="left:4300px;bottom:300px"></div>
+<div class="coin coinItem" style="left:5000px;bottom:280px"></div>
+<div class="coin coinItem" style="left:5850px;bottom:300px"></div>
+<div class="coin coinItem" style="left:6200px;bottom:280px"></div>
 
-  </div>
+<!-- ENEMY 1 -->
 
-  <!-- PLAYER -->
-  <div id="player">
-    <div class="head">
-      <div class="eye eye1"></div>
-      <div class="eye eye2"></div>
-    </div>
-    <div class="body"></div>
-    <div class="leg leg1"></div>
-    <div class="leg leg2"></div>
-  </div>
+<div class="enemy enemyItem"
+data-x="1200"
+data-health="100"
+style="left:1200px;bottom:155px">
+
+<div class="enemyHealth">
+<div class="enemyHealthBar"></div>
+</div>
+
+<div class="enemyHead">
+<span class="enemyEye ee1"></span>
+<span class="enemyEye ee2"></span>
+</div>
+
+<div class="enemyBody"></div>
+
+<div class="enemyArm arm1"></div>
+<div class="enemyArm arm2"></div>
+
+</div>
+
+<!-- ENEMY 2 -->
+
+<div class="enemy enemyItem"
+data-x="2800"
+data-health="100"
+style="left:2800px;bottom:155px">
+
+<div class="enemyHealth">
+<div class="enemyHealthBar"></div>
+</div>
+
+<div class="enemyHead">
+<span class="enemyEye ee1"></span>
+<span class="enemyEye ee2"></span>
+</div>
+
+<div class="enemyBody"></div>
+
+<div class="enemyArm arm1"></div>
+<div class="enemyArm arm2"></div>
+
+</div>
+
+<!-- ENEMY 3 -->
+
+<div class="enemy enemyItem"
+data-x="4550"
+data-health="100"
+style="left:4550px;bottom:155px">
+
+<div class="enemyHealth">
+<div class="enemyHealthBar"></div>
+</div>
+
+<div class="enemyHead">
+<span class="enemyEye ee1"></span>
+<span class="enemyEye ee2"></span>
+</div>
+
+<div class="enemyBody"></div>
+
+<div class="enemyArm arm1"></div>
+<div class="enemyArm arm2"></div>
+
+</div>
+
+<!-- GATE -->
+
+<div id="gate">
+
+<div class="gateTop"></div>
+
+<div class="gatePost gp1"></div>
+<div class="gatePost gp2"></div>
+
+<div class="gateBars">
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+</div>
+
+<div class="lock"></div>
+
+</div>
+
+</div>
+
+<!-- PLAYER -->
+
+<div id="player">
+
+<div id="shield"></div>
+
+<div class="playerHead">
+<div class="eye eye1"></div>
+<div class="eye eye2"></div>
+</div>
+
+<div class="playerBody"></div>
+
+<div class="leg leg1"></div>
+<div class="leg leg2"></div>
+
+<div id="playerKey">
+<div class="keyRing"></div>
+<div class="keyStem"></div>
+<div class="keyTooth"></div>
+</div>
+
+</div>
 
 </div>
 
 <!-- HUD -->
+
 <div id="hud">
 
-  <div class="stat">❤️ Health: <span id="health">100</span></div>
-  <div class="stat">💰 Coins: <span id="coins">0</span></div>
-  <div class="stat">⭐ XP: <span id="xp">0</span></div>
-  <div class="stat">🎒 Resources: <span id="resources">0</span></div>
-  <div class="stat">🔑 Key: <span id="keyStatus">NO</span></div>
-  <div class="stat">🌎 <span id="zone">Green Forest</span></div>
+<div class="stat">❤️ Health: <span id="health">100</span></div>
+<div class="stat">💰 Coins: <span id="coins">0</span></div>
+<div class="stat">⭐ XP: <span id="xp">0</span></div>
+<div class="stat">🎒 Resources: <span id="resources">0</span></div>
+<div class="stat">🔑 Key: <span id="keyStatus">NO</span></div>
+<div class="stat">🌎 <span id="zone">Green Forest</span></div>
 
-  <div id="missionStatus">
-    Mission: Find the hidden challenge
-  </div>
+<div id="boostStatus">
+⚡ Boost Ready
+</div>
+
+<div id="missionStatus">
+Mission: Find the Maths Challenge
+</div>
 
 </div>
 
-<button id="missionBtn">🧠 MATH MISSION</button>
+<button id="missionBtn">
+🧠 MATH MISSION
+</button>
+
+<button id="boostBtn">
+⚡ SPEED BOOST
+</button>
 
 <!-- CONTROLS -->
+
 <div id="controls">
-  <button class="ctrl" id="leftBtn">◀</button>
-  <button class="ctrl" id="jumpBtn">▲</button>
-  <button class="ctrl" id="rightBtn">▶</button>
+
+<button class="ctrl" id="leftBtn">◀</button>
+
+<button class="ctrl" id="jumpBtn">▲</button>
+
+<button class="ctrl" id="rightBtn">▶</button>
+
 </div>
 
-<!-- QUESTION POPUP -->
+<!-- TOAST -->
+
+<div id="toast"></div>
+
+<!-- MATH -->
+
 <div id="overlay">
 
-  <div id="panel">
+<div id="panel">
 
-    <h2>🧠 Forest Math Challenge</h2>
+<h2>🧠 Forest Maths Challenge</h2>
 
-    <p id="question">
-      Loading...
-    </p>
+<p id="question"></p>
 
-    <div id="answers"></div>
+<div id="answers"></div>
 
-    <button id="closeBtn">Close</button>
-
-  </div>
+<button id="closeBtn">
+Close
+</button>
 
 </div>
 
-<!-- START SCREEN -->
+</div>
+
+<!-- START -->
+
 <div id="startScreen">
 
-  <div class="startBox">
+<div class="startBox">
 
-    <h1>🌲 EduSpark Craft Quest</h1>
+<h1>🌲 EduSpark Craft Quest</h1>
 
-    <p>
-      Explore the forest, collect resources, defeat danger,
-      solve the Maths Mission and unlock the mysterious gate!
-    </p>
+<p>
+Explore the mysterious Green Forest.
+</p>
 
-    <p>
-      🎮 Move • 🪨 Collect • 💰 Find Coins • 🧠 Solve • 🔑 Unlock
-    </p>
+<p>
+👾 Avoid enemies • 💰 Collect coins •
+🪨 Gather resources • 🧠 Solve Maths
+</p>
 
-    <button id="startBtn">
-      START ADVENTURE 🚀
-    </button>
+<p>
+🔑 Find the key and unlock the ancient gate!
+</p>
 
-  </div>
+<button id="startBtn">
+START ADVENTURE 🚀
+</button>
+
+</div>
 
 </div>
 
 <!-- COMPLETE -->
+
 <div id="complete">
 
-  <div class="completeBox">
+<div class="completeBox">
 
-    <h1>🏆 ZONE 1 COMPLETE!</h1>
+<h1>🏆 FOREST GATE UNLOCKED!</h1>
 
-    <p>
-      You solved the Maths Mission and unlocked the Forest Gate!
-    </p>
+<p>
+Amazing! You completed the first adventure.
+</p>
 
-    <p>
-      🌵 Next Adventure: Desert Valley
-    </p>
+<p>
+🌲 Green Forest ✔
+</p>
 
-    <button id="continueBtn">
-      CONTINUE QUEST →
-    </button>
+<p>
+🧠 Maths Challenge ✔
+</p>
 
-  </div>
+<p>
+🔑 Ancient Key ✔
+</p>
+
+<p>
+🚪 Gate Unlocked ✔
+</p>
+
+<button id="continueBtn">
+ENTER NEXT WORLD →
+</button>
+
+</div>
 
 </div>
 
 <script>
 
 /* =========================
-   GAME VARIABLES
+GAME STATE
 ========================= */
 
-const player = document.getElementById("player");
-const world = document.getElementById("world");
-const overlay = document.getElementById("overlay");
-const questionText = document.getElementById("question");
-const answers = document.getElementById("answers");
+const player =
+document.getElementById("player");
 
-let gameStarted = false;
+const world =
+document.getElementById("world");
 
-let playerWorldX = 300;
-let playerY = 0;
+const shield =
+document.getElementById("shield");
 
-let worldX = 0;
+let gameStarted=false;
 
-let velocityY = 0;
+let playerWorldX=300;
 
-let onGround = true;
+let playerY=0;
 
-let health = 100;
-let coins = 0;
-let xp = 0;
-let resources = 0;
+let velocityY=0;
 
-let hasKey = false;
-let missionCompleted = false;
-let gateUnlocked = false;
+let onGround=true;
 
-let movingLeft = false;
-let movingRight = false;
+let worldX=0;
 
-let speed = 5.2;
-let jumpPower = 15;
+let health=100;
 
-let worldWidth = 6000;
+let coins=0;
+
+let xp=0;
+
+let resources=0;
+
+let hasKey=false;
+
+let missionCompleted=false;
+
+let gateUnlocked=false;
+
+let movingLeft=false;
+
+let movingRight=false;
+
+let speed=5;
+
+let normalSpeed=5;
+
+let boostSpeed=9;
+
+let boostActive=false;
+
+let boostCooldown=false;
+
+let jumpPower=15;
+
+let lastDamage=0;
+
+let enemyData=[];
+
+const worldWidth=7000;
 
 
 /* =========================
-   LOCAL SAVE
+SAVE
 ========================= */
 
 function saveGame(){
 
-  const saveData = {
-    coins,
-    xp,
-    resources,
-    health,
-    hasKey,
-    missionCompleted,
-    gateUnlocked
-  };
+localStorage.setItem(
+"edusparkCraftQuestSave",
+JSON.stringify({
+health,
+coins,
+xp,
+resources,
+hasKey,
+missionCompleted,
+gateUnlocked
+})
+);
 
-  localStorage.setItem(
-    "edusparkCraftQuestSave",
-    JSON.stringify(saveData)
-  );
 }
 
 
 function loadGame(){
 
-  const saved =
-    localStorage.getItem("edusparkCraftQuestSave");
+const saved=
+localStorage.getItem(
+"edusparkCraftQuestSave"
+);
 
-  if(!saved) return;
+if(!saved)return;
 
-  try{
+try{
 
-    const data = JSON.parse(saved);
+const data=JSON.parse(saved);
 
-    coins = data.coins || 0;
-    xp = data.xp || 0;
-    resources = data.resources || 0;
-    health = data.health || 100;
+health=data.health ?? 100;
+coins=data.coins ?? 0;
+xp=data.xp ?? 0;
+resources=data.resources ?? 0;
+hasKey=!!data.hasKey;
+missionCompleted=!!data.missionCompleted;
+gateUnlocked=!!data.gateUnlocked;
 
-    hasKey = !!data.hasKey;
-    missionCompleted = !!data.missionCompleted;
-    gateUnlocked = !!data.gateUnlocked;
-
-  }catch(e){
-
-    console.log("Save error");
-
-  }
+}catch(e){}
 
 }
 
 
 /* =========================
-   HUD
+HUD
 ========================= */
 
 function updateHUD(){
 
-  document.getElementById("health").textContent =
-    health;
+document.getElementById("health")
+.textContent=health;
 
-  document.getElementById("coins").textContent =
-    coins;
+document.getElementById("coins")
+.textContent=coins;
 
-  document.getElementById("xp").textContent =
-    xp;
+document.getElementById("xp")
+.textContent=xp;
 
-  document.getElementById("resources").textContent =
-    resources;
+document.getElementById("resources")
+.textContent=resources;
 
-  document.getElementById("keyStatus").textContent =
-    hasKey ? "YES 🔑" : "NO";
+document.getElementById("keyStatus")
+.textContent=hasKey?"YES 🔑":"NO";
 
-  if(gateUnlocked){
+if(gateUnlocked){
 
-    document.getElementById("missionStatus").textContent =
-      "Mission complete! Reach the Forest Gate 🚪";
+document.getElementById("missionStatus")
+.textContent=
+"🏆 Gate unlocked! Enter the next world.";
 
-  }
-  else if(hasKey){
+}
+else if(hasKey){
 
-    document.getElementById("missionStatus").textContent =
-      "You have the key! Find the gate 🚪";
+document.getElementById("missionStatus")
+.textContent=
+"🔑 Key obtained! Find the ancient gate.";
 
-  }
-  else{
+}
+else{
 
-    document.getElementById("missionStatus").textContent =
-      "Mission: Solve the Maths Challenge 🧠";
+document.getElementById("missionStatus")
+.textContent=
+"🧠 Mission: Solve the Maths Challenge.";
 
-  }
+}
 
 }
 
 
 /* =========================
-   START GAME
+TOAST
+========================= */
+
+let toastTimer;
+
+function toast(message){
+
+const t=
+document.getElementById("toast");
+
+t.textContent=message;
+
+t.classList.add("show");
+
+clearTimeout(toastTimer);
+
+toastTimer=setTimeout(()=>{
+
+t.classList.remove("show");
+
+},1800);
+
+}
+
+
+/* =========================
+START
 ========================= */
 
 document.getElementById("startBtn")
-.addEventListener("click",()=>{
+.onclick=()=>{
 
-  gameStarted = true;
+gameStarted=true;
 
-  document.getElementById("startScreen").style.display =
-    "none";
+document.getElementById("startScreen")
+.style.display="none";
 
-  loadGame();
-  updateHUD();
+loadGame();
 
-  requestAnimationFrame(gameLoop);
+if(hasKey){
 
-});
-
-
-/* =========================
-   MOVEMENT
-========================= */
-
-document.addEventListener("keydown",(e)=>{
-
-  if(!gameStarted) return;
-
-  if(
-    e.key === "ArrowLeft" ||
-    e.key.toLowerCase() === "a"
-  ){
-
-    movingLeft = true;
-
-  }
-
-  if(
-    e.key === "ArrowRight" ||
-    e.key.toLowerCase() === "d"
-  ){
-
-    movingRight = true;
-
-  }
-
-  if(
-    e.key === "ArrowUp" ||
-    e.key.toLowerCase() === "w" ||
-    e.code === "Space"
-  ){
-
-    jump();
-
-  }
-
-});
-
-
-document.addEventListener("keyup",(e)=>{
-
-  if(
-    e.key === "ArrowLeft" ||
-    e.key.toLowerCase() === "a"
-  ){
-
-    movingLeft = false;
-
-  }
-
-  if(
-    e.key === "ArrowRight" ||
-    e.key.toLowerCase() === "d"
-  ){
-
-    movingRight = false;
-
-  }
-
-});
-
-
-/* =========================
-   MOBILE CONTROLS
-========================= */
-
-function holdButton(button,down,up){
-
-  button.addEventListener("touchstart",(e)=>{
-
-    e.preventDefault();
-    down();
-
-  });
-
-  button.addEventListener("touchend",(e)=>{
-
-    e.preventDefault();
-    up();
-
-  });
-
-  button.addEventListener("mousedown",down);
-  button.addEventListener("mouseup",up);
-  button.addEventListener("mouseleave",up);
+document.getElementById("playerKey")
+.style.display="block";
 
 }
 
+if(gateUnlocked){
 
-holdButton(
-  document.getElementById("leftBtn"),
-  ()=>movingLeft=true,
-  ()=>movingLeft=false
-);
+document.querySelector(".lock")
+.style.display="none";
 
+}
 
-holdButton(
-  document.getElementById("rightBtn"),
-  ()=>movingRight=true,
-  ()=>movingRight=false
-);
+updateHUD();
 
+setupEnemies();
 
-document.getElementById("jumpBtn")
-.addEventListener("click",jump);
+requestAnimationFrame(gameLoop);
+
+};
 
 
 /* =========================
-   JUMP
+KEYBOARD
+========================= */
+
+document.addEventListener("keydown",e=>{
+
+if(!gameStarted)return;
+
+if(
+e.key==="ArrowRight" ||
+e.key.toLowerCase()==="d"
+){
+
+movingRight=true;
+
+}
+
+if(
+e.key==="ArrowLeft" ||
+e.key.toLowerCase()==="a"
+){
+
+movingLeft=true;
+
+}
+
+if(
+e.key==="ArrowUp" ||
+e.key.toLowerCase()==="w" ||
+e.code==="Space"
+){
+
+jump();
+
+}
+
+if(e.key==="Shift"){
+
+activateBoost();
+
+}
+
+});
+
+
+document.addEventListener("keyup",e=>{
+
+if(
+e.key==="ArrowRight" ||
+e.key.toLowerCase()==="d"
+){
+
+movingRight=false;
+
+}
+
+if(
+e.key==="ArrowLeft" ||
+e.key.toLowerCase()==="a"
+){
+
+movingLeft=false;
+
+}
+
+});
+
+
+/* =========================
+MOBILE
+========================= */
+
+function hold(btn,down,up){
+
+btn.addEventListener(
+"touchstart",
+e=>{
+e.preventDefault();
+down();
+}
+);
+
+btn.addEventListener(
+"touchend",
+e=>{
+e.preventDefault();
+up();
+}
+);
+
+btn.addEventListener("mousedown",down);
+btn.addEventListener("mouseup",up);
+btn.addEventListener("mouseleave",up);
+
+}
+
+hold(
+document.getElementById("leftBtn"),
+()=>movingLeft=true,
+()=>movingLeft=false
+);
+
+hold(
+document.getElementById("rightBtn"),
+()=>movingRight=true,
+()=>movingRight=false
+);
+
+document.getElementById("jumpBtn")
+.onclick=jump;
+
+
+/* =========================
+JUMP
 ========================= */
 
 function jump(){
 
-  if(!gameStarted) return;
+if(!gameStarted)return;
 
-  if(onGround){
+if(onGround){
 
-    velocityY = jumpPower;
-    onGround = false;
+velocityY=jumpPower;
 
-  }
+onGround=false;
+
+}
 
 }
 
 
 /* =========================
-   GAME LOOP
+BOOST
+========================= */
+
+document.getElementById("boostBtn")
+.onclick=activateBoost;
+
+
+function activateBoost(){
+
+if(boostCooldown)return;
+
+boostActive=true;
+
+boostCooldown=true;
+
+speed=boostSpeed;
+
+shield.style.opacity="1";
+
+document.getElementById("boostBtn")
+.classList.add("active");
+
+document.getElementById("boostStatus")
+.textContent="⚡ SUPER SPEED!";
+
+toast("⚡ SPEED BOOST ACTIVATED!");
+
+setTimeout(()=>{
+
+boostActive=false;
+
+speed=normalSpeed;
+
+shield.style.opacity="0";
+
+document.getElementById("boostBtn")
+.classList.remove("active");
+
+document.getElementById("boostStatus")
+.textContent="⏳ Boost recharging...";
+
+},4000);
+
+setTimeout(()=>{
+
+boostCooldown=false;
+
+document.getElementById("boostStatus")
+.textContent="⚡ Boost Ready";
+
+},9000);
+
+}
+
+
+/* =========================
+GAME LOOP
 ========================= */
 
 function gameLoop(){
 
-  if(!gameStarted) return;
+if(!gameStarted)return;
 
-  updatePlayer();
+updatePlayer();
 
-  updateCamera();
+updateCamera();
 
-  checkCoins();
+collectCoins();
 
-  checkResources();
+collectResources();
 
-  checkEnemies();
+updateEnemies();
 
-  checkKey();
+checkGate();
 
-  checkGate();
-
-  requestAnimationFrame(gameLoop);
+requestAnimationFrame(gameLoop);
 
 }
 
 
 /* =========================
-   PLAYER UPDATE
+PLAYER
 ========================= */
 
 function updatePlayer(){
 
-  if(movingRight){
+if(movingRight){
 
-    playerWorldX += speed;
+playerWorldX+=speed;
 
-    player.classList.add("walk");
+player.classList.add("walk");
 
-    player.style.transform =
-      "scaleX(1)";
+player.style.transform="scaleX(1)";
 
-  }
-  else if(movingLeft){
+}
+else if(movingLeft){
 
-    playerWorldX -= speed;
+playerWorldX-=speed;
 
-    player.classList.add("walk");
+player.classList.add("walk");
 
-    player.style.transform =
-      "scaleX(-1)";
+player.style.transform="scaleX(-1)";
 
-  }
-  else{
+}
+else{
 
-    player.classList.remove("walk");
+player.classList.remove("walk");
 
-  }
+}
 
+if(playerWorldX<40)
+playerWorldX=40;
 
-  /* LIMIT WORLD */
-
-  if(playerWorldX < 40)
-    playerWorldX = 40;
-
-  if(playerWorldX > worldWidth - 100)
-    playerWorldX = worldWidth - 100;
+if(playerWorldX>worldWidth-100)
+playerWorldX=worldWidth-100;
 
 
-  /* GRAVITY */
+/* GRAVITY */
 
-  velocityY -= 0.75;
+velocityY-=.75;
 
-  playerY += velocityY;
+playerY+=velocityY;
 
+if(playerY<=0){
 
-  if(playerY <= 0){
+playerY=0;
 
-    playerY = 0;
-    velocityY = 0;
-    onGround = true;
+velocityY=0;
 
-  }
+onGround=true;
 
+}
 
-  player.style.bottom =
-    (125 + playerY) + "px";
+player.style.bottom=
+(125+playerY)+"px";
 
 }
 
 
 /* =========================
-   CAMERA
+CAMERA
 ========================= */
 
 function updateCamera(){
 
-  const screenWidth =
-    window.innerWidth;
+const screenWidth=
+window.innerWidth;
 
-  let desiredCamera =
-    playerWorldX -
-    screenWidth * 0.45;
+let desired=
+playerWorldX-screenWidth*.45;
 
+const maxCamera=
+worldWidth-screenWidth;
 
-  const maxCamera =
-    worldWidth -
-    screenWidth;
+desired=Math.max(
+0,
+Math.min(maxCamera,desired)
+);
 
+worldX+=
+(desired-worldX)*.12;
 
-  if(desiredCamera < 0)
-    desiredCamera = 0;
+world.style.transform=
+`translateX(${-worldX}px)`;
 
-  if(desiredCamera > maxCamera)
-    desiredCamera = maxCamera;
-
-
-  worldX +=
-    (desiredCamera - worldX) * 0.12;
-
-
-  world.style.transform =
-    `translateX(${-worldX}px)`;
-
-
-  player.style.left =
-    (playerWorldX - worldX) + "px";
+player.style.left=
+(playerWorldX-worldX)+"px";
 
 }
 
 
 /* =========================
-   COLLISION HELPERS
+COINS
 ========================= */
 
-function distanceBetweenWorldX(x){
+function collectCoins(){
 
-  return Math.abs(
-    playerWorldX - x
-  );
+const p=
+player.getBoundingClientRect();
+
+document.querySelectorAll(".coinItem")
+.forEach(coin=>{
+
+if(coin.dataset.collected)
+return;
+
+const r=
+coin.getBoundingClientRect();
+
+if(
+r.left<p.right &&
+r.right>p.left &&
+r.top<p.bottom &&
+r.bottom>p.top
+){
+
+coin.dataset.collected="1";
+
+coin.classList.add("collect");
+
+coins++;
+
+xp+=5;
+
+toast("💰 +1 Coin   ⭐ +5 XP");
+
+updateHUD();
+
+saveGame();
+
+setTimeout(()=>{
+coin.style.display="none";
+},400);
+
+}
+
+});
 
 }
 
 
 /* =========================
-   COINS
-========================= */
-
-function checkCoins(){
-
-  document.querySelectorAll(".coinItem")
-  .forEach(coin=>{
-
-    if(coin.dataset.collected)
-      return;
-
-    const rect =
-      coin.getBoundingClientRect();
-
-    const playerRect =
-      player.getBoundingClientRect();
-
-
-    if(
-      rect.left < playerRect.right &&
-      rect.right > playerRect.left &&
-      rect.top < playerRect.bottom &&
-      rect.bottom > playerRect.top
-    ){
-
-      coin.dataset.collected = "yes";
-
-      coin.style.display = "none";
-
-      coins += 1;
-
-      xp += 5;
-
-      updateHUD();
-
-      saveGame();
-
-    }
-
-  });
-
-}
-
-
-/* =========================
-   RESOURCES
+RESOURCES
 ========================= */
 
 document.querySelectorAll(".resource")
 .forEach(block=>{
 
-  block.addEventListener("click",()=>{
+block.onclick=()=>{
 
-    if(block.dataset.collected)
-      return;
+if(block.dataset.collected)
+return;
 
-    block.dataset.collected = "yes";
+block.dataset.collected="1";
 
-    block.style.transform =
-      "scale(.2) rotate(90deg)";
+resources+=
+Number(block.dataset.value);
 
-    setTimeout(()=>{
-      block.style.display = "none";
-    },180);
+xp+=10;
 
-    resources +=
-      Number(block.dataset.value || 1);
+block.style.transform=
+"scale(.2) rotate(90deg)";
 
-    xp += 3;
+toast(
+"🪨 Resource collected! +" +
+block.dataset.value
+);
 
-    updateHUD();
+updateHUD();
 
-    saveGame();
+saveGame();
 
-  });
+setTimeout(()=>{
+block.style.display="none";
+},250);
+
+};
 
 });
 
 
-function checkResources(){
+function collectResources(){}
 
-  /* Resource collection happens by clicking.
-     This function intentionally remains available
-     for future automatic mining mechanics. */
+
+/* =========================
+ENEMIES
+========================= */
+
+function setupEnemies(){
+
+enemyData=[];
+
+document.querySelectorAll(".enemyItem")
+.forEach(enemy=>{
+
+enemyData.push({
+
+element:enemy,
+
+x:Number(enemy.dataset.x),
+
+health:100,
+
+speed:1.15,
+
+direction:1
+
+});
+
+});
+
+}
+
+
+function updateEnemies(){
+
+if(enemyData.length===0)
+return;
+
+const now=Date.now();
+
+enemyData.forEach(data=>{
+
+if(data.health<=0)
+return;
+
+const enemy=data.element;
+
+const distance=
+playerWorldX-data.x;
+
+
+/* CHASE */
+
+if(Math.abs(distance)<650){
+
+if(distance>0){
+
+data.x+=data.speed;
+
+enemy.style.transform="scaleX(1)";
+
+}
+else{
+
+data.x-=data.speed;
+
+enemy.style.transform="scaleX(-1)";
+
+}
+
+}
+
+
+/* PATROL */
+
+else{
+
+data.x+=
+data.speed*.45*
+data.direction;
+
+if(data.x>Number(enemy.dataset.x)+100){
+
+data.direction=-1;
+
+}
+
+if(data.x<Number(enemy.dataset.x)-100){
+
+data.direction=1;
+
+}
+
+}
+
+
+/* POSITION */
+
+enemy.style.left=
+data.x+"px";
+
+
+/* PLAYER HIT */
+
+if(
+Math.abs(playerWorldX-data.x)<60 &&
+now-lastDamage>1000
+){
+
+if(!boostActive){
+
+health-=15;
+
+lastDamage=now;
+
+toast("💥 Enemy hit! -15 Health");
+
+updateHUD();
+
+saveGame();
+
+if(health<=0){
+
+respawnPlayer();
+
+}
+
+}
+
+}
+
+
+/* ATTACK ANIMATION */
+
+if(
+Math.abs(playerWorldX-data.x)<180
+){
+
+enemy.style.filter=
+"drop-shadow(0 0 15px red)";
+
+}
+else{
+
+enemy.style.filter="none";
+
+}
+
+});
 
 }
 
 
 /* =========================
-   ENEMY
+RESPAWN
 ========================= */
 
-let lastDamage = 0;
+function respawnPlayer(){
 
-function checkEnemies(){
+health=100;
 
-  const now = Date.now();
+playerWorldX=
+Math.max(300,playerWorldX-400);
 
-  if(now - lastDamage < 900)
-    return;
+xp=Math.max(0,xp-10);
 
+toast("💀 You were defeated! Respawning...");
 
-  document.querySelectorAll(".enemyItem")
-  .forEach(enemy=>{
+updateHUD();
 
-    const enemyX =
-      Number(enemy.dataset.x);
-
-    if(
-      Math.abs(playerWorldX - enemyX)
-      < 55
-    ){
-
-      health -= 10;
-
-      if(health < 0)
-        health = 0;
-
-      lastDamage = now;
-
-      updateHUD();
-
-      if(health <= 0){
-
-        alert(
-          "💀 Your health reached 0!\n\nReturning to the Forest Camp."
-        );
-
-        health = 100;
-
-        playerWorldX = 300;
-
-        updateHUD();
-
-      }
-
-    }
-
-  });
+saveGame();
 
 }
 
 
 /* =========================
-   MATH MISSION
+MATH MISSION
 ========================= */
 
-const questions = [
+const questions=[
 
-  {
-    q:"A farmer has 6 rows with 4 trees in each row. How many trees?",
-    options:["10","20","24"],
-    answer:"24"
-  },
+{
+q:"There are 6 trees in each row. If there are 4 rows, how many trees?",
+a:["10","24","30"],
+c:"24"
+},
 
-  {
-    q:"What is 15 × 3?",
-    options:["35","45","55"],
-    answer:"45"
-  },
+{
+q:"What is 15 × 3?",
+a:["35","45","50"],
+c:"45"
+},
 
-  {
-    q:"A square has side 8 cm. What is its perimeter?",
-    options:["16 cm","24 cm","32 cm"],
-    answer:"32 cm"
-  },
+{
+q:"A square has side 8 cm. What is its perimeter?",
+a:["16 cm","24 cm","32 cm"],
+c:"32 cm"
+},
 
-  {
-    q:"What is 100 ÷ 4?",
-    options:["20","25","40"],
-    answer:"25"
-  },
+{
+q:"What is 100 ÷ 4?",
+a:["20","25","40"],
+c:"25"
+},
 
-  {
-    q:"If one block costs 7 coins, how many coins for 5 blocks?",
-    options:["30","35","40"],
-    answer:"35"
-  }
+{
+q:"What is 12 × 5?",
+a:["50","60","70"],
+c:"60"
+},
+
+{
+q:"A triangle has sides 5 cm, 5 cm and 6 cm. What is its perimeter?",
+a:["16 cm","15 cm","20 cm"],
+c:"16 cm"
+}
 
 ];
 
-let currentQuestion = 0;
-
-
-/* OPEN MISSION */
+let currentQuestion=0;
 
 document.getElementById("missionBtn")
-.addEventListener("click",openMission);
+.onclick=()=>{
 
+if(missionCompleted){
 
-function openMission(){
+toast("✅ Mission already completed!");
 
-  if(missionCompleted){
-
-    alert(
-      "✅ Maths Mission already completed!\nFind the gate now."
-    );
-
-    return;
-
-  }
-
-  currentQuestion =
-    Math.floor(
-      Math.random() * questions.length
-    );
-
-  showQuestion();
+return;
 
 }
 
+currentQuestion=
+Math.floor(
+Math.random()*questions.length
+);
 
-/* SHOW QUESTION */
+showQuestion();
+
+};
+
 
 function showQuestion(){
 
-  const q =
-    questions[currentQuestion];
+const q=
+questions[currentQuestion];
 
-  questionText.textContent =
-    q.q;
+document.getElementById("question")
+.textContent=q.q;
 
-  answers.innerHTML = "";
+const box=
+document.getElementById("answers");
 
-  q.options.forEach(option=>{
+box.innerHTML="";
 
-    const button =
-      document.createElement("button");
+q.a.forEach(option=>{
 
-    button.className =
-      "answer";
+const b=
+document.createElement("button");
 
-    button.textContent =
-      option;
+b.className="answer";
 
-    button.addEventListener(
-      "click",
-      ()=>answerQuestion(option)
-    );
+b.textContent=option;
 
-    answers.appendChild(button);
+b.onclick=()=>{
 
-  });
+if(option===q.c){
 
-  overlay.style.display =
-    "flex";
+missionCompleted=true;
+
+hasKey=true;
+
+xp+=50;
+
+document.getElementById("playerKey")
+.style.display="block";
+
+toast("🔑 KEY UNLOCKED! +50 XP");
+
+document.getElementById("overlay")
+.style.display="none";
+
+updateHUD();
+
+saveGame();
+
+}
+else{
+
+health-=10;
+
+toast("❌ Wrong answer! -10 Health");
+
+if(health<=0)
+health=100;
+
+updateHUD();
 
 }
 
+};
 
-/* ANSWER */
-
-function answerQuestion(answer){
-
-  const q =
-    questions[currentQuestion];
-
-  if(answer === q.answer){
-
-    overlay.style.display =
-      "none";
-
-    missionCompleted = true;
-
-    hasKey = true;
-
-    xp += 50;
-
-    document.getElementById("key").style.display =
-      "block";
-
-    document.getElementById("key").style.left =
-      (playerWorldX + 80) + "px";
-
-    document.getElementById("key").style.bottom =
-      "260px";
-
-    updateHUD();
-
-    saveGame();
-
-    alert(
-      "🎉 Correct!\n\n" +
-      "You earned:\n" +
-      "🔑 Forest Key\n" +
-      "⭐ +50 XP"
-    );
-
-  }
-  else{
-
-    health -= 10;
-
-    if(health < 0)
-      health = 0;
-
-    updateHUD();
-
-    alert(
-      "❌ Wrong answer!\n\n" +
-      "Try the Maths Mission again."
-    );
-
-    if(health <= 0){
-
-      health = 100;
-
-      updateHUD();
-
-    }
-
-  }
-
-}
-
-
-/* CLOSE */
-
-document.getElementById("closeBtn")
-.addEventListener("click",()=>{
-
-  overlay.style.display =
-    "none";
+box.appendChild(b);
 
 });
 
-
-/* =========================
-   KEY
-========================= */
-
-function checkKey(){
-
-  if(!hasKey)
-    return;
-
-  if(gateUnlocked)
-    return;
+document.getElementById("overlay")
+.style.display="flex";
 
 }
 
 
+document.getElementById("closeBtn")
+.onclick=()=>{
+
+document.getElementById("overlay")
+.style.display="none";
+
+};
+
+
 /* =========================
-   GATE
+GATE
 ========================= */
 
 function checkGate(){
 
-  const gateX = 5550;
+const gateX=6550;
 
-  if(
-    Math.abs(playerWorldX - gateX)
-    < 110
-  ){
+if(
+Math.abs(playerWorldX-gateX)<130
+){
 
-    if(!hasKey){
+if(!hasKey){
 
-      document.getElementById("missionStatus")
-      .textContent =
-        "🔒 Gate locked! Solve the Maths Mission.";
+document.getElementById("missionStatus")
+.textContent=
+"🔒 Gate locked! Solve the Maths Mission.";
 
-      return;
+return;
 
-    }
+}
 
+if(!gateUnlocked){
 
-    if(!gateUnlocked){
+gateUnlocked=true;
 
-      gateUnlocked = true;
+document.querySelector(".lock")
+.style.display="none";
 
-      document.querySelector(".lock").style.display =
-        "none";
+document.querySelector(".gateBars")
+.style.opacity=".25";
 
-      document.querySelector(".gateBars")
-      .style.opacity = ".25";
+xp+=100;
 
-      xp += 100;
+toast("🚪 ANCIENT GATE UNLOCKED!");
 
-      updateHUD();
+updateHUD();
 
-      saveGame();
+saveGame();
 
-      setTimeout(()=>{
+setTimeout(()=>{
 
-        document.getElementById("complete")
-        .style.display =
-          "flex";
+document.getElementById("complete")
+.style.display="flex";
 
-      },500);
+},800);
 
-    }
+}
 
-  }
+}
 
 }
 
 
 /* =========================
-   CONTINUE
+CONTINUE
 ========================= */
 
 document.getElementById("continueBtn")
-.addEventListener("click",()=>{
+.onclick=()=>{
 
-  document.getElementById("complete")
-  .style.display =
-    "none";
+document.getElementById("complete")
+.style.display="none";
 
-  alert(
-    "🌵 DESERT VALLEY is coming next!\n\n" +
-    "The next zone will contain:\n" +
-    "🏜️ Desert World\n" +
-    "🐍 New enemies\n" +
-    "💎 Rare resources\n" +
-    "🧩 Harder Maths Missions\n" +
-    "🏗️ Building challenges"
-  );
+toast(
+"🌵 DESERT VALLEY WILL BE YOUR NEXT WORLD!"
+);
 
-});
+setTimeout(()=>{
 
+alert(
+"🌵 NEXT WORLD UNLOCKED!\n\n"+
+"Next upgrade:\n"+
+"🏜️ Desert Valley\n"+
+"🐍 New enemies\n"+
+"💎 Rare crystals\n"+
+"🏗️ Building system\n"+
+"⛏️ Mining system\n"+
+"🧩 Harder Maths missions"
+);
 
-/* =========================
-   INITIAL
-========================= */
+},300);
 
-loadGame();
-
-updateHUD();
+};
 
 </script>
 
