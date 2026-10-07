@@ -2,22 +2,19 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>EduSpark Craft Quest</title>
 
 <style>
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
-
+*{box-sizing:border-box}
 html,body{
+  margin:0;
   width:100%;
   height:100%;
   overflow:hidden;
-  font-family:Arial, sans-serif;
-  background:#111;
+  font-family:Arial,sans-serif;
+  background:#87ceeb;
+  user-select:none;
 }
 
 #game{
@@ -25,426 +22,460 @@ html,body{
   width:100vw;
   height:100vh;
   overflow:hidden;
-  background:
-    linear-gradient(#65c9ff 0%,#a9e8ff 48%,#7fc85a 48%,#4c9b3c 100%);
+  background:linear-gradient(#63c8ff 0%,#b9ecff 58%,#78d34d 58%,#5dbb39 100%);
 }
 
-/* SUN */
-#sun{
+/* SKY */
+.sun{
   position:absolute;
   width:90px;
   height:90px;
+  right:8%;
+  top:7%;
+  background:#ffd83d;
   border-radius:50%;
-  background:#ffe66d;
-  top:70px;
-  right:12%;
-  box-shadow:0 0 45px #fff0a0;
+  box-shadow:0 0 40px #ffe879;
 }
 
-/* CLOUDS */
 .cloud{
   position:absolute;
-  width:170px;
+  width:150px;
   height:45px;
   background:white;
-  border-radius:40px;
-  opacity:.85;
+  border-radius:50px;
+  opacity:.9;
 }
-
-.cloud:before,
-.cloud:after{
+.cloud:before,.cloud:after{
   content:"";
   position:absolute;
   background:white;
   border-radius:50%;
 }
-
 .cloud:before{
-  width:70px;
-  height:70px;
-  left:25px;
-  top:-30px;
+  width:70px;height:70px;
+  left:25px;top:-35px;
 }
-
 .cloud:after{
-  width:85px;
-  height:85px;
-  right:20px;
-  top:-40px;
+  width:60px;height:60px;
+  right:25px;top:-28px;
 }
-
-.c1{top:100px;left:8%;animation:cloudMove 30s linear infinite;}
-.c2{top:180px;left:55%;transform:scale(.7);animation:cloudMove 42s linear infinite;}
-
-@keyframes cloudMove{
-  from{margin-left:-100px}
-  to{margin-left:120vw}
-}
+.c1{top:12%;left:8%}
+.c2{top:23%;left:48%;transform:scale(.7)}
+.c3{top:9%;left:72%;transform:scale(.55)}
 
 /* WORLD */
 #world{
   position:absolute;
   left:0;
   bottom:0;
-  width:100%;
-  height:55%;
+  width:5000px;
+  height:43vh;
+  transition:left .05s linear;
 }
 
-/* GROUND */
 .ground{
   position:absolute;
+  left:0;
   bottom:0;
-  width:100%;
-  height:45%;
+  width:5000px;
+  height:120px;
   background:
     repeating-linear-gradient(
       90deg,
-      #65b84b 0px,
-      #65b84b 45px,
-      #59a943 46px,
-      #59a943 90px
+      #72c642 0 38px,
+      #68b93b 38px 76px
     );
-  border-top:8px solid #3d7c31;
+  border-top:8px solid #3e9c32;
+}
+
+.dirt{
+  position:absolute;
+  left:0;
+  bottom:0;
+  width:5000px;
+  height:70px;
+  background:
+    radial-gradient(circle at 20px 20px,#9b5d31 0 5px,transparent 6px),
+    radial-gradient(circle at 70px 50px,#75411f 0 4px,transparent 5px),
+    #8b542c;
 }
 
 /* BLOCKS */
 .block{
   position:absolute;
-  width:65px;
-  height:65px;
+  width:48px;
+  height:48px;
   border:3px solid rgba(0,0,0,.18);
-  box-shadow:inset 0 8px rgba(255,255,255,.08);
+  box-shadow:inset 4px 4px rgba(255,255,255,.15);
+  cursor:pointer;
 }
 
-.grass{
-  background:#65b84b;
+.grassBlock{
+  background:linear-gradient(#58bd3c 0 22%,#8b542c 22% 100%);
 }
+.stoneBlock{background:#777}
+.woodBlock{background:#9b642e}
+.leafBlock{background:#319b3d}
+.goldBlock{background:#ffd22f}
 
-.dirt{
-  background:#9b633d;
-}
-
-.stone{
-  background:#777;
-}
-
-.water{
-  background:#3da9e8;
-  opacity:.9;
-}
-
-/* TREE */
+/* TREES */
 .tree{
   position:absolute;
-  bottom:42%;
-  width:80px;
-  height:190px;
+  bottom:120px;
+  width:150px;
+  height:230px;
 }
-
 .trunk{
   position:absolute;
   bottom:0;
-  left:31px;
-  width:22px;
-  height:100px;
-  background:#75482d;
-  border:3px solid #51301e;
+  left:58px;
+  width:35px;
+  height:125px;
+  background:#80502b;
+  border:4px solid #613a20;
 }
-
 .leaf{
   position:absolute;
-  width:80px;
-  height:80px;
-  background:#278c45;
-  border:5px solid #176333;
-  border-radius:22px;
+  width:70px;
+  height:70px;
+  background:#319b3d;
+  border:5px solid #247c2d;
+  border-radius:12px;
 }
+.l1{left:10px;top:30px}
+.l2{left:55px;top:5px}
+.l3{left:80px;top:55px}
+.l4{left:35px;top:75px}
 
-.l1{top:0;left:0}
-.l2{top:40px;left:-25px}
-.l3{top:40px;left:25px}
-.l4{top:75px;left:0}
+.t1{left:500px}
+.t2{left:1300px}
+.t3{left:2250px}
+.t4{left:3400px}
+
+/* ROCKS */
+.rock{
+  position:absolute;
+  bottom:120px;
+  width:70px;
+  height:55px;
+  background:#777;
+  border:5px solid #555;
+  border-radius:12px 18px 8px 8px;
+}
+.r1{left:800px}
+.r2{left:1700px}
+.r3{left:2900px}
+.r4{left:4100px}
+
+/* WATER */
+.water{
+  position:absolute;
+  bottom:120px;
+  height:75px;
+  background:linear-gradient(#39bff0,#208bd1);
+  border-top:6px solid #72e3ff;
+}
+.w1{left:1000px;width:280px}
+.w2{left:2500px;width:360px}
+.w3{left:3800px;width:300px}
+
+/* COINS */
+.coin{
+  position:absolute;
+  width:30px;
+  height:30px;
+  background:#ffd82e;
+  border:4px solid #e5a900;
+  border-radius:50%;
+  box-shadow:0 0 12px #ffe76b;
+  animation:coinFloat 1s infinite alternate;
+}
+@keyframes coinFloat{
+  from{transform:translateY(0)}
+  to{transform:translateY(-12px)}
+}
 
 /* PLAYER */
 #player{
   position:absolute;
-  width:48px;
-  height:78px;
-  left:50%;
-  bottom:45%;
-  transform:translateX(-50%);
+  width:46px;
+  height:75px;
+  left:180px;
+  bottom:120px;
   z-index:20;
-  transition:left .05s linear;
 }
 
 .head{
   position:absolute;
+  width:42px;
+  height:42px;
+  left:2px;
   top:0;
-  left:8px;
-  width:32px;
-  height:32px;
-  background:#f2b47e;
-  border:3px solid #703e29;
+  background:#ffc28b;
+  border:4px solid #7a4b32;
+  border-radius:8px;
 }
-
-.hair{
-  position:absolute;
-  top:-4px;
-  left:6px;
-  width:36px;
-  height:13px;
-  background:#3b241a;
-  z-index:2;
-}
-
 .eye{
   position:absolute;
-  width:5px;
-  height:5px;
-  background:#111;
-  top:15px;
+  width:7px;height:7px;
+  background:#222;
+  border-radius:50%;
+  top:13px;
 }
-
-.e1{left:16px}
-.e2{left:27px}
-
+.e1{left:9px}
+.e2{right:9px}
 .body{
   position:absolute;
-  top:32px;
-  left:7px;
-  width:34px;
-  height:30px;
-  background:#2878d8;
-  border:3px solid #17477e;
+  width:38px;
+  height:36px;
+  left:4px;
+  top:39px;
+  background:#1976d2;
+  border:4px solid #15539a;
+  border-radius:7px;
 }
-
 .leg{
   position:absolute;
-  top:60px;
-  width:13px;
-  height:20px;
-  background:#333;
-  border:3px solid #181818;
+  width:15px;
+  height:25px;
+  background:#263238;
+  bottom:-24px;
+  border-radius:4px;
 }
+.leg1{left:5px}
+.leg2{right:5px}
 
-.leg1{left:8px}
-.leg2{left:27px}
+.walk .leg1{animation:walk1 .2s infinite alternate}
+.walk .leg2{animation:walk2 .2s infinite alternate}
+@keyframes walk1{to{transform:rotate(20deg)}}
+@keyframes walk2{to{transform:rotate(-20deg)}}
+
+/* ENEMY */
+.enemy{
+  position:absolute;
+  width:52px;
+  height:68px;
+  bottom:120px;
+  background:#d93c45;
+  border:5px solid #8c2028;
+  border-radius:12px;
+  z-index:15;
+}
+.enemy:before{
+  content:"";
+  position:absolute;
+  width:8px;height:8px;
+  background:white;
+  left:9px;top:15px;
+  box-shadow:22px 0 white;
+}
+.enemy:after{
+  content:"";
+  position:absolute;
+  width:25px;height:7px;
+  background:#441015;
+  left:9px;top:35px;
+  border-radius:5px;
+}
 
 /* HUD */
 #hud{
-  position:absolute;
+  position:fixed;
   top:15px;
   left:15px;
-  z-index:100;
-  color:white;
-}
-
-.panel{
-  background:rgba(0,0,0,.55);
-  border:2px solid rgba(255,255,255,.25);
-  border-radius:14px;
-  padding:12px 16px;
-  margin-bottom:8px;
-  backdrop-filter:blur(5px);
-}
-
-#title{
-  font-size:20px;
-  font-weight:bold;
-}
-
-#stats{
-  font-size:15px;
-  line-height:25px;
-}
-
-/* CROSSHAIR */
-#crosshair{
-  position:absolute;
-  left:50%;
-  top:50%;
-  width:22px;
-  height:22px;
-  transform:translate(-50%,-50%);
-  z-index:30;
-}
-
-#crosshair:before,
-#crosshair:after{
-  content:"";
-  position:absolute;
-  background:white;
-  box-shadow:0 0 3px #000;
-}
-
-#crosshair:before{
-  width:22px;
-  height:2px;
-  top:10px;
-}
-
-#crosshair:after{
-  width:2px;
-  height:22px;
-  left:10px;
-}
-
-/* CONTROLS */
-#controls{
-  position:absolute;
-  right:18px;
-  bottom:18px;
   z-index:100;
   display:flex;
   gap:10px;
   flex-wrap:wrap;
-  justify-content:flex-end;
-  max-width:330px;
+}
+.stat{
+  background:rgba(20,30,40,.88);
+  color:white;
+  padding:10px 15px;
+  border-radius:14px;
+  font-weight:bold;
+  box-shadow:0 4px 10px #0005;
 }
 
-.control{
+#inventory{
+  position:fixed;
+  bottom:15px;
+  left:50%;
+  transform:translateX(-50%);
+  z-index:100;
+  display:flex;
+  gap:7px;
+  background:rgba(20,25,30,.92);
+  padding:10px;
+  border-radius:18px;
+}
+.slot{
   width:58px;
   height:58px;
-  border:none;
-  border-radius:15px;
-  background:rgba(0,0,0,.65);
-  color:white;
-  font-size:25px;
-  cursor:pointer;
-  border:2px solid rgba(255,255,255,.25);
-  touch-action:none;
-}
-
-.control:active{
-  transform:scale(.92);
-  background:#222;
-}
-
-#missionButton{
-  width:auto;
-  padding:0 18px;
-  font-size:15px;
-  font-weight:bold;
-}
-
-/* START SCREEN */
-#startScreen{
-  position:absolute;
-  inset:0;
-  z-index:200;
-  background:
-    radial-gradient(circle at center,rgba(80,160,255,.25),rgba(0,0,0,.9));
+  border:3px solid #aaa;
+  border-radius:10px;
+  background:#30343a;
   display:flex;
   align-items:center;
   justify-content:center;
-  text-align:center;
+  font-size:28px;
+  position:relative;
+}
+.slot.selected{
+  border-color:#ffe13b;
+  transform:translateY(-5px);
+}
+.count{
+  position:absolute;
+  right:4px;
+  bottom:2px;
   color:white;
+  font-size:13px;
+  font-weight:bold;
 }
 
-.startBox{
-  width:min(90%,500px);
-  padding:35px;
-  border-radius:25px;
-  background:rgba(15,25,40,.92);
-  border:2px solid rgba(255,255,255,.2);
-  box-shadow:0 20px 70px rgba(0,0,0,.5);
+/* CONTROLS */
+#controls{
+  position:fixed;
+  bottom:95px;
+  left:15px;
+  z-index:100;
+  display:flex;
+  gap:8px;
 }
-
-.startBox h1{
-  font-size:42px;
-  margin-bottom:10px;
-}
-
-.startBox p{
-  color:#cbd5e1;
-  line-height:1.6;
-  margin-bottom:25px;
-}
-
-#startButton{
+.control{
+  width:58px;
+  height:58px;
   border:0;
-  border-radius:14px;
-  padding:16px 35px;
-  font-size:19px;
+  border-radius:16px;
+  background:rgba(20,30,40,.85);
+  color:white;
+  font-size:25px;
+  box-shadow:0 4px 8px #0005;
+}
+.control:active{transform:scale(.9)}
+
+#missionBtn{
+  position:fixed;
+  top:15px;
+  right:15px;
+  z-index:110;
+  padding:13px 18px;
+  border:0;
+  border-radius:15px;
+  background:#ffb300;
+  color:#222;
   font-weight:bold;
   cursor:pointer;
-  background:#ffd447;
-  color:#352800;
+  box-shadow:0 4px 10px #0005;
 }
 
-/* MISSION */
-#mission{
-  position:absolute;
+/* START */
+#startScreen{
+  position:fixed;
   inset:0;
-  z-index:150;
+  z-index:500;
+  background:linear-gradient(135deg,#1769aa,#7b1fa2);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  color:white;
+  text-align:center;
+}
+#startScreen h1{
+  font-size:clamp(38px,7vw,78px);
+  margin:0 0 10px;
+  text-shadow:5px 5px #0006;
+}
+#startScreen p{
+  font-size:20px;
+  max-width:600px;
+}
+#startBtn{
+  margin-top:25px;
+  padding:18px 35px;
+  border:0;
+  border-radius:18px;
+  background:#ffd42a;
+  font-size:22px;
+  font-weight:bold;
+  cursor:pointer;
+  box-shadow:0 8px 0 #b38b00;
+}
+#startBtn:active{
+  transform:translateY(5px);
+  box-shadow:0 3px 0 #b38b00;
+}
+
+/* MATH */
+#mathBox{
+  position:fixed;
+  inset:0;
+  z-index:400;
+  background:#0008;
   display:none;
   align-items:center;
   justify-content:center;
-  background:rgba(0,0,0,.65);
+  padding:20px;
 }
-
-.missionBox{
-  width:min(90%,480px);
+.mathCard{
+  width:min(520px,95vw);
   background:white;
-  color:#172033;
-  border-radius:22px;
-  padding:28px;
+  border-radius:25px;
+  padding:25px;
   text-align:center;
+  box-shadow:0 20px 50px #0008;
 }
-
-.missionBox h2{
-  margin-bottom:12px;
-}
-
-.question{
-  font-size:30px;
+.mathCard h2{margin-top:0;color:#1769aa}
+#question{
+  font-size:25px;
   font-weight:bold;
   margin:20px 0;
 }
-
 .answers{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:12px;
 }
-
 .answer{
-  padding:14px;
+  padding:15px;
   border:0;
-  border-radius:12px;
-  background:#e9eef7;
-  font-size:18px;
+  border-radius:14px;
+  background:#e8f2ff;
+  font-size:19px;
+  font-weight:bold;
   cursor:pointer;
 }
-
-.answer:hover{
-  background:#d8e3f5;
+.answer:hover{background:#c8e2ff}
+#closeMath{
+  margin-top:15px;
+  border:0;
+  background:#ddd;
+  padding:10px 20px;
+  border-radius:12px;
 }
 
+/* MESSAGE */
 #message{
-  margin-top:15px;
-  min-height:24px;
+  position:fixed;
+  top:85px;
+  left:50%;
+  transform:translateX(-50%);
+  z-index:300;
+  background:#222;
+  color:white;
+  padding:12px 22px;
+  border-radius:15px;
+  display:none;
   font-weight:bold;
 }
 
-/* MOBILE */
 @media(max-width:600px){
-  #title{
-    font-size:16px;
-  }
-
-  #stats{
-    font-size:12px;
-  }
-
-  .control{
-    width:52px;
-    height:52px;
-  }
-
-  .startBox h1{
-    font-size:30px;
-  }
+  .stat{padding:7px 10px;font-size:13px}
+  .slot{width:48px;height:48px;font-size:23px}
+  #inventory{gap:4px;padding:7px}
+  #controls{bottom:75px}
 }
 </style>
 </head>
@@ -453,471 +484,700 @@ html,body{
 
 <div id="game">
 
-  <div id="sun"></div>
-  <div class="cloud c1"></div>
-  <div class="cloud c2"></div>
+<div class="sun"></div>
+<div class="cloud c1"></div>
+<div class="cloud c2"></div>
+<div class="cloud c3"></div>
 
-  <div id="hud">
-    <div class="panel">
-      <div id="title">⚡ EduSpark Craft Quest</div>
-      <div id="stats">
-        ❤️ <span id="health">100</span>
-        &nbsp; 🪙 <span id="coins">0</span>
-        &nbsp; ⭐ XP <span id="xp">0</span>
-      </div>
-    </div>
+<div id="world">
+
+  <div class="ground"></div>
+  <div class="dirt"></div>
+
+  <!-- Trees -->
+  <div class="tree t1">
+    <div class="trunk"></div>
+    <div class="leaf l1"></div>
+    <div class="leaf l2"></div>
+    <div class="leaf l3"></div>
+    <div class="leaf l4"></div>
   </div>
 
-  <div id="world">
-
-    <div class="ground"></div>
-
-    <!-- BLOCKS -->
-    <div class="block grass" style="left:8%;bottom:45%"></div>
-    <div class="block grass" style="left:calc(8% + 65px);bottom:45%"></div>
-    <div class="block dirt" style="left:8%;bottom:calc(45% - 65px)"></div>
-
-    <div class="block stone" style="left:75%;bottom:45%"></div>
-    <div class="block stone" style="left:calc(75% + 65px);bottom:45%"></div>
-
-    <!-- WATER -->
-    <div class="block water" style="left:40%;bottom:43%;width:130px"></div>
-
-    <!-- TREES -->
-    <div class="tree" style="left:18%">
-      <div class="leaf l1"></div>
-      <div class="leaf l2"></div>
-      <div class="leaf l3"></div>
-      <div class="leaf l4"></div>
-      <div class="trunk"></div>
-    </div>
-
-    <div class="tree" style="left:82%;transform:scale(.8)">
-      <div class="leaf l1"></div>
-      <div class="leaf l2"></div>
-      <div class="leaf l3"></div>
-      <div class="leaf l4"></div>
-      <div class="trunk"></div>
-    </div>
-
+  <div class="tree t2">
+    <div class="trunk"></div>
+    <div class="leaf l1"></div>
+    <div class="leaf l2"></div>
+    <div class="leaf l3"></div>
+    <div class="leaf l4"></div>
   </div>
 
-  <!-- PLAYER -->
-  <div id="player">
-    <div class="head">
-      <div class="hair"></div>
-      <div class="eye e1"></div>
-      <div class="eye e2"></div>
-    </div>
-    <div class="body"></div>
-    <div class="leg leg1"></div>
-    <div class="leg leg2"></div>
+  <div class="tree t3">
+    <div class="trunk"></div>
+    <div class="leaf l1"></div>
+    <div class="leaf l2"></div>
+    <div class="leaf l3"></div>
+    <div class="leaf l4"></div>
   </div>
 
-  <div id="crosshair"></div>
-
-  <!-- CONTROLS -->
-  <div id="controls">
-    <button class="control" id="left">◀</button>
-    <button class="control" id="jump">⬆</button>
-    <button class="control" id="right">▶</button>
-    <button class="control" id="missionButton">🧠 MATH MISSION</button>
+  <div class="tree t4">
+    <div class="trunk"></div>
+    <div class="leaf l1"></div>
+    <div class="leaf l2"></div>
+    <div class="leaf l3"></div>
+    <div class="leaf l4"></div>
   </div>
 
-  <!-- START -->
-  <div id="startScreen">
-    <div class="startBox">
-      <h1>🌍 EduSpark Craft Quest</h1>
-      <p>
-        Explore the block world.<br>
-        Collect coins, earn XP and solve maths challenges.
-      </p>
-      <button id="startButton">START ADVENTURE 🚀</button>
-    </div>
-  </div>
+  <!-- Rocks -->
+  <div class="rock r1"></div>
+  <div class="rock r2"></div>
+  <div class="rock r3"></div>
+  <div class="rock r4"></div>
 
-  <!-- MISSION -->
-  <div id="mission">
-    <div class="missionBox">
-      <h2>🧠 Maths Mission</h2>
-      <p>Solve the challenge to earn XP!</p>
+  <!-- Water -->
+  <div class="water w1"></div>
+  <div class="water w2"></div>
+  <div class="water w3"></div>
 
-      <div class="question" id="question">
-        8 × 7 = ?
-      </div>
+  <!-- Coins -->
+  <div class="coin" style="left:400px;bottom:260px"></div>
+  <div class="coin" style="left:720px;bottom:210px"></div>
+  <div class="coin" style="left:1450px;bottom:280px"></div>
+  <div class="coin" style="left:2050px;bottom:230px"></div>
+  <div class="coin" style="left:2750px;bottom:270px"></div>
+  <div class="coin" style="left:3300px;bottom:210px"></div>
+  <div class="coin" style="left:4000px;bottom:280px"></div>
 
-      <div class="answers" id="answers"></div>
-
-      <div id="message"></div>
-    </div>
-  </div>
+  <!-- Enemies -->
+  <div class="enemy" id="enemy1" style="left:650px"></div>
+  <div class="enemy" id="enemy2" style="left:1900px"></div>
+  <div class="enemy" id="enemy3" style="left:3150px"></div>
+  <div class="enemy" id="enemy4" style="left:4300px"></div>
 
 </div>
 
+<!-- PLAYER -->
+<div id="player">
+  <div class="head">
+    <div class="eye e1"></div>
+    <div class="eye e2"></div>
+  </div>
+  <div class="body"></div>
+  <div class="leg leg1"></div>
+  <div class="leg leg2"></div>
+</div>
+
+</div>
+
+<!-- HUD -->
+<div id="hud">
+  <div class="stat">❤️ <span id="health">100</span></div>
+  <div class="stat">🪙 <span id="coins">0</span></div>
+  <div class="stat">⭐ XP <span id="xp">0</span></div>
+  <div class="stat">🏆 LV <span id="level">1</span></div>
+</div>
+
+<button id="missionBtn">🧠 MATH MISSION</button>
+
+<!-- Inventory -->
+<div id="inventory">
+  <div class="slot selected" data-type="grass">🌿<span class="count" id="grassCount">0</span></div>
+  <div class="slot" data-type="wood">🪵<span class="count" id="woodCount">0</span></div>
+  <div class="slot" data-type="stone">🪨<span class="count" id="stoneCount">0</span></div>
+  <div class="slot" data-type="gold">🟨<span class="count" id="goldCount">0</span></div>
+</div>
+
+<!-- Controls -->
+<div id="controls">
+  <button class="control" id="left">⬅️</button>
+  <button class="control" id="jump">⬆️</button>
+  <button class="control" id="right">➡️</button>
+</div>
+
+<div id="message"></div>
+
+<!-- Maths -->
+<div id="mathBox">
+  <div class="mathCard">
+    <h2>🧠 EduSpark Math Mission</h2>
+    <div id="question"></div>
+    <div class="answers" id="answers"></div>
+    <button id="closeMath">Close</button>
+  </div>
+</div>
+
+<!-- START -->
+<div id="startScreen">
+  <h1>🌍 EduSpark Craft Quest</h1>
+  <p>
+    Explore the block world, collect resources, avoid enemies,
+    earn coins and solve maths missions!
+  </p>
+  <button id="startBtn">START ADVENTURE 🚀</button>
+</div>
+
 <script>
+/* =========================
+   GAME STATE
+========================= */
 
-const player = document.getElementById("player");
-const startScreen = document.getElementById("startScreen");
-const startButton = document.getElementById("startButton");
+const player=document.getElementById("player");
+const world=document.getElementById("world");
 
-const coinsText = document.getElementById("coins");
-const xpText = document.getElementById("xp");
-const healthText = document.getElementById("health");
+let x=180;
+let y=0;
+let velocityY=0;
 
-const mission = document.getElementById("mission");
-const missionButton = document.getElementById("missionButton");
+let left=false;
+let right=false;
+let jumping=false;
+let running=false;
 
-let gameStarted = false;
+let health=100;
+let coins=0;
+let xp=0;
+let level=1;
 
-let playerX = window.innerWidth / 2;
-let coins = 0;
-let xp = 0;
-let health = 100;
+let cameraX=0;
 
-let movingLeft = false;
-let movingRight = false;
+let inventory={
+  grass:0,
+  wood:0,
+  stone:0,
+  gold:0
+};
 
-let velocityY = 0;
-let jumping = false;
+let selectedBlock="grass";
 
-const gravity = 0.8;
-const jumpPower = 14;
+const speed=5;
+const gravity=.8;
+const jumpPower=15;
 
-function updatePlayer(){
+/* =========================
+   UI
+========================= */
 
-  if(!gameStarted) return;
+function updateHUD(){
+  document.getElementById("health").textContent=health;
+  document.getElementById("coins").textContent=coins;
+  document.getElementById("xp").textContent=xp;
+  document.getElementById("level").textContent=level;
 
-  if(movingLeft){
-    playerX -= 5;
-  }
-
-  if(movingRight){
-    playerX += 5;
-  }
-
-  const maxX = window.innerWidth - 60;
-
-  if(playerX < 10) playerX = 10;
-  if(playerX > maxX) playerX = maxX;
-
-  if(jumping){
-    velocityY -= gravity;
-
-    let currentBottom =
-      parseFloat(getComputedStyle(player).bottom);
-
-    currentBottom += velocityY;
-
-    if(currentBottom <= window.innerHeight * .45){
-      currentBottom = window.innerHeight * .45;
-      jumping = false;
-      velocityY = 0;
-    }
-
-    player.style.bottom = currentBottom + "px";
-  }
-
-  player.style.left = playerX + "px";
-
-  requestAnimationFrame(updatePlayer);
+  document.getElementById("grassCount").textContent=inventory.grass;
+  document.getElementById("woodCount").textContent=inventory.wood;
+  document.getElementById("stoneCount").textContent=inventory.stone;
+  document.getElementById("goldCount").textContent=inventory.gold;
 }
 
-/* START */
+function message(txt){
+  const m=document.getElementById("message");
+  m.textContent=txt;
+  m.style.display="block";
 
-startButton.addEventListener("click",function(){
+  clearTimeout(window.messageTimer);
 
-  gameStarted = true;
-
-  startScreen.style.display="none";
-
-  player.style.left =
-    (window.innerWidth/2) + "px";
-
-  player.style.bottom =
-    (window.innerHeight*.45) + "px";
-
-  updatePlayer();
-
-  collectCoin();
-
-});
-
-/* MOVEMENT */
-
-function startMove(direction){
-
-  if(direction==="left"){
-    movingLeft=true;
-  }
-
-  if(direction==="right"){
-    movingRight=true;
-  }
+  window.messageTimer=setTimeout(()=>{
+    m.style.display="none";
+  },1800);
 }
 
-function stopMove(direction){
+/* =========================
+   START
+========================= */
 
-  if(direction==="left"){
-    movingLeft=false;
-  }
+document.getElementById("startBtn").onclick=()=>{
+  document.getElementById("startScreen").style.display="none";
+  message("🌍 Adventure started!");
+  updateHUD();
+};
 
-  if(direction==="right"){
-    movingRight=false;
-  }
-}
+/* =========================
+   KEYBOARD
+========================= */
 
-const leftButton =
-document.getElementById("left");
-
-const rightButton =
-document.getElementById("right");
-
-leftButton.addEventListener("pointerdown",()=>{
-  startMove("left");
-});
-
-leftButton.addEventListener("pointerup",()=>{
-  stopMove("left");
-});
-
-leftButton.addEventListener("pointerleave",()=>{
-  stopMove("left");
-});
-
-rightButton.addEventListener("pointerdown",()=>{
-  startMove("right");
-});
-
-rightButton.addEventListener("pointerup",()=>{
-  stopMove("right");
-});
-
-rightButton.addEventListener("pointerleave",()=>{
-  stopMove("right");
-});
-
-/* KEYBOARD */
-
-document.addEventListener("keydown",function(e){
+document.addEventListener("keydown",e=>{
 
   if(e.key==="ArrowLeft" || e.key.toLowerCase()==="a"){
-    movingLeft=true;
+    left=true;
   }
 
   if(e.key==="ArrowRight" || e.key.toLowerCase()==="d"){
-    movingRight=true;
+    right=true;
   }
 
   if(
-    (e.key==="ArrowUp" ||
-     e.key==="w" ||
-     e.key===" ")
-     && !jumping
+    e.key==="ArrowUp" ||
+    e.key===" " ||
+    e.key.toLowerCase()==="w"
   ){
-    jumping=true;
-    velocityY=jumpPower;
+    jump();
   }
 
 });
 
-document.addEventListener("keyup",function(e){
+document.addEventListener("keyup",e=>{
 
   if(e.key==="ArrowLeft" || e.key.toLowerCase()==="a"){
-    movingLeft=false;
+    left=false;
   }
 
   if(e.key==="ArrowRight" || e.key.toLowerCase()==="d"){
-    movingRight=false;
+    right=false;
   }
 
 });
 
-/* JUMP BUTTON */
+/* =========================
+   MOBILE CONTROLS
+========================= */
 
-document.getElementById("jump")
-.addEventListener("pointerdown",function(){
+function holdButton(btn,down,up){
 
-  if(!jumping){
+  btn.addEventListener("touchstart",e=>{
+    e.preventDefault();
+    down();
+  },{passive:false});
 
-    jumping=true;
+  btn.addEventListener("touchend",e=>{
+    e.preventDefault();
+    up();
+  },{passive:false});
+
+  btn.addEventListener("mousedown",down);
+  btn.addEventListener("mouseup",up);
+  btn.addEventListener("mouseleave",up);
+}
+
+holdButton(
+  document.getElementById("left"),
+  ()=>left=true,
+  ()=>left=false
+);
+
+holdButton(
+  document.getElementById("right"),
+  ()=>right=true,
+  ()=>right=false
+);
+
+document.getElementById("jump").onclick=jump;
+
+/* =========================
+   JUMP
+========================= */
+
+function jump(){
+
+  if(y===0){
     velocityY=jumpPower;
-
+    jumping=true;
   }
-
-});
-
-/* COIN */
-
-function collectCoin(){
-
-  if(!gameStarted) return;
-
-  setTimeout(function(){
-
-    coins++;
-
-    coinsText.textContent=coins;
-
-    collectCoin();
-
-  },5000);
 
 }
 
-/* MATH MISSION */
+/* =========================
+   PLAYER UPDATE
+========================= */
 
-const questions = [
+function gameLoop(){
 
-  {
-    q:"8 × 7 = ?",
-    a:["54","56","64","48"],
-    correct:"56"
-  },
-
-  {
-    q:"Perimeter of a square with side 6 cm?",
-    a:["12 cm","18 cm","24 cm","36 cm"],
-    correct:"24 cm"
-  },
-
-  {
-    q:"25% of 80 = ?",
-    a:["10","15","20","25"],
-    correct:"20"
-  },
-
-  {
-    q:"12 + 18 × 2 = ?",
-    a:["60","48","42","36"],
-    correct:"48"
-  },
-
-  {
-    q:"Area of rectangle 8 × 5 = ?",
-    a:["13","26","40","80"],
-    correct:"40"
+  if(left){
+    x-=speed;
+    running=true;
   }
 
-];
+  if(right){
+    x+=speed;
+    running=true;
+  }
 
-let currentQuestion = 0;
+  if(!left && !right){
+    running=false;
+  }
 
-function openMission(){
+  if(x<50)x=50;
+  if(x>4700)x=4700;
 
-  if(!gameStarted) return;
+  /* gravity */
 
-  mission.style.display="flex";
+  velocityY-=gravity;
+  y+=velocityY;
 
-  showQuestion();
+  if(y<0){
+    y=0;
+    velocityY=0;
+    jumping=false;
+  }
 
+  player.style.left=x+"px";
+  player.style.bottom=(120+y)+"px";
+
+  if(running){
+    player.classList.add("walk");
+  }else{
+    player.classList.remove("walk");
+  }
+
+  /* CAMERA */
+
+  const screenWidth=window.innerWidth;
+
+  cameraX=x-screenWidth*.45;
+
+  if(cameraX<0)cameraX=0;
+  if(cameraX>5000-screenWidth)
+    cameraX=5000-screenWidth;
+
+  world.style.left=(-cameraX)+"px";
+
+  checkCoins();
+  checkEnemies();
+
+  requestAnimationFrame(gameLoop);
 }
 
-missionButton.addEventListener("click",openMission);
+/* =========================
+   COINS
+========================= */
 
-function showQuestion(){
+function checkCoins(){
 
-  const data =
-    questions[currentQuestion];
+  document.querySelectorAll(".coin").forEach(coin=>{
 
-  document.getElementById("question")
-    .textContent=data.q;
+    if(coin.dataset.collected==="yes")return;
 
-  const answers =
-    document.getElementById("answers");
+    const rect=coin.getBoundingClientRect();
+    const pr=player.getBoundingClientRect();
 
-  answers.innerHTML="";
+    if(
+      pr.right>rect.left &&
+      pr.left<rect.right &&
+      pr.bottom>rect.top &&
+      pr.top<rect.bottom
+    ){
 
-  document.getElementById("message")
-    .textContent="";
+      coin.dataset.collected="yes";
+      coin.style.display="none";
 
-  data.a.forEach(function(answer){
+      coins++;
+      xp+=5;
 
-    const button =
-      document.createElement("button");
+      level=Math.floor(xp/50)+1;
 
-    button.className="answer";
+      updateHUD();
 
-    button.textContent=answer;
-
-    button.addEventListener("click",function(){
-
-      checkAnswer(answer);
-
-    });
-
-    answers.appendChild(button);
+      message("🪙 Coin collected! +5 XP");
+    }
 
   });
 
 }
 
-function checkAnswer(answer){
+/* =========================
+   ENEMIES
+========================= */
 
-  const data =
-    questions[currentQuestion];
+function checkEnemies(){
 
-  const message =
-    document.getElementById("message");
+  document.querySelectorAll(".enemy").forEach(enemy=>{
 
-  if(answer===data.correct){
+    const rect=enemy.getBoundingClientRect();
+    const pr=player.getBoundingClientRect();
 
-    xp += 20;
+    if(
+      pr.right>rect.left &&
+      pr.left<rect.right &&
+      pr.bottom>rect.top &&
+      pr.top<rect.bottom
+    ){
 
-    coins += 5;
-
-    xpText.textContent=xp;
-    coinsText.textContent=coins;
-
-    message.textContent =
-      "🎉 Correct! +20 XP +5 Coins";
-
-    setTimeout(function(){
-
-      currentQuestion++;
-
-      if(currentQuestion>=questions.length){
-
-        currentQuestion=0;
-
-        message.textContent =
-          "🏆 Mission Complete!";
-
-        setTimeout(()=>{
-          mission.style.display="none";
-        },1000);
-
-      }else{
-
-        showQuestion();
-
+      if(y>35){
+        return;
       }
 
-    },900);
+      if(enemy.dataset.hit==="yes")return;
 
-  }else{
+      enemy.dataset.hit="yes";
 
-    health -= 10;
+      health-=10;
 
-    if(health<0) health=0;
+      updateHUD();
 
-    healthText.textContent=health;
+      message("👾 Enemy hit! -10 ❤️");
 
-    message.textContent =
-      "❌ Not correct. Try again!";
+      setTimeout(()=>{
+        enemy.dataset.hit="no";
+      },1200);
 
-  }
+      if(health<=0){
+        health=100;
+        x=180;
+        message("💥 You fainted! Respawning...");
+        updateHUD();
+      }
+
+    }
+
+  });
 
 }
 
-/* RESIZE */
+/* =========================
+   INVENTORY
+========================= */
 
-window.addEventListener("resize",function(){
+document.querySelectorAll(".slot").forEach(slot=>{
 
-  if(playerX > window.innerWidth-60){
-    playerX=window.innerWidth-60;
-  }
+  slot.addEventListener("click",()=>{
+
+    document.querySelectorAll(".slot")
+      .forEach(s=>s.classList.remove("selected"));
+
+    slot.classList.add("selected");
+
+    selectedBlock=slot.dataset.type;
+
+    message("Selected: "+selectedBlock);
+  });
 
 });
+
+/* =========================
+   CREATE BLOCKS
+========================= */
+
+function createBlock(type,leftPos,bottomPos){
+
+  const b=document.createElement("div");
+
+  b.className="block";
+
+  if(type==="grass")
+    b.classList.add("grassBlock");
+
+  if(type==="stone")
+    b.classList.add("stoneBlock");
+
+  if(type==="wood")
+    b.classList.add("woodBlock");
+
+  if(type==="gold")
+    b.classList.add("goldBlock");
+
+  b.style.left=leftPos+"px";
+  b.style.bottom=bottomPos+"px";
+
+  b.dataset.type=type;
+
+  b.onclick=()=>{
+
+    const blockType=b.dataset.type;
+
+    inventory[blockType]++;
+
+    b.remove();
+
+    coins++;
+    xp+=2;
+
+    level=Math.floor(xp/50)+1;
+
+    updateHUD();
+
+    message("⛏️ "+blockType+" collected!");
+  };
+
+  world.appendChild(b);
+}
+
+/* =========================
+   ADD MINING BLOCKS
+========================= */
+
+for(let i=0;i<35;i++){
+
+  const types=["grass","stone","wood","gold"];
+
+  const type=types[Math.floor(Math.random()*types.length)];
+
+  const xpos=300+i*120;
+
+  createBlock(
+    type,
+    xpos,
+    170+Math.random()*80
+  );
+
+}
+
+/* =========================
+   BUILDING
+========================= */
+
+world.addEventListener("dblclick",e=>{
+
+  if(!inventory[selectedBlock]){
+    message("❌ You don't have this block!");
+    return;
+  }
+
+  const rect=world.getBoundingClientRect();
+
+  let blockX=
+    e.clientX-
+    rect.left+
+    cameraX-
+    24;
+
+  let blockY=
+    window.innerHeight-
+    e.clientY-
+    120-
+    24;
+
+  blockX=Math.round(blockX/48)*48;
+  blockY=Math.round(blockY/48)*48;
+
+  if(blockY<0)blockY=0;
+
+  createBlock(
+    selectedBlock,
+    blockX,
+    blockY+120
+  );
+
+  inventory[selectedBlock]--;
+
+  xp+=3;
+
+  updateHUD();
+
+  message("🧱 Block placed!");
+});
+
+/* =========================
+   MATH MISSIONS
+========================= */
+
+const questions=[
+
+ {
+  q:"What is 7 × 8?",
+  a:["54","56","64","48"],
+  c:1
+ },
+
+ {
+  q:"A square has side 9 cm. What is its perimeter?",
+  a:["18 cm","27 cm","36 cm","81 cm"],
+  c:2
+ },
+
+ {
+  q:"What is 25% of 200?",
+  a:["25","40","50","75"],
+  c:2
+ },
+
+ {
+  q:"What is 12 + 6 × 2?",
+  a:["36","24","30","20"],
+  c:3
+ },
+
+ {
+  q:"A rectangle is 12 cm long and 5 cm wide. Area?",
+  a:["17 cm²","34 cm²","60 cm²","120 cm²"],
+  c:2
+ },
+
+ {
+  q:"What is 144 ÷ 12?",
+  a:["10","11","12","14"],
+  c:2
+ },
+
+ {
+  q:"What is 15²?",
+  a:["30","150","225","125"],
+  c:2
+ },
+
+ {
+  q:"If 3 blocks cost 15 coins, one block costs?",
+  a:["3","5","8","10"],
+  c:1
+ }
+
+];
+
+let currentQuestion=0;
+
+function openMath(){
+
+  currentQuestion=
+    Math.floor(Math.random()*questions.length);
+
+  const q=questions[currentQuestion];
+
+  document.getElementById("question").textContent=q.q;
+
+  const answers=document.getElementById("answers");
+
+  answers.innerHTML="";
+
+  q.a.forEach((answer,index)=>{
+
+    const button=document.createElement("button");
+
+    button.className="answer";
+
+    button.textContent=answer;
+
+    button.onclick=()=>{
+
+      if(index===q.c){
+
+        xp+=20;
+        coins+=5;
+
+        level=Math.floor(xp/50)+1;
+
+        message("🎉 Correct! +20 XP +5 coins");
+
+      }else{
+
+        health-=10;
+
+        message("❌ Wrong! -10 ❤️");
+
+        if(health<=0)
+          health=100;
+      }
+
+      updateHUD();
+
+      document.getElementById("mathBox").style.display="none";
+    };
+
+    answers.appendChild(button);
+
+  });
+
+  document.getElementById("mathBox").style.display="flex";
+}
+
+document.getElementById("missionBtn").onclick=openMath;
+
+document.getElementById("closeMath").onclick=()=>{
+  document.getElementById("mathBox").style.display="none";
+};
+
+/* =========================
+   START GAME LOOP
+========================= */
+
+updateHUD();
+gameLoop();
 
 </script>
 
