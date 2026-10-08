@@ -1,186 +1,285 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+
+<meta
+  name="viewport"
+  content="width=device-width,
+  initial-scale=1.0,
+  maximum-scale=1.0,
+  user-scalable=no"
+>
 
 <title>EduSpark Craft Quest</title>
 
 <style>
+
+/* =========================================================
+   RESET
+========================================================= */
+
 *{
   box-sizing:border-box;
+  margin:0;
+  padding:0;
   user-select:none;
   -webkit-user-select:none;
 }
 
-html,body{
-  margin:0;
+html,
+body{
   width:100%;
   height:100%;
   overflow:hidden;
-  font-family:Arial,sans-serif;
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+  background:#101010;
 }
 
-body{
-  background:#111;
-}
+/* =========================================================
+   MAIN GAME VIEW
+========================================================= */
 
 #game{
   position:relative;
   width:100vw;
   height:100vh;
   overflow:hidden;
-  background:#72c8ff;
+  background:#78d5ff;
 }
 
-/* =========================
-WORLD
-========================= */
+/* =========================================================
+   WORLD
+========================================================= */
 
 #world{
+
   position:absolute;
+
   left:0;
   top:0;
+
   width:14000px;
   height:100vh;
-  will-change:transform;
+
+  transform:
+    translate3d(0,0,0);
+
+  will-change:
+    transform;
+
 }
 
-.sky{
+/* =========================================================
+   SKY
+========================================================= */
+
+#sky{
+
   position:absolute;
-  inset:0;
+
+  left:0;
+  top:0;
+
   width:14000px;
   height:100vh;
 
   background:
-  linear-gradient(
-    to bottom,
-    #55baff 0%,
-    #9be0ff 55%,
-    #e0f7ff 100%
-  );
+    linear-gradient(
+      to bottom,
+      #48baff 0%,
+      #82d8ff 45%,
+      #d8f5ff 100%
+    );
+
 }
 
-#game.night .sky{
+.night #sky{
+
   background:
-  linear-gradient(
-    to bottom,
-    #061432,
-    #142a55,
-    #293b60
-  );
+    linear-gradient(
+      to bottom,
+      #07153b 0%,
+      #10275a 45%,
+      #263e69 100%
+    );
+
 }
+
+/* =========================================================
+   SUN
+========================================================= */
 
 #sun{
+
   position:absolute;
-  width:110px;
-  height:110px;
-  left:900px;
+
+  left:850px;
   top:70px;
+
+  width:115px;
+  height:115px;
+
   border-radius:50%;
-  background:#fff17b;
-  box-shadow:0 0 60px #fff17b;
+
+  background:#fff276;
+
+  box-shadow:
+    0 0 30px #fff276,
+    0 0 80px rgba(255,242,118,.55);
+
 }
 
-#game.night #sun{
-  background:#eee;
-  box-shadow:0 0 35px white;
+.night #sun{
+
+  background:#eeeeee;
+
+  box-shadow:
+    0 0 35px rgba(255,255,255,.8);
+
 }
 
-/* CLOUDS */
+/* =========================================================
+   CLOUDS
+========================================================= */
 
 .cloud{
+
   position:absolute;
-  width:180px;
+
+  width:190px;
   height:55px;
-  border-radius:60px;
+
   background:white;
-  opacity:.8;
+
+  border-radius:50px;
+
+  opacity:.82;
+
 }
 
 .cloud:before,
 .cloud:after{
+
   content:"";
+
   position:absolute;
-  border-radius:50%;
+
   background:white;
+
+  border-radius:50%;
+
 }
 
 .cloud:before{
+
   width:75px;
   height:75px;
+
   left:30px;
-  top:-35px;
+  top:-38px;
+
 }
 
 .cloud:after{
-  width:90px;
-  height:90px;
+
+  width:100px;
+  height:100px;
+
   right:20px;
-  top:-40px;
+  top:-48px;
+
 }
 
-.c1{left:300px;top:120px}
-.c2{left:1700px;top:80px;transform:scale(.8)}
-.c3{left:3200px;top:140px;transform:scale(1.2)}
-.c4{left:5200px;top:100px}
-.c5{left:7500px;top:160px;transform:scale(.7)}
-.c6{left:9700px;top:90px}
-.c7{left:12000px;top:140px}
+.cloud1{left:350px;top:120px}
+.cloud2{left:1500px;top:80px;transform:scale(.8)}
+.cloud3{left:2800px;top:150px;transform:scale(1.2)}
+.cloud4{left:4400px;top:100px}
+.cloud5{left:6000px;top:140px;transform:scale(.75)}
+.cloud6{left:7700px;top:90px;transform:scale(1.1)}
+.cloud7{left:9400px;top:140px}
+.cloud8{left:11000px;top:90px;transform:scale(.8)}
+.cloud9{left:12700px;top:150px}
 
-/* MOUNTAINS */
+/* =========================================================
+   MOUNTAINS
+========================================================= */
 
 .mountain{
+
   position:absolute;
+
   bottom:260px;
 
   width:0;
   height:0;
 
-  border-left:240px solid transparent;
-  border-right:240px solid transparent;
-  border-bottom:400px solid #637e92;
+  border-left:
+    250px solid transparent;
+
+  border-right:
+    250px solid transparent;
+
+  border-bottom:
+    410px solid #54768a;
 
   opacity:.6;
+
 }
 
-.m1{left:400px}
-.m2{left:1700px;transform:scale(1.3)}
-.m3{left:3100px;transform:scale(.9)}
+.m1{left:500px}
+.m2{left:1800px;transform:scale(1.3)}
+.m3{left:3200px;transform:scale(.8)}
 .m4{left:4700px;transform:scale(1.5)}
-.m5{left:6400px}
+.m5{left:6500px;transform:scale(1)}
 .m6{left:8200px;transform:scale(.8)}
-.m7{left:9900px;transform:scale(1.4)}
-.m8{left:11900px}
+.m7{left:9900px;transform:scale(1.3)}
+.m8{left:11500px;transform:scale(1)}
+.m9{left:13000px;transform:scale(.8)}
 
-/* HILLS */
+/* =========================================================
+   HILLS
+========================================================= */
 
 .hill{
+
   position:absolute;
+
   bottom:260px;
 
-  width:600px;
+  width:650px;
   height:250px;
 
-  border-radius:50% 50% 0 0;
+  border-radius:
+    50% 50% 0 0;
 
   background:#4d9e51;
+
 }
 
 .h1{left:0}
-.h2{left:1200px}
-.h3{left:2600px}
-.h4{left:4000px}
-.h5{left:5600px}
-.h6{left:7200px}
-.h7{left:8800px}
-.h8{left:10400px}
-.h9{left:12000px}
+.h2{left:1100px}
+.h3{left:2450px}
+.h4{left:3900px}
+.h5{left:5400px}
+.h6{left:6900px}
+.h7{left:8500px}
+.h8{left:10000px}
+.h9{left:11600px}
+.h10{left:13000px}
 
-/* GROUND */
+/* =========================================================
+   GROUND
+========================================================= */
 
 #ground{
+
   position:absolute;
+
   left:0;
   bottom:0;
 
@@ -188,61 +287,84 @@ WORLD
   height:260px;
 
   background:
-  linear-gradient(
-    to bottom,
-    #43a63f 0px,
-    #43a63f 35px,
-    #80502f 35px,
-    #80502f 150px,
-    #514941 150px
-  );
+    linear-gradient(
+      to bottom,
+      #43a83f 0px,
+      #43a83f 35px,
+      #80502f 35px,
+      #80502f 145px,
+      #51473e 145px,
+      #51473e 100%
+    );
 
-  border-top:8px solid #2e8935;
+  border-top:
+    8px solid #2c8d34;
+
 }
 
-.grass{
+/* =========================================================
+   GRASS
+========================================================= */
+
+#grass{
+
   position:absolute;
+
   left:0;
   bottom:255px;
 
   width:14000px;
-  height:12px;
+  height:15px;
 
   background:
-  repeating-linear-gradient(
-    90deg,
-    #3c9637 0 20px,
-    #61bf4b 20px 35px,
-    #348732 35px 55px
-  );
+    repeating-linear-gradient(
+      90deg,
+      #338b35 0px,
+      #338b35 18px,
+      #55b947 18px,
+      #55b947 32px,
+      #3c9a39 32px,
+      #3c9a39 52px
+    );
+
 }
 
-/* =========================
-OBJECTS
-========================= */
+/* =========================================================
+   TREE
+========================================================= */
 
 .tree{
+
   position:absolute;
+
   bottom:260px;
-  width:80px;
-  height:150px;
+
+  width:90px;
+  height:165px;
+
 }
 
-.tree .trunk{
+.treeTrunk{
+
   position:absolute;
+
+  left:34px;
   bottom:0;
-  left:30px;
 
   width:25px;
-  height:80px;
+  height:90px;
 
-  background:#70452d;
-  border-radius:6px;
+  background:#71452c;
+
+  border-radius:7px;
+
 }
 
-.tree .leaf{
+.treeLeaves{
+
   position:absolute;
-  left:-10px;
+
+  left:-5px;
   top:0;
 
   width:100px;
@@ -250,126 +372,176 @@ OBJECTS
 
   border-radius:50%;
 
-  background:#268d38;
+  background:#268f3b;
 
   box-shadow:
-  35px -20px 0 #38a947,
-  65px 20px 0 #238433,
-  5px 35px 0 #319d40;
+    35px -20px 0 #36a746,
+    65px 15px 0 #258735,
+    5px 35px 0 #309c40;
+
 }
+
+/* =========================================================
+   ROCK
+========================================================= */
 
 .rock{
+
   position:absolute;
+
   bottom:260px;
 
-  width:65px;
-  height:42px;
+  width:70px;
+  height:45px;
 
-  border-radius:50%;
+  border-radius:
+    55% 45% 40% 40%;
 
-  background:#70757a;
+  background:#72777b;
 
   box-shadow:
-  inset -12px -8px 0 rgba(0,0,0,.2);
+    inset -12px -9px 0 rgba(0,0,0,.2);
+
 }
+
+/* =========================================================
+   GOLD
+========================================================= */
 
 .gold{
+
   position:absolute;
+
   bottom:260px;
-
-  width:35px;
-  height:35px;
-
-  border-radius:50%;
-
-  background:#ffd936;
-
-  box-shadow:
-  0 0 18px rgba(255,216,54,.9);
-}
-
-.crystal{
-  position:absolute;
-  bottom:260px;
-
-  width:35px;
-  height:65px;
-
-  background:
-  linear-gradient(
-    135deg,
-    #c06cff,
-    #4d86ff
-  );
-
-  clip-path:
-  polygon(
-    50% 0,
-    100% 35%,
-    75% 100%,
-    25% 100%,
-    0 35%
-  );
-
-  filter:
-  drop-shadow(0 0 8px #8e6cff);
-}
-
-/* =========================
-PLAYER
-========================= */
-
-#player{
-  position:absolute;
-
-  left:150px;
-  bottom:260px;
-
-  width:54px;
-  height:90px;
-
-  z-index:50;
-
-  transform-origin:center bottom;
-}
-
-.playerHead{
-  position:absolute;
-
-  left:9px;
-  top:0;
 
   width:38px;
   height:38px;
 
   border-radius:50%;
 
-  background:#ffc58c;
+  background:
+    radial-gradient(
+      circle at 35% 30%,
+      #fff6a0,
+      #ffd52e 45%,
+      #e8a600
+    );
 
-  border:3px solid #8b5032;
+  box-shadow:
+    0 0 17px rgba(255,210,40,.8);
+
+  animation:
+    goldFloat 1.2s infinite alternate;
+
 }
 
-.playerBody{
+@keyframes goldFloat{
+
+  from{
+    transform:translateY(0);
+  }
+
+  to{
+    transform:translateY(-8px);
+  }
+
+}
+
+/* =========================================================
+   CRYSTAL
+========================================================= */
+
+.crystal{
+
+  position:absolute;
+
+  bottom:260px;
+
+  width:40px;
+  height:70px;
+
+  clip-path:
+    polygon(
+      50% 0,
+      100% 35%,
+      75% 100%,
+      25% 100%,
+      0 35%
+    );
+
+  background:
+    linear-gradient(
+      135deg,
+      #d477ff,
+      #6954ff
+    );
+
+  filter:
+    drop-shadow(
+      0 0 9px #8e6cff
+    );
+
+  animation:
+    crystalPulse 1.5s infinite alternate;
+
+}
+
+@keyframes crystalPulse{
+
+  from{
+    filter:
+      drop-shadow(0 0 4px #8e6cff);
+  }
+
+  to{
+    filter:
+      drop-shadow(0 0 18px #b68cff);
+  }
+
+}
+
+/* =========================================================
+   PLAYER
+========================================================= */
+
+#player{
+
+  position:absolute;
+
+  left:100px;
+  bottom:260px;
+
+  width:58px;
+  height:95px;
+
+  z-index:100;
+
+  transform-origin:
+    center bottom;
+
+}
+
+.playerHead{
+
   position:absolute;
 
   left:10px;
-  bottom:0;
+  top:0;
 
-  width:35px;
-  height:48px;
+  width:40px;
+  height:40px;
 
-  border-radius:10px 10px 6px 6px;
+  border-radius:50%;
 
-  background:
-  linear-gradient(
-    #297dff,
-    #1552bb
-  );
+  background:#ffc58e;
 
-  border:3px solid #092e79;
+  border:
+    3px solid #814b30;
+
 }
 
-.eye{
+.playerEye{
+
   position:absolute;
 
   top:12px;
@@ -380,88 +552,146 @@ PLAYER
   border-radius:50%;
 
   background:#111;
+
 }
 
 .eye1{left:9px}
 .eye2{right:9px}
 
-.playerLeg{
+.playerBody{
+
   position:absolute;
 
-  bottom:-22px;
+  left:10px;
+  bottom:0;
 
-  width:12px;
-  height:25px;
+  width:38px;
+  height:50px;
 
-  border-radius:5px;
+  border-radius:
+    10px 10px 7px 7px;
 
-  background:#243b64;
+  background:
+    linear-gradient(
+      #287fff,
+      #164eb6
+    );
 
-  transform-origin:top center;
+  border:
+    3px solid #092e79;
+
+}
+
+.leg{
+
+  position:absolute;
+
+  bottom:-23px;
+
+  width:13px;
+  height:26px;
+
+  border-radius:6px;
+
+  background:#263c68;
+
+  transform-origin:
+    top center;
+
 }
 
 .leg1{left:12px}
 .leg2{right:12px}
 
-#player.walking .leg1{
-  animation:walk1 .18s infinite alternate;
+.walk .leg1{
+
+  animation:
+    walk1 .18s infinite alternate;
+
 }
 
-#player.walking .leg2{
-  animation:walk2 .18s infinite alternate;
+.walk .leg2{
+
+  animation:
+    walk2 .18s infinite alternate;
+
 }
 
 @keyframes walk1{
-  from{transform:rotate(25deg)}
-  to{transform:rotate(-25deg)}
+
+  from{
+    transform:rotate(25deg);
+  }
+
+  to{
+    transform:rotate(-25deg);
+  }
+
 }
 
 @keyframes walk2{
-  from{transform:rotate(-25deg)}
-  to{transform:rotate(25deg)}
+
+  from{
+    transform:rotate(-25deg);
+  }
+
+  to{
+    transform:rotate(25deg);
+  }
+
 }
 
-/* SWORD */
+/* =========================================================
+   SWORD
+========================================================= */
 
 #swordArm{
+
   position:absolute;
 
-  width:10px;
-  height:50px;
+  right:-7px;
+  top:40px;
 
-  right:-8px;
-  top:39px;
+  width:12px;
+  height:52px;
 
-  transform-origin:5px 8px;
+  transform-origin:
+    6px 7px;
 
-  transform:rotate(-55deg);
+  transform:
+    rotate(-60deg);
 
-  z-index:70;
+  z-index:120;
+
 }
 
 #sword{
+
   position:absolute;
 
   left:0;
   top:0;
 
-  width:10px;
-  height:50px;
+  width:11px;
+  height:52px;
 
-  border-radius:5px;
+  border-radius:6px;
 
   background:
-  linear-gradient(
-    90deg,
-    #cbd8ed,
-    white,
-    #8da1c3
-  );
+    linear-gradient(
+      90deg,
+      #aebbd0,
+      #ffffff,
+      #8496b4
+    );
 
-  border:1px solid #50617b;
+  border:
+    1px solid #4e6079;
+
 }
 
 #sword:before{
+
   content:"";
 
   position:absolute;
@@ -469,16 +699,40 @@ PLAYER
   left:-8px;
   top:7px;
 
-  width:26px;
+  width:27px;
   height:7px;
+
+  background:#e0ad3d;
 
   border-radius:5px;
 
-  background:#d4a43c;
 }
 
-#player.attacking #swordArm{
-  animation:swordSwing .42s ease-out;
+#sword:after{
+
+  content:"";
+
+  position:absolute;
+
+  left:2px;
+  bottom:-9px;
+
+  border-left:
+    3px solid transparent;
+
+  border-right:
+    3px solid transparent;
+
+  border-top:
+    11px solid #dfe9ff;
+
+}
+
+.attack #swordArm{
+
+  animation:
+    swordSwing .42s ease-out;
+
 }
 
 @keyframes swordSwing{
@@ -487,500 +741,630 @@ PLAYER
     transform:rotate(-70deg);
   }
 
-  35%{
-    transform:rotate(70deg);
+  30%{
+    transform:rotate(45deg);
   }
 
-  65%{
+  55%{
     transform:rotate(125deg);
   }
 
+  75%{
+    transform:rotate(70deg);
+  }
+
   100%{
-    transform:rotate(-55deg);
+    transform:rotate(-60deg);
   }
 
 }
 
-/* =========================
-ENEMY
-========================= */
+/* =========================================================
+   ENEMY
+========================================================= */
 
 .enemy{
+
   position:absolute;
 
   bottom:260px;
 
-  width:58px;
-  height:76px;
+  width:62px;
+  height:80px;
 
-  z-index:40;
-}
+  z-index:80;
 
-.enemyBody{
-  position:absolute;
-
-  bottom:0;
-  left:9px;
-
-  width:40px;
-  height:48px;
-
-  border-radius:12px 12px 8px 8px;
-
-  background:#a63232;
-
-  border:3px solid #5a1515;
 }
 
 .enemyHead{
+
   position:absolute;
 
-  left:8px;
+  left:9px;
   top:0;
 
-  width:42px;
-  height:38px;
+  width:44px;
+  height:40px;
 
   border-radius:50%;
 
-  background:#b94141;
+  background:#b63e3e;
 
-  border:3px solid #5a1515;
+  border:
+    3px solid #5c1717;
+
+}
+
+.enemyBody{
+
+  position:absolute;
+
+  left:10px;
+  bottom:0;
+
+  width:42px;
+  height:50px;
+
+  border-radius:
+    12px 12px 7px 7px;
+
+  background:
+    linear-gradient(
+      #a62e36,
+      #711d25
+    );
+
+  border:
+    3px solid #521317;
+
 }
 
 .enemyEye{
+
   position:absolute;
 
-  top:12px;
+  top:13px;
 
   width:7px;
   height:7px;
 
   border-radius:50%;
 
-  background:#ffff55;
+  background:#ffff4e;
+
+  box-shadow:
+    0 0 7px #ffff4e;
+
 }
 
-.enemyEye1{left:9px}
-.enemyEye2{right:9px}
+.enemyEye1{left:10px}
+.enemyEye2{right:10px}
 
 .enemyBar{
+
   position:absolute;
 
-  top:-15px;
   left:0;
+  top:-16px;
 
-  width:58px;
+  width:62px;
   height:7px;
 
   border-radius:5px;
 
   background:#222;
+
+  overflow:hidden;
+
 }
 
-.enemyHealth{
+.enemyHP{
+
   width:100%;
   height:100%;
 
-  background:#39dc58;
+  background:#36dc59;
 
-  border-radius:5px;
 }
 
-.enemy.hit{
-  filter:brightness(2);
+.enemyHit{
+
+  animation:
+    enemyHit .15s;
+
 }
 
-/* =========================
-BOSS
-========================= */
+@keyframes enemyHit{
+
+  50%{
+    filter:
+      brightness(2.5);
+  }
+
+}
+
+/* =========================================================
+   BOSS
+========================================================= */
 
 #boss{
+
   position:absolute;
 
   left:9800px;
   bottom:260px;
 
-  width:100px;
-  height:130px;
+  width:120px;
+  height:150px;
 
-  z-index:45;
+  z-index:90;
+
 }
 
 .bossHead{
+
   position:absolute;
 
-  left:12px;
+  left:15px;
   top:0;
 
-  width:76px;
-  height:70px;
+  width:90px;
+  height:78px;
 
   border-radius:50%;
 
-  background:#7e2fc5;
+  background:
+    linear-gradient(
+      #8b35d0,
+      #63219d
+    );
 
-  border:5px solid #1e0739;
+  border:
+    5px solid #25083e;
+
 }
 
 .bossBody{
+
   position:absolute;
 
-  left:12px;
+  left:17px;
   bottom:0;
 
-  width:75px;
-  height:85px;
+  width:86px;
+  height:90px;
 
-  border-radius:20px;
+  border-radius:
+    22px 22px 10px 10px;
 
   background:
-  linear-gradient(
-    #6727a9,
-    #321060
-  );
+    linear-gradient(
+      #6421a4,
+      #32105d
+    );
 
-  border:5px solid #1e0739;
+  border:
+    5px solid #220632;
+
 }
 
 .bossEye{
+
   position:absolute;
 
-  top:22px;
+  top:25px;
 
-  width:12px;
-  height:12px;
+  width:13px;
+  height:13px;
 
   border-radius:50%;
 
-  background:#ffed40;
+  background:#ffe841;
+
+  box-shadow:
+    0 0 10px #ffe841;
+
 }
 
-.bossEye1{left:16px}
-.bossEye2{right:16px}
+.bossEye1{left:19px}
+.bossEye2{right:19px}
 
 #bossBar{
+
   position:absolute;
 
-  top:-25px;
   left:0;
+  top:-28px;
 
-  width:100px;
-  height:10px;
-
-  background:#222;
+  width:120px;
+  height:12px;
 
   border-radius:8px;
 
+  background:#181818;
+
   overflow:hidden;
+
 }
 
-#bossHealth{
+#bossHP{
+
   width:100%;
   height:100%;
 
-  background:#ff3030;
+  background:#ff3434;
+
 }
 
-/* =========================
-PORTAL
-========================= */
+/* =========================================================
+   PORTAL
+========================================================= */
 
 #portal{
+
   position:absolute;
 
   left:11800px;
   bottom:260px;
 
-  width:150px;
-  height:220px;
+  width:155px;
+  height:225px;
 
   border-radius:
-  75px 75px 0 0;
+    80px 80px 0 0;
 
-  border:12px solid #00dcff;
+  border:
+    12px solid #00dfff;
 
   background:
-  radial-gradient(
-    circle,
-    #9b5cff,
-    #27125c 70%
-  );
+    radial-gradient(
+      circle,
+      #9f55ff,
+      #28115e 72%
+    );
 
   box-shadow:
-  0 0 25px #00dcff,
-  0 0 80px rgba(0,217,255,.6);
+    0 0 30px #00dfff,
+    0 0 90px rgba(0,220,255,.55);
 
-  z-index:35;
+  z-index:50;
 
-  animation:portalPulse 1.4s infinite alternate;
-}
+  animation:
+    portalPulse 1.4s infinite alternate;
 
-@keyframes portalPulse{
-  from{filter:brightness(.85)}
-  to{filter:brightness(1.4)}
 }
 
 #portal.locked{
-  filter:grayscale(1);
+
+  filter:
+    grayscale(1);
+
   opacity:.45;
+
 }
 
-.portalText{
+.portalLabel{
+
   position:absolute;
 
-  width:300px;
+  left:-70px;
+  top:-50px;
 
-  left:-75px;
-  top:-45px;
+  width:290px;
+
+  text-align:center;
 
   color:white;
 
-  text-align:center;
+  font-size:17px;
 
   font-weight:bold;
 
   text-shadow:
-  0 2px 6px black;
+    0 2px 5px #000;
+
 }
 
-/* =========================
-QUEST TRACKER
-========================= */
+/* =========================================================
+   QUEST PANEL
+========================================================= */
 
-#questTracker{
+#questPanel{
+
   position:fixed;
 
-  top:135px;
-  left:15px;
+  left:50%;
+  top:14px;
+
+  transform:
+    translateX(-50%);
 
   z-index:1000;
 
-  width:330px;
+  width:
+    min(480px,calc(100vw - 380px));
 
-  padding:15px;
+  min-width:300px;
+
+  padding:12px 16px;
 
   border-radius:16px;
 
+  background:
+    rgba(8,20,38,.82);
+
+  border:
+    2px solid rgba(255,255,255,.25);
+
   color:white;
 
-  background:
-  linear-gradient(
-    135deg,
-    rgba(12,29,54,.94),
-    rgba(18,53,82,.94)
-  );
-
-  border:2px solid rgba(255,255,255,.3);
-
   box-shadow:
-  0 10px 35px rgba(0,0,0,.35);
+    0 8px 30px rgba(0,0,0,.3);
 
-  backdrop-filter:blur(8px);
+  backdrop-filter:
+    blur(8px);
+
 }
 
 .questTitle{
-  font-size:13px;
 
-  color:#72ddff;
+  font-size:12px;
 
-  font-weight:bold;
+  color:#a9cfff;
+
+  text-transform:uppercase;
 
   letter-spacing:1px;
+
 }
 
 #questName{
-  margin-top:5px;
 
-  font-size:20px;
+  margin-top:3px;
+
+  font-size:19px;
 
   font-weight:bold;
+
 }
 
-#questObjective{
-  margin-top:5px;
+#questDescription{
+
+  margin-top:3px;
 
   font-size:13px;
 
-  color:#dcecff;
+  color:#d5e9ff;
+
 }
 
 .progressOuter{
+
   width:100%;
 
-  height:13px;
+  height:10px;
 
-  margin-top:11px;
+  margin-top:8px;
 
-  background:#10151d;
-
-  border-radius:20px;
+  border-radius:10px;
 
   overflow:hidden;
+
+  background:#182436;
+
 }
 
 #questProgress{
+
   width:0%;
 
   height:100%;
 
   background:
-  linear-gradient(
-    90deg,
-    #28e6ff,
-    #7cff59
-  );
+    linear-gradient(
+      90deg,
+      #38dc67,
+      #ffe14d
+    );
 
-  border-radius:20px;
+  transition:
+    width .3s ease;
 
-  transition:width .25s;
 }
 
-#questPercent{
-  margin-top:5px;
+#questNumbers{
+
+  margin-top:4px;
 
   text-align:right;
 
-  font-size:12px;
+  font-size:11px;
 
-  color:#9eeeff;
+  color:#b9cde5;
+
 }
 
-/* =========================
-HUD
-========================= */
+/* =========================================================
+   HUD
+========================================================= */
 
 #hud{
+
   position:fixed;
 
-  top:12px;
   left:12px;
+  top:12px;
 
-  z-index:1000;
+  z-index:1100;
 
-  min-width:340px;
+  width:310px;
 
   padding:12px;
 
+  border-radius:15px;
+
   color:white;
 
-  background:rgba(0,0,0,.58);
+  background:
+    rgba(0,0,0,.62);
 
   border:
-  2px solid rgba(255,255,255,.25);
+    2px solid rgba(255,255,255,.2);
 
-  border-radius:14px;
+  box-shadow:
+    0 8px 25px rgba(0,0,0,.25);
 
-  backdrop-filter:blur(7px);
 }
 
-.title{
-  font-size:20px;
+.gameTitle{
+
+  font-size:19px;
+
   font-weight:bold;
+
+  margin-bottom:7px;
+
 }
 
-.stats{
-  display:flex;
+.healthLabel{
 
-  gap:12px;
+  font-size:12px;
 
-  flex-wrap:wrap;
-
-  margin-top:7px;
-
-  font-size:14px;
 }
 
 .healthOuter{
-  width:160px;
+
+  width:100%;
+
   height:12px;
 
-  margin-top:5px;
-
-  background:#321;
+  margin-top:4px;
 
   border-radius:10px;
 
   overflow:hidden;
+
+  background:#361b1b;
+
 }
 
 #healthBar{
+
   width:100%;
   height:100%;
 
-  background:#2be25c;
+  background:
+    linear-gradient(
+      90deg,
+      #ff3030,
+      #43e15e
+    );
+
+}
+
+.stats{
+
+  display:flex;
+
+  flex-wrap:wrap;
+
+  gap:10px;
+
+  margin-top:9px;
+
+  font-size:13px;
+
 }
 
 .distance{
+
   margin-top:7px;
 
-  color:#9fe7ff;
-
   font-size:13px;
+
+  color:#9feaff;
+
 }
 
 .hudButtons{
+
   display:flex;
 
-  gap:7px;
+  gap:6px;
 
   margin-top:8px;
+
 }
 
 .hudButtons button{
+
   border:0;
 
-  padding:7px 10px;
+  padding:7px 9px;
 
   border-radius:8px;
 
   font-weight:bold;
 
   cursor:pointer;
+
 }
 
-/* INVENTORY */
+/* =========================================================
+   INVENTORY
+========================================================= */
 
 #inventory{
+
   position:fixed;
 
-  top:12px;
   right:12px;
+  top:12px;
 
-  z-index:1000;
+  z-index:1100;
 
-  padding:10px;
+  padding:10px 13px;
+
+  border-radius:13px;
 
   color:white;
 
-  background:rgba(0,0,0,.58);
+  background:
+    rgba(0,0,0,.62);
 
   border:
-  2px solid rgba(255,255,255,.25);
+    2px solid rgba(255,255,255,.2);
 
-  border-radius:12px;
+  font-size:13px;
 
-  line-height:1.7;
+  line-height:1.65;
+
 }
 
-/* CONTROLS */
+/* =========================================================
+   CONTROLS
+========================================================= */
 
 #controls{
+
   position:fixed;
 
   left:50%;
-  bottom:18px;
+  bottom:16px;
 
-  transform:translateX(-50%);
+  transform:
+    translateX(-50%);
 
-  z-index:1000;
+  z-index:1200;
 
   display:flex;
 
-  gap:10px;
+  gap:8px;
+
 }
 
-.controlBtn{
+.control{
+
   width:58px;
   height:58px;
 
@@ -988,177 +1372,357 @@ HUD
 
   border-radius:16px;
 
-  font-size:25px;
+  background:
+    rgba(255,255,255,.86);
 
-  background:rgba(255,255,255,.86);
+  font-size:24px;
+
+  font-weight:bold;
 
   box-shadow:
-  0 5px 15px rgba(0,0,0,.25);
+    0 6px 15px rgba(0,0,0,.3);
 
   touch-action:none;
+
 }
 
-/* =========================
-SCREENS
-========================= */
+.control:active{
 
-#startScreen,
-#mathScreen,
-#completeScreen{
+  transform:
+    scale(.9);
+
+}
+
+/* =========================================================
+   NOTIFICATION
+========================================================= */
+
+#notification{
+
+  position:fixed;
+
+  left:50%;
+  top:145px;
+
+  transform:
+    translateX(-50%)
+    translateY(-20px);
+
+  z-index:3000;
+
+  padding:13px 22px;
+
+  border-radius:30px;
+
+  background:
+    rgba(5,20,35,.9);
+
+  color:white;
+
+  font-size:16px;
+
+  font-weight:bold;
+
+  opacity:0;
+
+  pointer-events:none;
+
+  transition:
+    .35s ease;
+
+  border:
+    2px solid rgba(255,255,255,.25);
+
+}
+
+#notification.show{
+
+  opacity:1;
+
+  transform:
+    translateX(-50%)
+    translateY(0);
+
+}
+
+/* =========================================================
+   START SCREEN
+========================================================= */
+
+.overlay{
+
   position:fixed;
 
   inset:0;
 
-  z-index:2000;
+  z-index:5000;
 
   display:flex;
 
   align-items:center;
   justify-content:center;
 
-  background:
-  radial-gradient(
-    circle,
-    rgba(20,70,120,.9),
-    rgba(0,0,0,.95)
-  );
+  text-align:center;
 
   color:white;
 
-  text-align:center;
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(17,73,120,.92),
+      rgba(0,0,0,.96)
+    );
+
 }
 
 .modal{
-  width:min(650px,90vw);
+
+  width:
+    min(700px,92vw);
 
   padding:35px;
 
   border-radius:25px;
 
-  background:rgba(10,20,40,.94);
+  background:
+    rgba(8,18,35,.94);
 
   border:
-  3px solid rgba(255,255,255,.25);
+    3px solid rgba(255,255,255,.2);
 
   box-shadow:
-  0 20px 70px rgba(0,0,0,.6);
+    0 25px 80px rgba(0,0,0,.7);
+
 }
 
 .modal h1{
-  font-size:40px;
-  margin:0 0 12px;
+
+  font-size:42px;
+
+  margin-bottom:12px;
+
 }
 
 .modal p{
-  line-height:1.6;
-  color:#d8ecff;
+
+  color:#d7ebff;
+
+  line-height:1.65;
+
+  margin:10px 0;
+
 }
 
 .bigButton{
+
+  margin-top:18px;
+
+  padding:15px 28px;
+
   border:0;
 
-  border-radius:15px;
+  border-radius:14px;
 
-  padding:15px 30px;
-
-  font-size:20px;
+  font-size:19px;
 
   font-weight:bold;
 
   cursor:pointer;
 
-  background:#35d45d;
+  background:#39dc61;
 
-  color:#07140a;
+  color:#07150b;
+
+  box-shadow:
+    0 8px 20px rgba(0,0,0,.4);
+
 }
+
+/* =========================================================
+   MATH
+========================================================= */
 
 .mathQuestion{
-  font-size:25px;
 
-  margin:25px 0;
+  margin:22px 0;
 
-  color:#fff47a;
+  font-size:28px;
+
+  color:#ffe95c;
+
 }
 
-.answerGrid{
+.answers{
+
   display:grid;
 
-  grid-template-columns:1fr 1fr;
+  grid-template-columns:
+    1fr 1fr;
 
   gap:12px;
+
 }
 
-.answerBtn{
-  border:0;
+.answer{
 
   padding:15px;
 
+  border:0;
+
   border-radius:12px;
 
-  background:#263f66;
+  background:#28476d;
 
   color:white;
 
   font-size:18px;
+
+  cursor:pointer;
+
 }
 
-/* MOBILE */
+.answer:hover{
 
-@media(max-width:700px){
+  background:#3c6595;
+
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:900px){
+
+  #questPanel{
+
+    top:10px;
+
+    width:
+      calc(100vw - 340px);
+
+    min-width:260px;
+
+  }
+
+}
+
+@media(max-width:650px){
+
+  #questPanel{
+
+    top:8px;
+    left:50%;
+
+    width:
+      calc(100vw - 20px);
+
+    min-width:0;
+
+    transform:
+      translateX(-50%);
+
+    padding:8px 11px;
+
+  }
 
   #hud{
-    min-width:250px;
-    max-width:calc(100vw - 24px);
+
+    top:105px;
+
+    width:230px;
+
+    padding:9px;
+
   }
 
-  #questTracker{
-    top:125px;
-    width:270px;
-  }
-
-  .questTitle{
-    font-size:11px;
-  }
-
-  #questName{
-    font-size:16px;
+  .gameTitle{
+    font-size:15px;
   }
 
   #inventory{
-    top:110px;
+
+    top:105px;
+    right:8px;
+
     font-size:11px;
+
   }
 
-  .controlBtn{
+  .control{
+
     width:50px;
     height:50px;
+
   }
 
   .modal h1{
+
     font-size:30px;
+
   }
 
 }
+
+/* =========================================================
+   QUEST COMPLETE FLASH
+========================================================= */
+
+.questComplete{
+
+  animation:
+    questFlash .7s ease;
+
+}
+
+@keyframes questFlash{
+
+  0%{
+    transform:
+      translateX(-50%)
+      scale(1);
+  }
+
+  50%{
+    transform:
+      translateX(-50%)
+      scale(1.06);
+  }
+
+  100%{
+    transform:
+      translateX(-50%)
+      scale(1);
+  }
+
+}
+
 </style>
+
 </head>
 
 <body>
 
 <div id="game">
 
+<!-- =====================================================
+     WORLD
+===================================================== -->
+
 <div id="world">
 
-<div class="sky"></div>
+<div id="sky"></div>
 
 <div id="sun"></div>
 
-<div class="cloud c1"></div>
-<div class="cloud c2"></div>
-<div class="cloud c3"></div>
-<div class="cloud c4"></div>
-<div class="cloud c5"></div>
-<div class="cloud c6"></div>
-<div class="cloud c7"></div>
+<div class="cloud cloud1"></div>
+<div class="cloud cloud2"></div>
+<div class="cloud cloud3"></div>
+<div class="cloud cloud4"></div>
+<div class="cloud cloud5"></div>
+<div class="cloud cloud6"></div>
+<div class="cloud cloud7"></div>
+<div class="cloud cloud8"></div>
+<div class="cloud cloud9"></div>
 
 <div class="mountain m1"></div>
 <div class="mountain m2"></div>
@@ -1168,6 +1732,7 @@ SCREENS
 <div class="mountain m6"></div>
 <div class="mountain m7"></div>
 <div class="mountain m8"></div>
+<div class="mountain m9"></div>
 
 <div class="hill h1"></div>
 <div class="hill h2"></div>
@@ -1178,884 +1743,1340 @@ SCREENS
 <div class="hill h7"></div>
 <div class="hill h8"></div>
 <div class="hill h9"></div>
+<div class="hill h10"></div>
 
 <div id="ground"></div>
-
-<div class="grass"></div>
-
+<div id="grass"></div>
 
 <!-- TREES -->
 
-<div class="tree" style="left:350px">
-<div class="leaf"></div>
-<div class="trunk"></div>
+<div class="tree" style="left:300px">
+  <div class="treeLeaves"></div>
+  <div class="treeTrunk"></div>
 </div>
 
-<div class="tree" style="left:1250px">
-<div class="leaf"></div>
-<div class="trunk"></div>
+<div class="tree" style="left:1150px">
+  <div class="treeLeaves"></div>
+  <div class="treeTrunk"></div>
 </div>
 
-<div class="tree" style="left:2100px">
-<div class="leaf"></div>
-<div class="trunk"></div>
+<div class="tree" style="left:2000px">
+  <div class="treeLeaves"></div>
+  <div class="treeTrunk"></div>
 </div>
 
-<div class="tree" style="left:3000px">
-<div class="leaf"></div>
-<div class="trunk"></div>
+<div class="tree" style="left:2950px">
+  <div class="treeLeaves"></div>
+  <div class="treeTrunk"></div>
 </div>
 
-<div class="tree" style="left:4300px">
-<div class="leaf"></div>
-<div class="trunk"></div>
+<div class="tree" style="left:4200px">
+  <div class="treeLeaves"></div>
+  <div class="treeTrunk"></div>
 </div>
 
-<div class="tree" style="left:5700px">
-<div class="leaf"></div>
-<div class="trunk"></div>
+<div class="tree" style="left:5600px">
+  <div class="treeLeaves"></div>
+  <div class="treeTrunk"></div>
 </div>
 
-<div class="tree" style="left:7200px">
-<div class="leaf"></div>
-<div class="trunk"></div>
+<div class="tree" style="left:7100px">
+  <div class="treeLeaves"></div>
+  <div class="treeTrunk"></div>
 </div>
 
-<div class="tree" style="left:8600px">
-<div class="leaf"></div>
-<div class="trunk"></div>
+<div class="tree" style="left:8500px">
+  <div class="treeLeaves"></div>
+  <div class="treeTrunk"></div>
 </div>
 
 <div class="tree" style="left:10100px">
-<div class="leaf"></div>
-<div class="trunk"></div>
+  <div class="treeLeaves"></div>
+  <div class="treeTrunk"></div>
 </div>
 
-<div class="tree" style="left:11300px">
-<div class="leaf"></div>
-<div class="trunk"></div>
+<div class="tree" style="left:11200px">
+  <div class="treeLeaves"></div>
+  <div class="treeTrunk"></div>
 </div>
 
+<div class="tree" style="left:13100px">
+  <div class="treeLeaves"></div>
+  <div class="treeTrunk"></div>
+</div>
 
 <!-- ROCKS -->
 
-<div class="rock" style="left:700px"></div>
-<div class="rock" style="left:1800px"></div>
+<div class="rock" style="left:650px"></div>
+<div class="rock" style="left:1750px"></div>
 <div class="rock" style="left:2700px"></div>
-<div class="rock" style="left:3600px"></div>
-<div class="rock" style="left:5000px"></div>
-<div class="rock" style="left:6300px"></div>
-<div class="rock" style="left:7800px"></div>
-<div class="rock" style="left:9000px"></div>
-<div class="rock" style="left:10600px"></div>
-<div class="rock" style="left:12700px"></div>
-
+<div class="rock" style="left:3650px"></div>
+<div class="rock" style="left:4900px"></div>
+<div class="rock" style="left:6200px"></div>
+<div class="rock" style="left:7750px"></div>
+<div class="rock" style="left:8950px"></div>
+<div class="rock" style="left:10550px"></div>
+<div class="rock" style="left:12600px"></div>
 
 <!-- GOLD -->
 
-<div class="gold" style="left:550px"></div>
-<div class="gold" style="left:1450px"></div>
-<div class="gold" style="left:2300px"></div>
-<div class="gold" style="left:3300px"></div>
-<div class="gold" style="left:4600px"></div>
-<div class="gold" style="left:6100px"></div>
-<div class="gold" style="left:7500px"></div>
-<div class="gold" style="left:8800px"></div>
-<div class="gold" style="left:10400px"></div>
-<div class="gold" style="left:12600px"></div>
-
+<div class="gold" style="left:520px"></div>
+<div class="gold" style="left:1350px"></div>
+<div class="gold" style="left:2250px"></div>
+<div class="gold" style="left:3200px"></div>
+<div class="gold" style="left:4550px"></div>
+<div class="gold" style="left:6000px"></div>
+<div class="gold" style="left:7350px"></div>
+<div class="gold" style="left:8750px"></div>
+<div class="gold" style="left:10350px"></div>
+<div class="gold" style="left:12500px"></div>
 
 <!-- CRYSTALS -->
 
-<div class="crystal" style="left:1050px"></div>
-<div class="crystal" style="left:1950px"></div>
-<div class="crystal" style="left:2900px"></div>
-<div class="crystal" style="left:4100px"></div>
-<div class="crystal" style="left:5400px"></div>
-<div class="crystal" style="left:6800px"></div>
-<div class="crystal" style="left:8300px"></div>
-<div class="crystal" style="left:9500px"></div>
-<div class="crystal" style="left:11000px"></div>
+<div class="crystal" style="left:950px"></div>
+<div class="crystal" style="left:1900px"></div>
+<div class="crystal" style="left:2850px"></div>
+<div class="crystal" style="left:4050px"></div>
+<div class="crystal" style="left:5350px"></div>
+<div class="crystal" style="left:6750px"></div>
+<div class="crystal" style="left:8200px"></div>
+<div class="crystal" style="left:9450px"></div>
+<div class="crystal" style="left:10900px"></div>
+<div class="crystal" style="left:12800px"></div>
 
-
-<!-- PLAYER -->
+<!-- =====================================================
+     PLAYER
+===================================================== -->
 
 <div id="player">
 
-<div class="playerHead">
-<div class="eye eye1"></div>
-<div class="eye eye2"></div>
+  <div class="playerHead">
+
+    <div class="playerEye eye1"></div>
+    <div class="playerEye eye2"></div>
+
+  </div>
+
+  <div class="playerBody"></div>
+
+  <div class="leg leg1"></div>
+  <div class="leg leg2"></div>
+
+  <div id="swordArm">
+    <div id="sword"></div>
+  </div>
+
 </div>
 
-<div class="playerBody"></div>
-
-<div class="playerLeg leg1"></div>
-<div class="playerLeg leg2"></div>
-
-<div id="swordArm">
-<div id="sword"></div>
-</div>
-
-</div>
-
-
-<!-- BOSS -->
+<!-- =====================================================
+     BOSS
+===================================================== -->
 
 <div id="boss">
 
-<div id="bossBar">
-<div id="bossHealth"></div>
+  <div id="bossBar">
+    <div id="bossHP"></div>
+  </div>
+
+  <div class="bossHead">
+
+    <div class="bossEye bossEye1"></div>
+    <div class="bossEye bossEye2"></div>
+
+  </div>
+
+  <div class="bossBody"></div>
+
 </div>
 
-<div class="bossHead">
-<div class="bossEye bossEye1"></div>
-<div class="bossEye bossEye2"></div>
-</div>
-
-<div class="bossBody"></div>
-
-</div>
-
-
-<!-- PORTAL -->
+<!-- =====================================================
+     PORTAL
+===================================================== -->
 
 <div id="portal" class="locked">
 
-<div class="portalText">
-🔒 Ancient Portal
-</div>
+  <div class="portalLabel">
+    🔒 ANCIENT PORTAL
+  </div>
 
 </div>
 
 </div>
 
+<!-- =====================================================
+     QUEST PANEL
+===================================================== -->
 
-<!-- =========================
-HUD
-========================= -->
+<div id="questPanel">
+
+  <div class="questTitle">
+    CURRENT QUEST
+  </div>
+
+  <div id="questName">
+    🌎 Explore the World
+  </div>
+
+  <div id="questDescription">
+    Travel through the mysterious world.
+  </div>
+
+  <div class="progressOuter">
+
+    <div id="questProgress"></div>
+
+  </div>
+
+  <div id="questNumbers">
+    0 / 1000 m
+  </div>
+
+</div>
+
+<!-- =====================================================
+     HUD
+===================================================== -->
 
 <div id="hud">
 
-<div class="title">
-⚔️ EduSpark Craft Quest
-</div>
+  <div class="gameTitle">
+    ⚔️ EduSpark Craft Quest
+  </div>
 
-<div>
-❤️ Health
-</div>
+  <div class="healthLabel">
+    ❤️ Health
+  </div>
 
-<div class="healthOuter">
-<div id="healthBar"></div>
-</div>
+  <div class="healthOuter">
 
-<div class="stats">
+    <div id="healthBar"></div>
 
-<div>⭐ XP <span id="xp">0</span></div>
+  </div>
 
-<div>🪙 <span id="coins">0</span></div>
+  <div class="stats">
 
-<div>💎 <span id="crystals">0</span></div>
+    <span>
+      ⭐ XP:
+      <b id="xp">0</b>
+    </span>
 
-<div>⭐ Lv <span id="level">1</span></div>
+    <span>
+      🪙
+      <b id="coins">0</b>
+    </span>
 
-</div>
+    <span>
+      💎
+      <b id="crystals">0</b>
+    </span>
 
-<div class="distance">
+    <span>
+      🏆 Lv
+      <b id="level">1</b>
+    </span>
 
-📍 Distance:
-<span id="distance">0</span> m
+  </div>
 
-</div>
+  <div class="distance">
 
-<div class="hudButtons">
+    📍 Distance:
+    <b id="distance">0</b> m
 
-<button id="dayBtn">
-🌙 Day/Night
-</button>
+  </div>
 
-<button id="saveBtn">
-💾 Save
-</button>
+  <div class="hudButtons">
 
-</div>
+    <button id="dayButton">
+      🌙 Day/Night
+    </button>
 
-</div>
+    <button id="saveButton">
+      💾 Save
+    </button>
 
-
-<!-- =========================
-QUEST TRACKER
-========================= -->
-
-<div id="questTracker">
-
-<div class="questTitle">
-CURRENT QUEST
-</div>
-
-<div id="questName">
-🌎 Explore the World
-</div>
-
-<div id="questObjective">
-Travel 1000m through the world.
-</div>
-
-<div class="progressOuter">
-
-<div id="questProgress"></div>
+  </div>
 
 </div>
 
-<div id="questPercent">
-0%
-</div>
-
-</div>
-
-
-<!-- INVENTORY -->
+<!-- =====================================================
+     INVENTORY
+===================================================== -->
 
 <div id="inventory">
 
-🪵 Wood:
-<span id="wood">0</span>
-<br>
+  🪵 Wood:
+  <b id="wood">0</b>
+  <br>
 
-🪨 Stone:
-<span id="stone">0</span>
-<br>
+  🪨 Stone:
+  <b id="stone">0</b>
+  <br>
 
-🪙 Gold:
-<span id="invCoins">0</span>
-<br>
+  🪙 Gold:
+  <b id="invGold">0</b>
+  <br>
 
-💎 Crystal:
-<span id="invCrystal">0</span>
-<br>
+  💎 Crystal:
+  <b id="invCrystal">0</b>
+  <br>
 
-🔑 Key:
-<span id="key">0</span>
+  🔑 Key:
+  <b id="key">0</b>
 
 </div>
 
-
-<!-- CONTROLS -->
+<!-- =====================================================
+     CONTROLS
+===================================================== -->
 
 <div id="controls">
 
-<button class="controlBtn" id="jumpBtn">
-⬆️
-</button>
+  <button
+    class="control"
+    id="leftButton"
+  >
+    ⬅️
+  </button>
 
-<button class="controlBtn" id="leftBtn">
-⬅️
-</button>
+  <button
+    class="control"
+    id="jumpButton"
+  >
+    ⬆️
+  </button>
 
-<button class="controlBtn" id="attackBtn">
-⚔️
-</button>
+  <button
+    class="control"
+    id="attackButton"
+  >
+    ⚔️
+  </button>
 
-<button class="controlBtn" id="rightBtn">
-➡️
-</button>
+  <button
+    class="control"
+    id="rightButton"
+  >
+    ➡️
+  </button>
 
-<button class="controlBtn" id="mineBtn">
-⛏️
-</button>
+  <button
+    class="control"
+    id="mineButton"
+  >
+    ⛏️
+  </button>
 
-<button class="controlBtn" id="boostBtn">
-⚡
-</button>
-
-</div>
-
-
-<!-- START -->
-
-<div id="startScreen">
-
-<div class="modal">
-
-<h1>
-🌎 EduSpark Craft Quest
-</h1>
-
-<p>
-Adventure • Battle • Maths
-</p>
-
-<p>
-Complete quests, collect resources,
-fight enemies and unlock the Ancient Portal.
-</p>
-
-<p>
-A/D or Arrow Keys = Move<br>
-W / Space = Jump<br>
-F = Attack<br>
-E = Mine<br>
-Shift = Boost
-</p>
-
-<button class="bigButton" id="startBtn">
-🚀 START ADVENTURE
-</button>
+  <button
+    class="control"
+    id="boostButton"
+  >
+    ⚡
+  </button>
 
 </div>
 
+<!-- =====================================================
+     NOTIFICATION
+===================================================== -->
+
+<div id="notification"></div>
+
+<!-- =====================================================
+     START
+===================================================== -->
+
+<div
+  id="startScreen"
+  class="overlay"
+>
+
+  <div class="modal">
+
+    <h1>
+      🌎 EduSpark Craft Quest
+    </h1>
+
+    <p>
+      Welcome, Explorer!
+    </p>
+
+    <p>
+      Your adventure begins here.
+      Explore the giant world,
+      collect resources,
+      defeat monsters,
+      complete quests,
+      solve mathematics,
+      defeat the Guardian
+      and unlock the Ancient Portal.
+    </p>
+
+    <p>
+
+      🕹️ <b>Controls</b>
+      <br><br>
+
+      A / D or ← / → = Move
+      <br>
+
+      W / Space / ↑ = Jump
+      <br>
+
+      F = Sword Attack
+      <br>
+
+      E = Mine
+      <br>
+
+      Shift = Speed Boost
+
+    </p>
+
+    <button
+      class="bigButton"
+      id="startButton"
+    >
+      🚀 START ADVENTURE
+    </button>
+
+  </div>
+
 </div>
 
+<!-- =====================================================
+     MATH SCREEN
+===================================================== -->
 
-<!-- MATH -->
+<div
+  id="mathScreen"
+  class="overlay"
+  style="display:none"
+>
 
-<div id="mathScreen" style="display:none">
+  <div class="modal">
 
-<div class="modal">
+    <h1>
+      🧠 Maths Mission
+    </h1>
 
-<h1>
-🧠 Maths Mission
-</h1>
+    <p>
+      You discovered an ancient challenge!
+    </p>
 
-<p>
-Solve correctly to receive the Ancient Key.
-</p>
+    <p>
+      Solve the question correctly
+      to obtain the 🔑 Ancient Key.
+    </p>
 
-<div class="mathQuestion" id="mathQuestion"></div>
+    <div
+      id="mathQuestion"
+      class="mathQuestion"
+    >
+    </div>
 
-<div class="answerGrid">
+    <div class="answers">
 
-<button class="answerBtn" id="ans0"></button>
-<button class="answerBtn" id="ans1"></button>
-<button class="answerBtn" id="ans2"></button>
-<button class="answerBtn" id="ans3"></button>
+      <button
+        class="answer"
+        id="answer0"
+      ></button>
 
-</div>
+      <button
+        class="answer"
+        id="answer1"
+      ></button>
 
-</div>
+      <button
+        class="answer"
+        id="answer2"
+      ></button>
 
-</div>
+      <button
+        class="answer"
+        id="answer3"
+      ></button>
 
+    </div>
 
-<!-- COMPLETE -->
-
-<div id="completeScreen" style="display:none">
-
-<div class="modal">
-
-<h1>
-🏆 WORLD COMPLETE!
-</h1>
-
-<p>
-You completed the EduSpark Craft Quest!
-</p>
-
-<p>
-🌎 Explored<br>
-⛏️ Collected resources<br>
-⚔️ Defeated enemies<br>
-🧠 Solved Maths<br>
-👑 Defeated Guardian<br>
-🌀 Opened Ancient Portal
-</p>
-
-<button class="bigButton" onclick="location.reload()">
-🔄 PLAY AGAIN
-</button>
-
-</div>
+  </div>
 
 </div>
 
+<!-- =====================================================
+     COMPLETE
+===================================================== -->
+
+<div
+  id="completeScreen"
+  class="overlay"
+  style="display:none"
+>
+
+  <div class="modal">
+
+    <h1>
+      🏆 WORLD COMPLETE!
+    </h1>
+
+    <p>
+      Amazing, Explorer!
+    </p>
+
+    <p>
+      You travelled through EduSpark Craft Quest,
+      collected resources,
+      defeated monsters,
+      solved the Maths Mission,
+      defeated the Guardian
+      and unlocked the Ancient Portal.
+    </p>
+
+    <p>
+      🌎 Adventure Complete
+    </p>
+
+    <button
+      class="bigButton"
+      id="restartButton"
+    >
+      🔄 PLAY AGAIN
+    </button>
+
+  </div>
+
+</div>
 
 <script>
 
-/* ==================================================
-GAME VARIABLES
-================================================== */
+/* =========================================================
+   GAME VARIABLES
+========================================================= */
 
 const world =
-document.getElementById("world");
+  document.getElementById("world");
 
 const player =
-document.getElementById("player");
+  document.getElementById("player");
 
 const game =
-document.getElementById("game");
+  document.getElementById("game");
 
-const worldWidth=14000;
+const portal =
+  document.getElementById("portal");
 
-let playerX=150;
+const boss =
+  document.getElementById("boss");
 
-let playerY=0;
+const startScreen =
+  document.getElementById("startScreen");
 
-let velocityY=0;
+const mathScreen =
+  document.getElementById("mathScreen");
 
-let jumping=false;
+const completeScreen =
+  document.getElementById("completeScreen");
 
-let movingLeft=false;
+const notification =
+  document.getElementById("notification");
 
-let movingRight=false;
+const questPanel =
+  document.getElementById("questPanel");
 
-let boost=false;
+const questName =
+  document.getElementById("questName");
 
-let attacking=false;
+const questDescription =
+  document.getElementById("questDescription");
 
-let gameStarted=false;
+const questProgress =
+  document.getElementById("questProgress");
 
-let gameOver=false;
+const questNumbers =
+  document.getElementById("questNumbers");
 
-let cameraX=0;
+const healthBar =
+  document.getElementById("healthBar");
 
-let health=100;
+const xpEl =
+  document.getElementById("xp");
 
-let xp=0;
+const coinsEl =
+  document.getElementById("coins");
 
-let coins=0;
+const crystalsEl =
+  document.getElementById("crystals");
 
-let crystals=0;
+const levelEl =
+  document.getElementById("level");
 
-let wood=0;
+const distanceEl =
+  document.getElementById("distance");
 
-let stone=0;
+const woodEl =
+  document.getElementById("wood");
 
-let key=0;
+const stoneEl =
+  document.getElementById("stone");
 
-let bossHealth=100;
+const invGoldEl =
+  document.getElementById("invGold");
 
-let lastTime=performance.now();
+const invCrystalEl =
+  document.getElementById("invCrystal");
 
+const keyEl =
+  document.getElementById("key");
 
-/* ==================================================
-QUEST SYSTEM
-================================================== */
-
-let quest=1;
-
-let questComplete=false;
-
-const questName=
-document.getElementById("questName");
-
-const questObjective=
-document.getElementById("questObjective");
-
-const questProgress=
-document.getElementById("questProgress");
-
-const questPercent=
-document.getElementById("questPercent");
+const bossHP =
+  document.getElementById("bossHP");
 
 
-function setQuest(
-  number,
-  name,
-  objective
-){
+/* =========================================================
+   WORLD SETTINGS
+========================================================= */
 
-  quest=number;
+const WORLD_WIDTH =
+  14000;
 
-  questComplete=false;
+const GROUND =
+  260;
 
-  questName.textContent=name;
 
-  questObjective.textContent=objective;
+/* =========================================================
+   PLAYER
+========================================================= */
 
-  questProgress.style.width="0%";
+let playerX =
+  150;
 
-  questPercent.textContent="0%";
+let playerY =
+  0;
+
+let velocityY =
+  0;
+
+let jumping =
+  false;
+
+let movingLeft =
+  false;
+
+let movingRight =
+  false;
+
+let boosting =
+  false;
+
+let attacking =
+  false;
+
+let playerDirection =
+  1;
+
+
+/* =========================================================
+   CAMERA
+========================================================= */
+
+let cameraX =
+  0;
+
+
+/* =========================================================
+   GAME STATE
+========================================================= */
+
+let gameStarted =
+  false;
+
+let gameFinished =
+  false;
+
+let gamePaused =
+  false;
+
+let lastTime =
+  performance.now();
+
+
+/* =========================================================
+   PLAYER STATS
+========================================================= */
+
+let health =
+  100;
+
+let xp =
+  0;
+
+let coins =
+  0;
+
+let crystals =
+  0;
+
+let wood =
+  0;
+
+let stone =
+  0;
+
+let key =
+  0;
+
+let level =
+  1;
+
+
+/* =========================================================
+   QUEST STATE
+========================================================= */
+
+let questIndex =
+  0;
+
+let resourcesCollected =
+  0;
+
+let enemiesDefeated =
+  0;
+
+let mathsCompleted =
+  false;
+
+let bossDefeated =
+  false;
+
+
+/* =========================================================
+   BOSS
+========================================================= */
+
+let bossHealth =
+  100;
+
+
+/* =========================================================
+   DAY/NIGHT
+========================================================= */
+
+let isDay =
+  true;
+
+
+/* =========================================================
+   ENEMIES
+========================================================= */
+
+const enemies = [];
+
+const enemyPositions = [
+
+  1600,
+  2450,
+  3400,
+  4550,
+  5700,
+  6900,
+  8050,
+  9000,
+  10300,
+  11500,
+  12700,
+  13500
+
+];
+
+
+enemyPositions.forEach(
+  (position,index)=>{
+
+    const enemy =
+      document.createElement("div");
+
+    enemy.className =
+      "enemy";
+
+    enemy.style.left =
+      position + "px";
+
+    enemy.innerHTML = `
+
+      <div class="enemyBar">
+
+        <div
+          class="enemyHP"
+        ></div>
+
+      </div>
+
+      <div class="enemyHead">
+
+        <div
+          class="enemyEye enemyEye1"
+        ></div>
+
+        <div
+          class="enemyEye enemyEye2"
+        ></div>
+
+      </div>
+
+      <div class="enemyBody"></div>
+
+    `;
+
+    world.appendChild(enemy);
+
+    enemies.push({
+
+      el:enemy,
+
+      x:position,
+
+      home:position,
+
+      hp:50,
+
+      direction:
+        index % 2 === 0
+          ? 1
+          : -1,
+
+      speed:
+        .5 + Math.random()*.4,
+
+      dead:false
+
+    });
+
+  }
+);
+
+
+/* =========================================================
+   QUEST DEFINITIONS
+========================================================= */
+
+const quests = [
+
+  {
+
+    name:
+      "🌎 Explore the World",
+
+    description:
+      "Travel 1000m through the mysterious world.",
+
+    type:
+      "distance",
+
+    target:
+      1000
+
+  },
+
+  {
+
+    name:
+      "⛏️ Gather Resources",
+
+    description:
+      "Collect 5 resources from the world.",
+
+    type:
+      "resources",
+
+    target:
+      5
+
+  },
+
+  {
+
+    name:
+      "⚔️ Defeat the Monsters",
+
+    description:
+      "Defeat 3 enemies using your sword.",
+
+    type:
+      "enemies",
+
+    target:
+      3
+
+  },
+
+  {
+
+    name:
+      "🧠 Maths Mission",
+
+    description:
+      "Reach the ancient Maths Temple and solve the challenge.",
+
+    type:
+      "math",
+
+    target:
+      1
+
+  },
+
+  {
+
+    name:
+      "👹 Defeat the Guardian",
+
+    description:
+      "Defeat the Guardian protecting the Ancient Portal.",
+
+    type:
+      "boss",
+
+    target:
+      1
+
+  },
+
+  {
+
+    name:
+      "🌀 Ancient Portal",
+
+    description:
+      "Reach the Ancient Portal and complete your adventure.",
+
+    type:
+      "portal",
+
+    target:
+      1
+
+  }
+
+];
+
+
+/* =========================================================
+   SHOW NOTIFICATION
+========================================================= */
+
+let notificationTimer =
+  null;
+
+function notify(message){
+
+  notification.textContent =
+    message;
+
+  notification.classList.add(
+    "show"
+  );
+
+  clearTimeout(
+    notificationTimer
+  );
+
+  notificationTimer =
+    setTimeout(()=>{
+
+      notification.classList.remove(
+        "show"
+      );
+
+    },2200);
 
 }
 
 
-function completeCurrentQuest(){
+/* =========================================================
+   QUEST UPDATE
+========================================================= */
 
-  if(questComplete) return;
+function getQuestValue(){
 
-  questComplete=true;
+  const quest =
+    quests[questIndex];
 
-  questProgress.style.width="100%";
+  if(!quest)
+    return 0;
 
-  questPercent.textContent="100%";
+  if(
+    quest.type ===
+    "distance"
+  ){
 
-  xp+=50;
+    return Math.min(
+      Math.floor(playerX),
+      quest.target
+    );
+
+  }
+
+  if(
+    quest.type ===
+    "resources"
+  ){
+
+    return Math.min(
+      resourcesCollected,
+      quest.target
+    );
+
+  }
+
+  if(
+    quest.type ===
+    "enemies"
+  ){
+
+    return Math.min(
+      enemiesDefeated,
+      quest.target
+    );
+
+  }
+
+  if(
+    quest.type ===
+    "math"
+  ){
+
+    return mathsCompleted
+      ? 1
+      : 0;
+
+  }
+
+  if(
+    quest.type ===
+    "boss"
+  ){
+
+    return bossDefeated
+      ? 1
+      : 0;
+
+  }
+
+  if(
+    quest.type ===
+    "portal"
+  ){
+
+    return 0;
+
+  }
+
+  return 0;
+
+}
+
+
+/* =========================================================
+   QUEST DISPLAY
+========================================================= */
+
+function updateQuest(){
+
+  const quest =
+    quests[questIndex];
+
+  if(!quest)
+    return;
+
+  const value =
+    getQuestValue();
+
+  let percent =
+    0;
+
+  if(
+    quest.type ===
+    "portal"
+  ){
+
+    percent =
+      key &&
+      bossDefeated
+        ? 100
+        : 0;
+
+  }else{
+
+    percent =
+      Math.min(
+        100,
+        (value / quest.target)*100
+      );
+
+  }
+
+  questName.textContent =
+    quest.name;
+
+  questDescription.textContent =
+    quest.description;
+
+  questProgress.style.width =
+    percent + "%";
+
+  questNumbers.textContent =
+    `${value} / ${quest.target}`;
+
+}
+
+
+/* =========================================================
+   COMPLETE QUEST
+========================================================= */
+
+function completeQuest(){
+
+  questPanel.classList.add(
+    "questComplete"
+  );
+
+  notify(
+    "✅ QUEST COMPLETE!"
+  );
 
   setTimeout(()=>{
 
-    nextQuest();
+    questPanel.classList.remove(
+      "questComplete"
+    );
 
-  },800);
+  },700);
+
+  questIndex++;
+
+  if(
+    questIndex >=
+    quests.length
+  ){
+
+    completeGame();
+
+    return;
+
+  }
+
+  updateQuest();
+
+  notify(
+    "🎯 New Quest: " +
+    quests[questIndex].name
+  );
 
 }
 
 
-function nextQuest(){
+/* =========================================================
+   CHECK QUEST
+========================================================= */
 
-  if(quest===1){
+function checkQuest(){
 
-    setQuest(
-      2,
-      "⛏️ Collect Resources",
-      "Collect 3 resources from the world."
-    );
+  const quest =
+    quests[questIndex];
 
-    return;
-
-  }
-
-  if(quest===2){
-
-    setQuest(
-      3,
-      "⚔️ Defeat Enemies",
-      "Defeat 3 monsters."
-    );
-
-    return;
-
-  }
-
-  if(quest===3){
-
-    setQuest(
-      4,
-      "🧠 Maths Mission",
-      "Reach the Maths Mission area."
-    );
-
-    return;
-
-  }
-
-  if(quest===4){
-
-    setQuest(
-      5,
-      "🔑 Get the Ancient Key",
-      "Solve the Maths Mission."
-    );
-
-    return;
-
-  }
-
-  if(quest===5){
-
-    setQuest(
-      6,
-      "👑 Defeat the Guardian",
-      "Reach the Guardian and defeat it."
-    );
-
-    return;
-
-  }
-
-  if(quest===6){
-
-    setQuest(
-      7,
-      "🌀 Open the Ancient Portal",
-      "Reach the Portal at the end of the world."
-    );
-
-  }
-
-}
-
-
-/* ==================================================
-ENEMIES
-================================================== */
-
-const enemyPositions=[
-  1600,
-  2500,
-  3500,
-  4700,
-  5900,
-  7100,
-  8300,
-  9300,
-  10800,
-  12400,
-  13400
-];
-
-let enemies=[];
-
-enemyPositions.forEach((x,i)=>{
-
-  const el=
-  document.createElement("div");
-
-  el.className="enemy";
-
-  el.style.left=x+"px";
-
-  el.innerHTML=`
-
-    <div class="enemyBar">
-      <div class="enemyHealth"></div>
-    </div>
-
-    <div class="enemyHead">
-      <div class="enemyEye enemyEye1"></div>
-      <div class="enemyEye enemyEye2"></div>
-    </div>
-
-    <div class="enemyBody"></div>
-
-  `;
-
-  world.appendChild(el);
-
-  enemies.push({
-
-    el:el,
-
-    x:x,
-
-    health:50,
-
-    home:x,
-
-    direction:i%2===0?1:-1,
-
-    speed:.6,
-
-    dead:false
-
-  });
-
-});
-
-
-/* ==================================================
-INPUT
-================================================== */
-
-window.addEventListener("keydown",e=>{
-
-  if(!gameStarted || gameOver)
+  if(!quest)
     return;
 
   if(
-    e.key==="ArrowLeft" ||
-    e.key.toLowerCase()==="a"
-  )
-    movingLeft=true;
+    quest.type ===
+    "distance"
+  ){
 
-  if(
-    e.key==="ArrowRight" ||
-    e.key.toLowerCase()==="d"
-  )
-    movingRight=true;
+    if(
+      playerX >=
+      quest.target
+    ){
 
-  if(
-    e.key==="ArrowUp" ||
-    e.key===" " ||
-    e.key.toLowerCase()==="w"
-  )
-    jump();
+      completeQuest();
 
-  if(e.key.toLowerCase()==="f")
-    attack();
-
-  if(e.key.toLowerCase()==="e")
-    mine();
-
-  if(e.key==="Shift")
-    boost=true;
-
-});
-
-
-window.addEventListener("keyup",e=>{
-
-  if(
-    e.key==="ArrowLeft" ||
-    e.key.toLowerCase()==="a"
-  )
-    movingLeft=false;
-
-  if(
-    e.key==="ArrowRight" ||
-    e.key.toLowerCase()==="d"
-  )
-    movingRight=false;
-
-  if(e.key==="Shift")
-    boost=false;
-
-});
-
-
-/* ==================================================
-MOBILE
-================================================== */
-
-function holdButton(
-  id,
-  down,
-  up
-){
-
-  const button=
-  document.getElementById(id);
-
-  button.addEventListener(
-    "pointerdown",
-    e=>{
-      e.preventDefault();
-      down();
     }
-  );
 
-  button.addEventListener(
-    "pointerup",
-    e=>{
-      e.preventDefault();
-      up();
+  }
+
+  else if(
+    quest.type ===
+    "resources"
+  ){
+
+    if(
+      resourcesCollected >=
+      quest.target
+    ){
+
+      completeQuest();
+
     }
-  );
 
-  button.addEventListener(
-    "pointerleave",
-    up
-  );
+  }
 
-  button.addEventListener(
-    "pointercancel",
-    up
-  );
+  else if(
+    quest.type ===
+    "enemies"
+  ){
+
+    if(
+      enemiesDefeated >=
+      quest.target
+    ){
+
+      completeQuest();
+
+    }
+
+  }
+
+  else if(
+    quest.type ===
+    "math"
+  ){
+
+    if(mathsCompleted){
+
+      completeQuest();
+
+    }
+
+  }
+
+  else if(
+    quest.type ===
+    "boss"
+  ){
+
+    if(bossDefeated){
+
+      completeQuest();
+
+    }
+
+  }
+
+  else if(
+    quest.type ===
+    "portal"
+  ){
+
+    if(
+      key &&
+      bossDefeated &&
+      playerX >= 11680
+    ){
+
+      completeQuest();
+
+    }
+
+  }
 
 }
 
 
-holdButton(
-  "leftBtn",
-  ()=>movingLeft=true,
-  ()=>movingLeft=false
-);
+/* =========================================================
+   PLAYER MOVEMENT
+========================================================= */
 
+function updateMovement(dt){
 
-holdButton(
-  "rightBtn",
-  ()=>movingRight=true,
-  ()=>movingRight=false
-);
+  let speed =
+    boosting
+      ? 8.5
+      : 5.2;
 
-
-holdButton(
-  "boostBtn",
-  ()=>boost=true,
-  ()=>boost=false
-);
-
-
-document.getElementById(
-  "jumpBtn"
-).onclick=jump;
-
-
-document.getElementById(
-  "attackBtn"
-).onclick=attack;
-
-
-document.getElementById(
-  "mineBtn"
-).onclick=mine;
-
-
-/* ==================================================
-START
-================================================== */
-
-document.getElementById(
-  "startBtn"
-).onclick=()=>{
-
-  gameStarted=true;
-
-  document.getElementById(
-    "startScreen"
-  ).style.display="none";
-
-  setQuest(
-    1,
-    "🌎 Explore the World",
-    "Travel 1000m through the world."
-  );
-
-  requestAnimationFrame(loop);
-
-};
-
-
-/* ==================================================
-MOVEMENT
-================================================== */
-
-function movement(dt){
-
-  let speed=
-    boost?8.5:5.2;
-
-  let moving=false;
+  let moving =
+    false;
 
   if(movingLeft){
 
     playerX -=
-      speed*dt*60;
+      speed *
+      dt *
+      60;
 
-    moving=true;
+    playerDirection =
+      -1;
+
+    moving =
+      true;
 
   }
 
   if(movingRight){
 
     playerX +=
-      speed*dt*60;
+      speed *
+      dt *
+      60;
 
-    moving=true;
+    playerDirection =
+      1;
+
+    moving =
+      true;
 
   }
 
-  playerX=
-    Math.max(
-      50,
-      Math.min(
-        worldWidth-100,
-        playerX
-      )
-    );
+  /* WORLD LIMIT */
 
-  if(moving && !jumping){
+  if(
+    playerX < 50
+  ){
+
+    playerX =
+      50;
+
+  }
+
+  if(
+    playerX >
+    WORLD_WIDTH-100
+  ){
+
+    playerX =
+      WORLD_WIDTH-100;
+
+  }
+
+  /* WALK ANIMATION */
+
+  if(
+    moving &&
+    !jumping
+  ){
 
     player.classList.add(
-      "walking"
+      "walk"
     );
 
   }else{
 
     player.classList.remove(
-      "walking"
+      "walk"
     );
 
   }
 
-  if(movingLeft){
+  /* FACE PLAYER */
 
-    player.style.transform=
+  if(
+    playerDirection ===
+    -1
+  ){
+
+    player.style.transform =
       "scaleX(-1)";
 
-  }
+  }else{
 
-  if(movingRight){
-
-    player.style.transform=
+    player.style.transform =
       "scaleX(1)";
 
   }
@@ -2063,891 +3084,1169 @@ function movement(dt){
 }
 
 
-/* ==================================================
-JUMP
-================================================== */
+/* =========================================================
+   JUMP
+========================================================= */
 
 function jump(){
 
-  if(!gameStarted)
+  if(
+    !gameStarted ||
+    gameFinished ||
+    gamePaused
+  )
     return;
 
   if(!jumping){
 
-    jumping=true;
+    jumping =
+      true;
 
-    velocityY=13;
+    velocityY =
+      14;
 
   }
 
 }
 
 
-/* ==================================================
-PHYSICS
-================================================== */
+/* =========================================================
+   PHYSICS
+========================================================= */
 
-function physics(dt){
+function updatePhysics(dt){
 
   if(!jumping)
     return;
 
-  playerY+=
-    velocityY*dt*60;
+  playerY +=
+    velocityY *
+    dt *
+    60;
 
-  velocityY-=
-    .75*dt*60;
+  velocityY -=
+    .72 *
+    dt *
+    60;
 
-  if(playerY<=0){
+  if(
+    playerY <= 0
+  ){
 
-    playerY=0;
+    playerY =
+      0;
 
-    velocityY=0;
+    velocityY =
+      0;
 
-    jumping=false;
+    jumping =
+      false;
 
   }
 
 }
 
 
-/* ==================================================
-CAMERA
-================================================== */
+/* =========================================================
+   CAMERA
+========================================================= */
 
-function camera(){
+function updateCamera(){
 
-  const screenWidth=
+  const screenWidth =
     window.innerWidth;
 
-  let target=
-    playerX-screenWidth*.45;
+  const desiredCamera =
+    playerX -
+    screenWidth*.45;
 
-  cameraX+=
-    (target-cameraX)*.12;
+  cameraX +=
+    (
+      desiredCamera -
+      cameraX
+    )*.12;
 
-  const max=
+  const maxCamera =
     Math.max(
       0,
-      worldWidth-screenWidth
+      WORLD_WIDTH -
+      screenWidth
     );
 
-  cameraX=
-    Math.max(
-      0,
-      Math.min(
-        max,
-        cameraX
-      )
-    );
+  if(
+    cameraX < 0
+  ){
 
-  world.style.transform=
+    cameraX =
+      0;
+
+  }
+
+  if(
+    cameraX >
+    maxCamera
+  ){
+
+    cameraX =
+      maxCamera;
+
+  }
+
+  world.style.transform =
     `translate3d(${-cameraX}px,0,0)`;
 
 }
 
 
-/* ==================================================
-PLAYER
-================================================== */
+/* =========================================================
+   RENDER PLAYER
+========================================================= */
 
 function renderPlayer(){
 
-  player.style.left=
-    playerX+"px";
+  player.style.left =
+    playerX + "px";
 
-  player.style.bottom=
-    (260+playerY)+"px";
-
-}
-
-
-/* ==================================================
-COLLECT
-================================================== */
-
-function collect(){
-
-  document
-  .querySelectorAll(".gold")
-  .forEach(g=>{
-
-    if(g.dataset.done)
-      return;
-
-    const x=
-      parseFloat(g.style.left);
-
-    if(
-      Math.abs(playerX-x)<60
-    ){
-
-      g.dataset.done="1";
-
-      g.style.display="none";
-
-      coins++;
-
-      xp+=10;
-
-    }
-
-  });
-
-
-  document
-  .querySelectorAll(".crystal")
-  .forEach(c=>{
-
-    if(c.dataset.done)
-      return;
-
-    const x=
-      parseFloat(c.style.left);
-
-    if(
-      Math.abs(playerX-x)<60
-    ){
-
-      c.dataset.done="1";
-
-      c.style.display="none";
-
-      crystals++;
-
-      xp+=20;
-
-    }
-
-  });
+  player.style.bottom =
+    (
+      GROUND +
+      playerY
+    ) + "px";
 
 }
 
 
-/* ==================================================
-MINE
-================================================== */
+/* =========================================================
+   COLLECT GOLD
+========================================================= */
+
+function collectGold(){
+
+  document
+    .querySelectorAll(".gold")
+    .forEach(
+      gold=>{
+
+        if(
+          gold.dataset.collected
+        )
+          return;
+
+        const x =
+          parseFloat(
+            gold.style.left
+          );
+
+        if(
+          Math.abs(
+            playerX-x
+          ) < 65
+        ){
+
+          gold.dataset.collected =
+            "true";
+
+          gold.style.display =
+            "none";
+
+          coins++;
+
+          xp +=
+            10;
+
+          resourcesCollected++;
+
+          notify(
+            "🪙 Gold collected!"
+          );
+
+          updateHUD();
+
+        }
+
+      }
+    );
+
+}
+
+
+/* =========================================================
+   COLLECT CRYSTAL
+========================================================= */
+
+function collectCrystal(){
+
+  document
+    .querySelectorAll(".crystal")
+    .forEach(
+      crystal=>{
+
+        if(
+          crystal.dataset.collected
+        )
+          return;
+
+        const x =
+          parseFloat(
+            crystal.style.left
+          );
+
+        if(
+          Math.abs(
+            playerX-x
+          ) < 65
+        ){
+
+          crystal.dataset.collected =
+            "true";
+
+          crystal.style.display =
+            "none";
+
+          crystals++;
+
+          xp +=
+            20;
+
+          resourcesCollected++;
+
+          notify(
+            "💎 Crystal collected!"
+          );
+
+          updateHUD();
+
+        }
+
+      }
+    );
+
+}
+
+
+/* =========================================================
+   MINE
+========================================================= */
 
 function mine(){
 
-  document
-  .querySelectorAll(".rock")
-  .forEach(r=>{
+  if(
+    !gameStarted ||
+    gameFinished
+  )
+    return;
 
-    if(r.dataset.done)
-      return;
-
-    const x=
-      parseFloat(r.style.left);
-
-    if(
-      Math.abs(playerX-x)<90
-    ){
-
-      r.dataset.done="1";
-
-      r.style.display="none";
-
-      stone++;
-
-      xp+=5;
-
-    }
-
-  });
-
+  let found =
+    false;
 
   document
-  .querySelectorAll(".tree")
-  .forEach(t=>{
+    .querySelectorAll(".rock")
+    .forEach(
+      rock=>{
 
-    if(t.dataset.done)
-      return;
+        if(
+          rock.dataset.mined
+        )
+          return;
 
-    const x=
-      parseFloat(t.style.left);
+        const x =
+          parseFloat(
+            rock.style.left
+          );
 
-    if(
-      Math.abs(playerX-x)<100
-    ){
+        if(
+          Math.abs(
+            playerX-x
+          ) < 100
+        ){
 
-      t.dataset.done="1";
+          rock.dataset.mined =
+            "true";
 
-      t.style.opacity=".35";
+          rock.style.display =
+            "none";
 
-      wood++;
+          stone++;
 
-      xp+=5;
+          xp +=
+            8;
 
-    }
+          resourcesCollected++;
 
-  });
+          found =
+            true;
+
+          notify(
+            "🪨 Stone mined!"
+          );
+
+        }
+
+      }
+    );
+
+
+  document
+    .querySelectorAll(".tree")
+    .forEach(
+      tree=>{
+
+        if(
+          tree.dataset.mined
+        )
+          return;
+
+        const x =
+          parseFloat(
+            tree.style.left
+          );
+
+        if(
+          Math.abs(
+            playerX-x
+          ) < 105
+        ){
+
+          tree.dataset.mined =
+            "true";
+
+          tree.style.opacity =
+            ".35";
+
+          wood++;
+
+          xp +=
+            8;
+
+          resourcesCollected++;
+
+          found =
+            true;
+
+          notify(
+            "🪵 Wood collected!"
+          );
+
+        }
+
+      }
+    );
+
+
+  if(!found){
+
+    notify(
+      "⛏️ Move closer to a resource."
+    );
+
+  }
+
+  updateHUD();
 
 }
 
 
-/* ==================================================
-ATTACK
-================================================== */
+/* =========================================================
+   ATTACK
+========================================================= */
 
 function attack(){
 
-  if(attacking)
+  if(
+    !gameStarted ||
+    gameFinished ||
+    attacking
+  )
     return;
 
-  attacking=true;
+  attacking =
+    true;
 
   player.classList.add(
-    "attacking"
+    "attack"
   );
+
 
   setTimeout(()=>{
 
-    attacking=false;
-
     player.classList.remove(
-      "attacking"
+      "attack"
     );
+
+    attacking =
+      false;
 
   },420);
 
 
-  enemies.forEach(enemy=>{
+  /* DAMAGE ENEMIES */
 
-    if(enemy.dead)
-      return;
+  enemies.forEach(
+    enemy=>{
 
-    if(
-      Math.abs(
-        playerX-enemy.x
-      )<115
-    ){
+      if(enemy.dead)
+        return;
 
-      enemy.health-=25;
-
-      enemy.el.classList.add(
-        "hit"
-      );
-
-      setTimeout(()=>{
-        enemy.el.classList.remove(
-          "hit"
+      const distance =
+        Math.abs(
+          playerX -
+          enemy.x
         );
-      },120);
 
-      enemy.el
-      .querySelector(
-        ".enemyHealth"
-      )
-      .style.width=
-        Math.max(
-          0,
-          enemy.health*2
-        )+"%";
+      if(
+        distance < 125
+      ){
+
+        enemy.hp -=
+          25;
+
+        enemy.el.classList.add(
+          "enemyHit"
+        );
+
+        setTimeout(()=>{
+
+          enemy.el.classList.remove(
+            "enemyHit"
+          );
+
+        },150);
+
+        const hpBar =
+          enemy.el.querySelector(
+            ".enemyHP"
+          );
+
+        hpBar.style.width =
+          Math.max(
+            0,
+            enemy.hp*2
+          ) + "%";
 
 
-      if(enemy.health<=0){
+        if(
+          enemy.hp <= 0
+        ){
 
-        enemy.dead=true;
+          enemy.dead =
+            true;
 
-        enemy.el.style.display=
-          "none";
+          enemy.el.style.display =
+            "none";
 
-        xp+=40;
+          enemiesDefeated++;
 
-        coins+=10;
+          coins +=
+            8;
+
+          xp +=
+            45;
+
+          notify(
+            "⚔️ Enemy defeated! +45 XP"
+          );
+
+          updateHUD();
+
+        }
 
       }
 
     }
-
-  });
+  );
 
 
   /* BOSS */
 
   if(
+    !bossDefeated &&
     Math.abs(
-      playerX-9800
-    )<150 &&
-    bossHealth>0
+      playerX -
+      9800
+    ) < 150
   ){
 
-    bossHealth-=15;
+    bossHealth -=
+      15;
 
-    bossHealth=
+    bossHealth =
       Math.max(
         0,
         bossHealth
       );
 
-    document
-    .getElementById(
-      "bossHealth"
-    )
-    .style.width=
-      bossHealth+"%";
-
-    if(bossHealth<=0){
-
-      document
-      .getElementById(
-        "boss"
-      )
-      .style.display="none";
-
-      xp+=200;
-
-      if(quest===6)
-        completeCurrentQuest();
-
-    }
-
-  }
-
-}
-
-
-/* ==================================================
-ENEMY AI
-================================================== */
-
-function enemyAI(dt){
-
-  enemies.forEach(enemy=>{
-
-    if(enemy.dead)
-      return;
-
-    const d=
-      playerX-enemy.x;
-
-    if(Math.abs(d)<450){
-
-      enemy.x +=
-        Math.sign(d)*
-        enemy.speed*
-        dt*
-        60;
-
-    }else{
-
-      enemy.x +=
-        enemy.direction*
-        enemy.speed*
-        dt*
-        20;
-
-      if(
-        enemy.x>
-        enemy.home+160
-      )
-        enemy.direction=-1;
-
-      if(
-        enemy.x<
-        enemy.home-160
-      )
-        enemy.direction=1;
-
-    }
-
-    enemy.el.style.left=
-      enemy.x+"px";
-
-  });
-
-}
-
-
-/* ==================================================
-QUEST UPDATE
-================================================== */
-
-function updateQuest(){
-
-  /* QUEST 1 */
-
-  if(quest===1){
-
-    let p=
-      Math.min(
-        100,
-        playerX/1000*100
-      );
-
-    questProgress.style.width=
-      p+"%";
-
-    questPercent.textContent=
-      Math.floor(p)+"%";
-
-    if(playerX>=1000){
-
-      completeCurrentQuest();
-
-    }
-
-    return;
-
-  }
-
-
-  /* QUEST 2 */
-
-  if(quest===2){
-
-    let collected=
-      coins+
-      crystals+
-      wood+
-      stone;
-
-    let p=
-      Math.min(
-        100,
-        collected/3*100
-      );
-
-    questProgress.style.width=
-      p+"%";
-
-    questPercent.textContent=
-      Math.floor(p)+"%";
-
-    if(collected>=3){
-
-      completeCurrentQuest();
-
-    }
-
-    return;
-
-  }
-
-
-  /* QUEST 3 */
-
-  if(quest===3){
-
-    let defeated=
-      enemies.filter(
-        e=>e.dead
-      ).length;
-
-    let p=
-      Math.min(
-        100,
-        defeated/3*100
-      );
-
-    questProgress.style.width=
-      p+"%";
-
-    questPercent.textContent=
-      defeated+"/3";
-
-    if(defeated>=3){
-
-      completeCurrentQuest();
-
-    }
-
-    return;
-
-  }
-
-
-  /* QUEST 4 */
-
-  if(quest===4){
-
-    let p=
-      Math.min(
-        100,
-        Math.max(
-          0,
-          (playerX-4500)/1500*100
-        )
-      );
-
-    questProgress.style.width=
-      p+"%";
-
-    questPercent.textContent=
-      Math.floor(p)+"%";
-
-    if(playerX>=6000){
-
-      showMath();
-
-      completeCurrentQuest();
-
-    }
-
-    return;
-
-  }
-
-
-  /* QUEST 5 */
-
-  if(quest===5){
-
-    if(key===1){
-
-      questProgress.style.width=
-        "100%";
-
-      questPercent.textContent=
-        "100%";
-
-      completeCurrentQuest();
-
-    }
-
-    return;
-
-  }
-
-
-  /* QUEST 6 */
-
-  if(quest===6){
-
-    let p=
-      Math.min(
-        100,
-        Math.max(
-          0,
-          (playerX-8500)/1300*100
-        )
-      );
-
-    questProgress.style.width=
-      p+"%";
-
-    questPercent.textContent=
-      Math.floor(p)+"%";
+    bossHP.style.width =
+      bossHealth + "%";
+
+    notify(
+      "⚔️ Guardian hit!"
+    );
 
     if(
-      bossHealth<=0
+      bossHealth <= 0
     ){
 
-      completeCurrentQuest();
+      bossDefeated =
+        true;
+
+      boss.style.display =
+        "none";
+
+      xp +=
+        250;
+
+      coins +=
+        100;
+
+      notify(
+        "🏆 GUARDIAN DEFEATED!"
+      );
+
+      updateHUD();
 
     }
 
-    return;
-
   }
 
+}
 
-  /* QUEST 7 */
 
-  if(quest===7){
+/* =========================================================
+   ENEMY AI
+========================================================= */
 
-    let p=
-      Math.min(
-        100,
+function updateEnemies(dt){
+
+  enemies.forEach(
+    enemy=>{
+
+      if(enemy.dead)
+        return;
+
+      const difference =
+        playerX -
+        enemy.x;
+
+      /* CHASE */
+
+      if(
+        Math.abs(
+          difference
+        ) < 500
+      ){
+
+        if(
+          difference > 0
+        ){
+
+          enemy.x +=
+            enemy.speed *
+            dt *
+            60;
+
+        }else{
+
+          enemy.x -=
+            enemy.speed *
+            dt *
+            60;
+
+        }
+
+      }
+
+      /* PATROL */
+
+      else{
+
+        enemy.x +=
+          enemy.direction *
+          enemy.speed *
+          dt *
+          25;
+
+        if(
+          enemy.x >
+          enemy.home+180
+        ){
+
+          enemy.direction =
+            -1;
+
+        }
+
+        if(
+          enemy.x <
+          enemy.home-180
+        ){
+
+          enemy.direction =
+            1;
+
+        }
+
+      }
+
+
+      /* LIMIT */
+
+      enemy.x =
         Math.max(
-          0,
-          (playerX-10500)/1300*100
-        )
-      );
+          50,
+          Math.min(
+            WORLD_WIDTH-100,
+            enemy.x
+          )
+        );
 
-    questProgress.style.width=
-      p+"%";
 
-    questPercent.textContent=
-      Math.floor(p)+"%";
+      enemy.el.style.left =
+        enemy.x + "px";
 
-    if(playerX>=11700){
 
-      if(key===1){
+      /* DAMAGE */
 
-        completeGame();
+      if(
+        Math.abs(
+          playerX -
+          enemy.x
+        ) < 55 &&
+        !attacking &&
+        !jumping
+      ){
+
+        health -=
+          .08;
+
+        if(
+          health < 0
+        ){
+
+          health =
+            0;
+
+        }
+
+        updateHUD();
+
+        if(
+          health <= 0
+        ){
+
+          loseGame();
+
+        }
 
       }
 
     }
+  );
+
+}
+
+
+/* =========================================================
+   MATH QUESTIONS
+========================================================= */
+
+const questions = [
+
+  {
+
+    question:
+      "What is 12 × 8?",
+
+    answers:[
+      "86",
+      "96",
+      "108",
+      "88"
+    ],
+
+    correct:
+      1
+
+  },
+
+  {
+
+    question:
+      "What is √144?",
+
+    answers:[
+      "10",
+      "11",
+      "12",
+      "14"
+    ],
+
+    correct:
+      2
+
+  },
+
+  {
+
+    question:
+      "Area of a triangle with base 10 cm and height 6 cm?",
+
+    answers:[
+      "20 cm²",
+      "30 cm²",
+      "60 cm²",
+      "16 cm²"
+    ],
+
+    correct:
+      1
+
+  },
+
+  {
+
+    question:
+      "What is 15²?",
+
+    answers:[
+      "125",
+      "225",
+      "250",
+      "215"
+    ],
+
+    correct:
+      1
+
+  },
+
+  {
+
+    question:
+      "What is 25% of 200?",
+
+    answers:[
+      "25",
+      "40",
+      "50",
+      "75"
+    ],
+
+    correct:
+      2
+
+  },
+
+  {
+
+    question:
+      "If x + 7 = 15, what is x?",
+
+    answers:[
+      "6",
+      "7",
+      "8",
+      "9"
+    ],
+
+    correct:
+      2
 
   }
-
-}
-
-
-/* ==================================================
-MATH
-================================================== */
-
-const questions=[
-
-{
-q:"What is 12 × 8?",
-a:["86","96","108","88"],
-c:1
-},
-
-{
-q:"What is √144?",
-a:["10","11","12","14"],
-c:2
-},
-
-{
-q:"A triangle has base 10 cm and height 6 cm. Area?",
-a:["20 cm²","30 cm²","60 cm²","16 cm²"],
-c:1
-},
-
-{
-q:"What is 15²?",
-a:["125","225","250","215"],
-c:1
-}
 
 ];
 
-let mathShown=false;
+let currentQuestion =
+  0;
 
 
-function showMath(){
+/* =========================================================
+   MATH TRIGGER
+========================================================= */
 
-  if(mathShown)
+function checkMathTrigger(){
+
+  if(
+    mathsCompleted
+  )
     return;
 
-  mathShown=true;
-
-  movingLeft=false;
-  movingRight=false;
-
-  const screen=
-    document.getElementById(
-      "mathScreen"
-    );
-
-  screen.style.display="flex";
-
-  const q=
-    questions[
-      Math.floor(
-        Math.random()*
-        questions.length
-      )
-    ];
-
-  document
-  .getElementById(
-    "mathQuestion"
+  if(
+    questIndex !== 3
   )
-  .textContent=q.q;
+    return;
 
+  if(
+    playerX >= 6000
+  ){
 
-  for(let i=0;i<4;i++){
-
-    const btn=
-      document.getElementById(
-        "ans"+i
-      );
-
-    btn.textContent=q.a[i];
-
-    btn.style.background="";
-
-    btn.onclick=()=>{
-
-      if(i===q.c){
-
-        key=1;
-
-        xp+=150;
-
-        document
-        .getElementById(
-          "portal"
-        )
-        .classList.remove(
-          "locked"
-        );
-
-        screen.style.display=
-          "none";
-
-        questName.textContent=
-          "🔑 Ancient Key Obtained!";
-
-        questObjective.textContent=
-          "Now reach the Guardian.";
-
-        setTimeout(()=>{
-
-          nextQuest();
-
-        },1200);
-
-      }else{
-
-        btn.style.background=
-          "#b52d2d";
-
-      }
-
-    };
+    showMath();
 
   }
 
 }
 
 
-/* ==================================================
-PORTAL
-================================================== */
+/* =========================================================
+   SHOW MATH
+========================================================= */
+
+function showMath(){
+
+  gamePaused =
+    true;
+
+  movingLeft =
+    false;
+
+  movingRight =
+    false;
+
+  currentQuestion =
+    Math.floor(
+      Math.random() *
+      questions.length
+    );
+
+  const question =
+    questions[
+      currentQuestion
+    ];
+
+  document
+    .getElementById(
+      "mathQuestion"
+    )
+    .textContent =
+    question.question;
+
+
+  for(
+    let i=0;
+    i<4;
+    i++
+  ){
+
+    const button =
+      document.getElementById(
+        "answer"+i
+      );
+
+    button.textContent =
+      question.answers[i];
+
+    button.style.background =
+      "#28476d";
+
+    button.onclick =
+      ()=>answerMath(i);
+
+  }
+
+
+  mathScreen.style.display =
+    "flex";
+
+}
+
+
+/* =========================================================
+   ANSWER MATH
+========================================================= */
+
+function answerMath(index){
+
+  const question =
+    questions[
+      currentQuestion
+    ];
+
+  if(
+    index ===
+    question.correct
+  ){
+
+    mathsCompleted =
+      true;
+
+    key =
+      1;
+
+    xp +=
+      150;
+
+    notify(
+      "🔑 ANCIENT KEY OBTAINED!"
+    );
+
+    portal.classList.remove(
+      "locked"
+    );
+
+    questIndex++;
+
+    mathScreen.style.display =
+      "none";
+
+    gamePaused =
+      false;
+
+    updateQuest();
+
+    notify(
+      "🎯 New Quest: Defeat the Guardian"
+    );
+
+    updateHUD();
+
+  }else{
+
+    const button =
+      document.getElementById(
+        "answer"+index
+      );
+
+    button.style.background =
+      "#b82e2e";
+
+    notify(
+      "❌ Wrong answer. Try again!"
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   BOSS AREA
+========================================================= */
+
+function updateBoss(){
+
+  if(
+    bossDefeated
+  )
+    return;
+
+  if(
+    playerX > 9400 &&
+    playerX < 10000
+  ){
+
+    if(
+      questIndex >= 4
+    ){
+
+      notify(
+        "👹 The Guardian has appeared!"
+      );
+
+    }
+
+  }
+
+}
+
+
+/* =========================================================
+   PORTAL CHECK
+========================================================= */
 
 function checkPortal(){
 
   if(
-    playerX>11700 &&
-    playerX<12150
+    playerX < 11650
+  )
+    return;
+
+  if(
+    playerX > 12150
+  )
+    return;
+
+
+  if(
+    !key
   ){
 
-    if(
-      key===1 &&
-      bossHealth<=0
-    ){
+    notify(
+      "🔒 You need the Ancient Key!"
+    );
 
-      completeGame();
+    return;
 
-    }
+  }
+
+
+  if(
+    !bossDefeated
+  ){
+
+    notify(
+      "👹 Defeat the Guardian first!"
+    );
+
+    return;
+
+  }
+
+
+  if(
+    questIndex === 5
+  ){
+
+    completeQuest();
 
   }
 
 }
 
 
-/* ==================================================
-COMPLETE
-================================================== */
+/* =========================================================
+   COMPLETE GAME
+========================================================= */
 
 function completeGame(){
 
-  gameOver=true;
+  gameFinished =
+    true;
 
-  document
-  .getElementById(
-    "completeScreen"
-  )
-  .style.display="flex";
+  movingLeft =
+    false;
 
-}
+  movingRight =
+    false;
 
-
-/* ==================================================
-HUD
-================================================== */
-
-function hud(){
-
-  document
-  .getElementById(
-    "healthBar"
-  )
-  .style.width=
-    health+"%";
-
-  document
-  .getElementById(
-    "xp"
-  )
-  .textContent=xp;
-
-  document
-  .getElementById(
-    "coins"
-  )
-  .textContent=coins;
-
-  document
-  .getElementById(
-    "crystals"
-  )
-  .textContent=crystals;
-
-  document
-  .getElementById(
-    "level"
-  )
-  .textContent=
-    Math.floor(xp/200)+1;
-
-  document
-  .getElementById(
-    "wood"
-  )
-  .textContent=wood;
-
-  document
-  .getElementById(
-    "stone"
-  )
-  .textContent=stone;
-
-  document
-  .getElementById(
-    "invCoins"
-  )
-  .textContent=coins;
-
-  document
-  .getElementById(
-    "invCrystal"
-  )
-  .textContent=crystals;
-
-  document
-  .getElementById(
-    "key"
-  )
-  .textContent=key;
-
-  document
-  .getElementById(
-    "distance"
-  )
-  .textContent=
-    Math.floor(
-      playerX/10
-    );
+  completeScreen.style.display =
+    "flex";
 
 }
 
 
-/* ==================================================
-DAY NIGHT
-================================================== */
+/* =========================================================
+   LOSE GAME
+========================================================= */
 
-document
-.getElementById("dayBtn")
-.onclick=()=>{
+function loseGame(){
 
-  game.classList.toggle(
-    "night"
+  gameFinished =
+    true;
+
+  movingLeft =
+    false;
+
+  movingRight =
+    false;
+
+  notify(
+    "💀 You were defeated!"
   );
 
-};
+  setTimeout(()=>{
+
+    alert(
+      "💀 GAME OVER!\n\nRefresh the page to try again."
+    );
+
+  },300);
+
+}
 
 
-/* ==================================================
-SAVE
-================================================== */
+/* =========================================================
+   HUD UPDATE
+========================================================= */
+
+function updateHUD(){
+
+  healthBar.style.width =
+    health + "%";
+
+  xpEl.textContent =
+    xp;
+
+  coinsEl.textContent =
+    coins;
+
+  crystalsEl.textContent =
+    crystals;
+
+  level =
+    Math.floor(
+      xp / 200
+    ) + 1;
+
+  levelEl.textContent =
+    level;
+
+  distanceEl.textContent =
+    Math.floor(
+      playerX / 10
+    );
+
+  woodEl.textContent =
+    wood;
+
+  stoneEl.textContent =
+    stone;
+
+  invGoldEl.textContent =
+    coins;
+
+  invCrystalEl.textContent =
+    crystals;
+
+  keyEl.textContent =
+    key;
+
+}
+
+
+/* =========================================================
+   DAY / NIGHT
+========================================================= */
 
 document
-.getElementById("saveBtn")
-.onclick=()=>{
+  .getElementById(
+    "dayButton"
+  )
+  .onclick =
+  ()=>{
 
-  localStorage.setItem(
-    "craftQuestSave",
-    JSON.stringify({
+    isDay =
+      !isDay;
+
+    if(
+      isDay
+    ){
+
+      game.classList.remove(
+        "night"
+      );
+
+    }else{
+
+      game.classList.add(
+        "night"
+      );
+
+    }
+
+  };
+
+
+/* =========================================================
+   SAVE
+========================================================= */
+
+document
+  .getElementById(
+    "saveButton"
+  )
+  .onclick =
+  ()=>{
+
+    const saveData = {
 
       playerX,
       health,
@@ -2957,132 +4256,628 @@ document
       wood,
       stone,
       key,
-      bossHealth
 
-    })
-  );
+      questIndex,
 
-};
+      resourcesCollected,
 
+      enemiesDefeated,
 
-/* ==================================================
-LOAD
-================================================== */
+      mathsCompleted,
 
-function load(){
+      bossDefeated,
 
-  const save=
-    localStorage.getItem(
-      "craftQuestSave"
+      bossHealth,
+
+      isDay
+
+    };
+
+    localStorage.setItem(
+      "EduSparkCraftQuestSave",
+      JSON.stringify(
+        saveData
+      )
     );
 
-  if(!save)
+    notify(
+      "💾 Game Saved!"
+    );
+
+  };
+
+
+/* =========================================================
+   LOAD
+========================================================= */
+
+function loadGame(){
+
+  const saved =
+    localStorage.getItem(
+      "EduSparkCraftQuestSave"
+    );
+
+  if(!saved)
     return;
 
   try{
 
-    const d=
-      JSON.parse(save);
+    const data =
+      JSON.parse(saved);
 
-    playerX=
-      d.playerX||150;
+    playerX =
+      data.playerX ??
+      150;
 
-    health=
-      d.health||100;
+    health =
+      data.health ??
+      100;
 
-    xp=
-      d.xp||0;
+    xp =
+      data.xp ??
+      0;
 
-    coins=
-      d.coins||0;
+    coins =
+      data.coins ??
+      0;
 
-    crystals=
-      d.crystals||0;
+    crystals =
+      data.crystals ??
+      0;
 
-    wood=
-      d.wood||0;
+    wood =
+      data.wood ??
+      0;
 
-    stone=
-      d.stone||0;
+    stone =
+      data.stone ??
+      0;
 
-    key=
-      d.key||0;
+    key =
+      data.key ??
+      0;
 
-    bossHealth=
-      d.bossHealth??100;
+    questIndex =
+      data.questIndex ??
+      0;
 
-  }catch(e){}
+    resourcesCollected =
+      data.resourcesCollected ??
+      0;
+
+    enemiesDefeated =
+      data.enemiesDefeated ??
+      0;
+
+    mathsCompleted =
+      data.mathsCompleted ??
+      false;
+
+    bossDefeated =
+      data.bossDefeated ??
+      false;
+
+    bossHealth =
+      data.bossHealth ??
+      100;
+
+    isDay =
+      data.isDay ??
+      true;
+
+
+    if(
+      key
+    ){
+
+      portal.classList.remove(
+        "locked"
+      );
+
+    }
+
+
+    if(
+      bossDefeated
+    ){
+
+      boss.style.display =
+        "none";
+
+    }
+
+
+    bossHP.style.width =
+      bossHealth + "%";
+
+
+    if(
+      !isDay
+    ){
+
+      game.classList.add(
+        "night"
+      );
+
+    }
+
+
+    updateHUD();
+
+    updateQuest();
+
+  }catch(error){
+
+    console.log(
+      "Save loading error",
+      error
+    );
+
+  }
 
 }
 
 
-/* ==================================================
-MAIN LOOP
-================================================== */
+/* =========================================================
+   RESET
+========================================================= */
 
-function loop(now){
+document
+  .getElementById(
+    "restartButton"
+  )
+  .onclick =
+  ()=>{
 
-  if(!gameStarted)
+    localStorage.removeItem(
+      "EduSparkCraftQuestSave"
+    );
+
+    location.reload();
+
+  };
+
+
+/* =========================================================
+   START GAME
+========================================================= */
+
+document
+  .getElementById(
+    "startButton"
+  )
+  .onclick =
+  ()=>{
+
+    gameStarted =
+      true;
+
+    startScreen.style.display =
+      "none";
+
+    notify(
+      "🎯 QUEST STARTED!"
+    );
+
+    updateQuest();
+
+    requestAnimationFrame(
+      gameLoop
+    );
+
+  };
+
+
+/* =========================================================
+   KEYBOARD CONTROLS
+========================================================= */
+
+window.addEventListener(
+  "keydown",
+  event=>{
+
+    if(
+      !gameStarted ||
+      gameFinished ||
+      gamePaused
+    )
+      return;
+
+
+    const keyPressed =
+      event.key.toLowerCase();
+
+
+    if(
+      keyPressed ===
+      "a" ||
+      event.key ===
+      "ArrowLeft"
+    ){
+
+      movingLeft =
+        true;
+
+    }
+
+
+    if(
+      keyPressed ===
+      "d" ||
+      event.key ===
+      "ArrowRight"
+    ){
+
+      movingRight =
+        true;
+
+    }
+
+
+    if(
+      keyPressed ===
+      "w" ||
+      event.key ===
+      "ArrowUp" ||
+      event.key ===
+      " "
+    ){
+
+      jump();
+
+    }
+
+
+    if(
+      keyPressed ===
+      "f"
+    ){
+
+      attack();
+
+    }
+
+
+    if(
+      keyPressed ===
+      "e"
+    ){
+
+      mine();
+
+    }
+
+
+    if(
+      event.key ===
+      "Shift"
+    ){
+
+      boosting =
+        true;
+
+    }
+
+  }
+);
+
+
+window.addEventListener(
+  "keyup",
+  event=>{
+
+    if(
+      event.key.toLowerCase() ===
+      "a" ||
+      event.key ===
+      "ArrowLeft"
+    ){
+
+      movingLeft =
+        false;
+
+    }
+
+
+    if(
+      event.key.toLowerCase() ===
+      "d" ||
+      event.key ===
+      "ArrowRight"
+    ){
+
+      movingRight =
+        false;
+
+    }
+
+
+    if(
+      event.key ===
+      "Shift"
+    ){
+
+      boosting =
+        false;
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   MOBILE BUTTON HELPERS
+========================================================= */
+
+function holdButton(
+  element,
+  startFunction,
+  stopFunction
+){
+
+  element.addEventListener(
+    "pointerdown",
+    event=>{
+
+      event.preventDefault();
+
+      startFunction();
+
+    }
+  );
+
+  element.addEventListener(
+    "pointerup",
+    event=>{
+
+      event.preventDefault();
+
+      stopFunction();
+
+    }
+  );
+
+  element.addEventListener(
+    "pointercancel",
+    stopFunction
+  );
+
+  element.addEventListener(
+    "pointerleave",
+    stopFunction
+  );
+
+}
+
+
+/* =========================================================
+   MOBILE MOVEMENT
+========================================================= */
+
+holdButton(
+
+  document.getElementById(
+    "leftButton"
+  ),
+
+  ()=>{
+    movingLeft =
+      true;
+  },
+
+  ()=>{
+    movingLeft =
+      false;
+  }
+
+);
+
+
+holdButton(
+
+  document.getElementById(
+    "rightButton"
+  ),
+
+  ()=>{
+    movingRight =
+      true;
+  },
+
+  ()=>{
+    movingRight =
+      false;
+  }
+
+);
+
+
+/* =========================================================
+   MOBILE ACTIONS
+========================================================= */
+
+document
+  .getElementById(
+    "jumpButton"
+  )
+  .addEventListener(
+    "pointerdown",
+    jump
+  );
+
+
+document
+  .getElementById(
+    "attackButton"
+  )
+  .addEventListener(
+    "pointerdown",
+    attack
+  );
+
+
+document
+  .getElementById(
+    "mineButton"
+  )
+  .addEventListener(
+    "pointerdown",
+    mine
+  );
+
+
+holdButton(
+
+  document.getElementById(
+    "boostButton"
+  ),
+
+  ()=>{
+    boosting =
+      true;
+  },
+
+  ()=>{
+    boosting =
+      false;
+  }
+
+);
+
+
+/* =========================================================
+   MAIN GAME LOOP
+========================================================= */
+
+function gameLoop(now){
+
+  if(
+    !gameStarted
+  )
     return;
 
-  if(gameOver)
+  if(
+    gameFinished
+  )
     return;
 
-  const dt=
+  const dt =
     Math.min(
       .032,
       (now-lastTime)/1000
     );
 
-  lastTime=now;
+  lastTime =
+    now;
 
 
-  movement(dt);
+  /* MOVEMENT */
 
-  physics(dt);
+  updateMovement(dt);
 
-  enemyAI(dt);
 
-  collect();
+  /* PHYSICS */
 
-  updateQuest();
+  updatePhysics(dt);
 
-  checkPortal();
 
-  camera();
+  /* ENEMY AI */
+
+  updateEnemies(dt);
+
+
+  /* CAMERA */
+
+  updateCamera();
+
+
+  /* PLAYER */
 
   renderPlayer();
 
-  hud();
+
+  /* COLLECT */
+
+  collectGold();
+
+  collectCrystal();
 
 
-  requestAnimationFrame(loop);
+  /* QUEST */
+
+  checkQuest();
+
+
+  /* MATH */
+
+  checkMathTrigger();
+
+
+  /* BOSS */
+
+  updateBoss();
+
+
+  /* PORTAL */
+
+  checkPortal();
+
+
+  /* HUD */
+
+  updateHUD();
+
+  updateQuest();
+
+
+  requestAnimationFrame(
+    gameLoop
+  );
 
 }
 
 
-/* ==================================================
-INIT
-================================================== */
+/* =========================================================
+   INITIALIZE
+========================================================= */
 
-load();
+loadGame();
 
 renderPlayer();
 
-camera();
+updateCamera();
 
-hud();
+updateHUD();
 
+updateQuest();
+
+
+/* =========================================================
+   RESIZE
+========================================================= */
 
 window.addEventListener(
   "resize",
-  camera
+  ()=>{
+    updateCamera();
+  }
 );
+
+
+/* =========================================================
+   PREVENT MOBILE SCROLL
+========================================================= */
 
 document.addEventListener(
   "touchmove",
-  e=>e.preventDefault(),
-  {passive:false}
+  event=>{
+    event.preventDefault();
+  },
+  {
+    passive:false
+  }
 );
 
 </script>
