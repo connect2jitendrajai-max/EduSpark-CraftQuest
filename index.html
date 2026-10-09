@@ -3,272 +3,167 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>EduSpark Ultimate Chase</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EduSpark Dino Adventure</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;overflow:hidden;background:#101b35;font-family:Arial;color:white}
-canvas{display:block;width:100vw;height:100vh}
-#hud{position:fixed;top:10px;left:10px;right:10px;display:flex;justify-content:space-between;gap:6px;pointer-events:none}
-.box{background:#10182cdd;padding:10px;border:1px solid #ffffff55;border-radius:12px;font-weight:bold;font-size:14px}
-button{border:0;border-radius:12px;padding:12px 18px;background:#20d889;color:#07271a;font-weight:bold;font-size:16px;cursor:pointer}
-#menu{position:fixed;inset:0;background:#07132be9;display:flex;align-items:center;justify-content:center;text-align:center;padding:20px}
-.card{max-width:580px;background:linear-gradient(145deg,#263f75,#171d43);padding:30px;border-radius:25px;border:2px solid #ffffff33;box-shadow:0 15px 60px #0008}
-h1{font-size:clamp(30px,6vw,55px);margin:0 0 12px;color:#ffe66d}
-p{line-height:1.6}
-#question{position:fixed;display:none;inset:0;background:#07132bf2;align-items:center;justify-content:center;text-align:center;padding:15px}
-.answers{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px}
-.answers button{background:#38bdf8;color:#07132b}
-#mobile{position:fixed;bottom:16px;left:0;right:0;display:flex;justify-content:center;gap:20px}
-#mobile button{width:65px;height:60px;background:#10182cdd;color:white;border:1px solid #ffffff77;font-size:24px}
+body{margin:0;font-family:Arial,sans-serif;background:#70dcff;overflow:hidden;color:white}
+#game{height:100vh;position:relative;overflow:hidden;background:linear-gradient(#60d7ff 0%,#d1f8ff 48%,#78df72 49%,#237b45 100%)}
+#sun{position:absolute;right:9%;top:10%;width:80px;height:80px;border-radius:50%;background:#fff5a3;box-shadow:0 0 45px #fff5a3}
+#mountains{position:absolute;bottom:25%;width:200%;height:40%;background:linear-gradient(135deg,transparent 25%,#69b5a1 25% 42%,transparent 42% 55%,#40937f 55% 75%,transparent 75%);animation:mountain 18s linear infinite}
+@keyframes mountain{to{transform:translateX(-50%)}}
+#trees{position:absolute;bottom:20%;width:200%;height:28%;background:repeating-linear-gradient(90deg,transparent 0 30px,#21844b 31px 43px,transparent 44px 78px);animation:trees 7s linear infinite}
+@keyframes trees{to{transform:translateX(-25%)}}
+#ground{position:absolute;bottom:0;width:100%;height:22%;background:linear-gradient(#55d64f 0 12%,#a66a3b 12% 20%,#6c4027 20%);border-top:6px solid #b4f65d}
+#ground:after{content:"";position:absolute;top:28%;width:200%;height:8px;background:repeating-linear-gradient(90deg,#ffdf83 0 30px,transparent 30px 80px);animation:road .5s linear infinite}
+@keyframes road{to{transform:translateX(-80px)}}
+#title{position:absolute;top:12%;width:100%;text-align:center;font-size:clamp(28px,5vw,54px);font-weight:1000;text-shadow:0 5px #237445}
+#subtitle{position:absolute;top:22%;width:100%;text-align:center;color:#174d45;font-weight:bold;letter-spacing:2px}
+#hud{position:absolute;z-index:5;top:10px;left:10px;right:10px;display:flex;justify-content:space-between;gap:7px;flex-wrap:wrap}
+.stat{background:#10294be8;border:2px solid white;border-radius:12px;padding:8px 12px;font-weight:bold}
+#dino{position:absolute;left:13%;bottom:19%;width:100px;height:95px;z-index:3}
+.body{position:absolute;left:10px;bottom:12px;width:72px;height:52px;border-radius:45%;background:#24b979;border:4px solid #12694c}
+.head{position:absolute;left:49px;top:4px;width:49px;height:44px;border-radius:45%;background:#42d88c;border:4px solid #12694c}
+.snout{position:absolute;right:-12px;top:21px;width:25px;height:14px;border-radius:12px;background:#42d88c}
+.eye{position:absolute;right:9px;top:8px;width:8px;height:9px;background:white;border-radius:50%;box-shadow:2px 1px #172b35}
+.tail{position:absolute;left:-18px;bottom:28px;width:35px;height:18px;background:#24b979;clip-path:polygon(100% 0,100% 100%,0 50%)}
+.spikes{position:absolute;left:27px;top:0;width:45px;height:20px;background:repeating-linear-gradient(90deg,transparent 0 8px,#ffcf45 8px 17px,transparent 17px 22px);clip-path:polygon(0 100%,12% 0,28% 100%,45% 0,61% 100%,78% 0,100% 100%)}
+.leg{position:absolute;bottom:0;width:21px;height:29px;background:#159764;border:3px solid #12694c;border-radius:7px;animation:run .2s infinite alternate}
+.leg.a{left:28px}.leg.b{left:58px;animation-delay:.1s}
+@keyframes run{to{transform:rotate(22deg)}}
+#dino.jump{animation:jump .7s ease-out}
+@keyframes jump{0%,100%{bottom:19%}50%{bottom:52%}}
+#dino.duck{transform:scaleY(.62);transform-origin:bottom}
+#items{position:absolute;inset:0;z-index:2;pointer-events:none}
+.item{position:absolute;font-size:42px;filter:drop-shadow(0 5px 3px #0005)}
+#overlay{position:absolute;inset:0;z-index:10;background:#10204bbd;display:flex;align-items:center;justify-content:center;padding:15px}
+.panel{width:min(620px,95vw);background:linear-gradient(140deg,#18466b,#562b83);border:3px solid #c0f8ff;border-radius:25px;padding:25px;text-align:center;box-shadow:0 0 40px #183d5c}
+.panel h1{font-size:clamp(27px,5vw,45px);margin:0 0 10px}
+.panel p{line-height:1.55}
+button{cursor:pointer;border:0;border-radius:13px;padding:12px 17px;font-size:16px;font-weight:bold;background:linear-gradient(90deg,#fff071,#ffad45);color:#38264c;margin:4px}
+#question{display:none;position:absolute;z-index:8;top:32%;left:50%;transform:translateX(-50%);width:min(500px,92vw);padding:18px;border:3px solid #ffe66d;border-radius:20px;background:#152752f5;text-align:center}
+#answers{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+#answers button{background:#31538b;color:white;border:1px solid #c0efff}
+#qmsg{min-height:22px;color:#ffe66d;margin-top:8px;font-weight:bold}
+#controls{position:absolute;bottom:12px;left:12px;right:12px;display:flex;justify-content:space-between;z-index:6}
+#controls button{background:#15355bdd;color:white;border:2px solid white;width:57px;height:53px;padding:0;font-size:22px}
+#toast{position:absolute;top:28%;width:100%;text-align:center;font-size:25px;font-weight:bold;color:white;text-shadow:0 3px #277343;z-index:7;pointer-events:none}
 .hidden{display:none!important}
-#pause{pointer-events:auto}
-@media(min-width:800px){#mobile{opacity:.5}}
 </style>
 </head>
 <body>
-<canvas id="c"></canvas>
-
-<div id="hud" class="hidden">
- <div class="box">🏆 <span id="score">0</span><br>🪙 <span id="coins">0</span></div>
- <div class="box">❤️ <span id="lives">3</span><br>LEVEL <span id="level">1</span></div>
- <button id="pause">Ⅱ</button>
+<div id="game">
+<div id="sun"></div><div id="mountains"></div><div id="trees"></div><div id="ground"></div>
+<div id="title">🦖 DINO ADVENTURE</div>
+<div id="subtitle">RUN • JUMP • COLLECT • EXPLORE</div>
+<div id="hud">
+<div class="stat">⭐ <span id="score">0</span></div>
+<div class="stat">💎 <span id="gems">0</span></div>
+<div class="stat">❤️ <span id="lives">3</span></div>
+<div class="stat">🌋 Level <span id="level">1</span></div>
+<button id="pause">Ⅱ</button>
 </div>
-
-<div id="menu">
- <div class="card">
-  <h1>⚡ EDUSPARK</h1>
-  <h2>THE GREAT THIEF CHASE</h2>
-  <p>🏃 Run through the city!<br>🪙 Collect coins and dodge obstacles.<br>🧠 Solve maths questions to earn bonus points.<br>🚔 Catch the thief before he escapes!</p>
-  <p>Keyboard: ← → to move · SPACE to jump · P to pause</p>
-  <button id="start">🚀 START MISSION</button>
- </div>
+<div id="dino">
+<div class="spikes"></div><div class="tail"></div><div class="body"></div>
+<div class="head"><div class="eye"></div><div class="snout"></div></div>
+<div class="leg a"></div><div class="leg b"></div>
 </div>
-
+<div id="items"></div><div id="toast"></div>
 <div id="question">
- <div class="card">
-  <h1>🧠 MATHS BREAK!</h1>
-  <h2 id="qtext">What is 7 × 8?</h2>
-  <div class="answers" id="answers"></div>
-  <p id="feedback"></p>
- </div>
+<div id="qtext" style="font-size:22px;font-weight:bold;margin-bottom:12px"></div>
+<div id="answers"></div><div id="qmsg"></div>
 </div>
-
-<div id="mobile" class="hidden">
- <button id="left">⬅</button><button id="jump">⬆</button><button id="right">➡</button>
+<div id="controls">
+<div><button id="jumpBtn">⬆ JUMP</button><button id="duckBtn">⬇ DUCK</button></div>
+<button id="boostBtn">⚡ BOOST</button>
 </div>
-
+<div id="overlay"><div class="panel">
+<h1>🌴 DINO ADVENTURE!</h1>
+<p>Help your dinosaur explore a lost jungle! Jump over logs, dodge lava, collect gems and solve brain challenges.</p>
+<p><b>Controls:</b> SPACE / ↑ = Jump · ↓ = Duck · SHIFT = Boost · P = Pause</p>
+<button id="start">▶ START ADVENTURE</button>
+<p id="best">🏆 Best score: 0</p>
+</div></div>
+</div>
 <script>
-const canvas=document.getElementById('c'),ctx=canvas.getContext('2d');
 const $=id=>document.getElementById(id);
-let W,H,roadY,raf=0,last=0;
-function resize(){
- W=canvas.width=innerWidth;H=canvas.height=innerHeight;
- canvas.style.width=W+'px';canvas.style.height=H+'px';
- roadY=H*.75;
+const dino=$('dino'),items=$('items'),overlay=$('overlay'),question=$('question');
+let live=false,paused=false,score=0,gems=0,lives=3,level=1,speed=5,last=0,spawnAt=0,qAt=0,boostTo=0,invuln=0,objects=[],raf=0;
+let best=Number(localStorage.getItem('dinoBest')||0);$('best').textContent='🏆 Best score: '+best;
+function hud(){$('score').textContent=score;$('gems').textContent=gems;$('lives').textContent='❤️'.repeat(Math.max(0,lives))+'🖤'.repeat(Math.max(0,3-lives));$('level').textContent=level}
+function toast(t){$('toast').textContent=t;setTimeout(()=>{$('toast').textContent=''},900)}
+function jump(){if(!live||paused||dino.classList.contains('jump'))return;dino.classList.add('jump');setTimeout(()=>dino.classList.remove('jump'),700)}
+function duck(){if(!live||paused)return;dino.classList.add('duck');setTimeout(()=>dino.classList.remove('duck'),600)}
+function boost(){if(!live||paused)return;boostTo=performance.now()+1500;score+=10;toast('⚡ SUPER SPEED!');hud()}
+function spawn(){
+let r=Math.random(),type=r<.48?'gem':r<.75?'log':r<.9?'lava':'branch';
+let el=document.createElement('div');el.className='item';
+el.textContent=type==='gem'?['💎','🪙','⭐'][Math.floor(Math.random()*3)]:type==='log'?'🪵':type==='lava'?'🌋':'🌿';
+el.style.left='105%';el.style.top=type==='branch'?'57%':type==='gem'?'62%':'auto';
+if(type==='log'||type==='lava')el.style.bottom='17%';
+items.appendChild(el);objects.push({el,type,x:105,hit:false});
 }
-addEventListener('resize',resize);resize();
-
-let running=false,paused=false,asking=false;
-let score=0,coins=0,lives=3,level=1,world=0,spawn=0,coinSpawn=0;
-let speed=5,questionCount=0;
-const player={lane:1,x:0,y:0,vy:0,jumping:false,anim:0,inv:0};
-const thief={x:0,anim:0};
-let obstacles=[],gold=[],particles=[],buildings=[];
-const laneX=i=>W*(.29+i*.21);
-
-function reset(){
- score=0;coins=0;lives=3;level=1;world=0;spawn=0;coinSpawn=0;speed=5;
- obstacles=[];gold=[];particles=[];questionCount=0;
- player.lane=1;player.x=laneX(1);player.y=roadY;player.vy=0;
- player.jumping=false;player.inv=0;player.anim=0;
- thief.x=W*.78;thief.anim=0;
+function overlap(a,b){let x=a.getBoundingClientRect(),y=b.getBoundingClientRect();return x.left<y.right-8&&x.right>y.left+8&&x.top<y.bottom-8&&x.bottom>y.top+8}
+function remove(o){o.el.remove();objects=objects.filter(v=>v!==o)}
+function ask(){
+if(!live||paused||question.style.display==='block')return;
+let bank=[
+['What is 7 × 8?',['54','56','64','48'],1],
+['Which number is prime?',['21','25','27','31'],3],
+['Next: 3, 6, 12, 24, ...',['30','36','42','48'],3],
+['How many sides has a pentagon?',['4','5','6','8'],1],
+['What is 25% of 80?',['10','15','20','25'],2],
+['Perimeter of a square with side 6 cm?',['12 cm','18 cm','24 cm','36 cm'],2],
+['What is 144 ÷ 12?',['10','11','12','14'],2],
+['If x + 9 = 17, x = ?',['6','7','8','9'],2]
+];
+let q=bank[Math.floor(Math.random()*bank.length)];$('qtext').textContent='🧠 '+q[0];$('answers').innerHTML='';$('qmsg').textContent='';
+q[1].forEach((a,i)=>{let b=document.createElement('button');b.textContent=a;b.onclick=()=>{if(i===q[2]){score+=100;gems+=3;$('qmsg').textContent='🎉 Correct! +100 points +3 gems';}else $('qmsg').textContent='Keep going, adventurer!';hud();setTimeout(()=>{question.style.display='none';qAt=performance.now()},850)};$('answers').appendChild(b)});
+question.style.display='block';
 }
-
 function start(){
- cancelAnimationFrame(raf);reset();
- $('menu').classList.add('hidden');$('question').style.display='none';
- $('hud').classList.remove('hidden');$('mobile').classList.remove('hidden');
- running=true;paused=false;asking=false;last=performance.now();
- $('pause').textContent='Ⅱ';updateHud();raf=requestAnimationFrame(loop);
+objects.forEach(remove);objects=[];score=0;gems=0;lives=3;level=1;speed=5;live=true;paused=false;
+last=performance.now();spawnAt=last;qAt=last;boostTo=0;invuln=0;
+question.style.display='none';overlay.style.display='none';$('pause').textContent='Ⅱ';hud();raf=requestAnimationFrame(loop);
 }
-function end(win){
- running=false;cancelAnimationFrame(raf);
- $('hud').classList.add('hidden');$('mobile').classList.add('hidden');
- $('menu').classList.remove('hidden');
- $('menu').innerHTML=`<div class="card"><h1>${win?'🏆 MISSION COMPLETE!':'💥 GAME OVER'}</h1>
- <h2>${win?'The thief is caught!':'The thief escaped!'}</h2>
- <p>Final score: <b>${Math.floor(score)}</b><br>Coins: <b>${coins}</b><br>Level: <b>${level}</b></p>
- <button id="start">🔄 PLAY AGAIN</button></div>`;
- $('start').onclick=start;
-}
-function updateHud(){
- $('score').textContent=Math.floor(score);$('coins').textContent=coins;
- $('lives').textContent='❤️'.repeat(Math.max(0,lives));
- $('level').textContent=level;
-}
-function left(){if(running&&!paused&&!asking){player.lane=Math.max(0,player.lane-1);player.x=laneX(player.lane)}}
-function right(){if(running&&!paused&&!asking){player.lane=Math.min(2,player.lane+1);player.x=laneX(player.lane)}}
-function jump(){if(running&&!paused&&!asking&&!player.jumping){player.vy=-15;player.jumping=true}}
-addEventListener('keydown',e=>{
- if(['ArrowLeft','ArrowRight','ArrowUp','Space'].includes(e.code))e.preventDefault();
- if(e.code==='ArrowLeft'||e.code==='KeyA')left();
- if(e.code==='ArrowRight'||e.code==='KeyD')right();
- if(e.code==='Space'||e.code==='ArrowUp'||e.code==='KeyW')jump();
- if(e.code==='KeyP')togglePause();
-});
-$('left').onclick=left;$('right').onclick=right;$('jump').onclick=jump;
-$('start').onclick=start;
-$('pause').onclick=togglePause;
-function togglePause(){
- if(!running||asking)return;
- paused=!paused;$('pause').textContent=paused?'▶':'Ⅱ';
- if(!paused){last=performance.now();raf=requestAnimationFrame(loop)}
-}
-function spawnObstacle(){
- let lane=Math.floor(Math.random()*3);
- obstacles.push({x:W+50,lane,type:Math.random()<.5?'barrier':'crate',hit:false});
-}
-function spawnCoin(){
- let lane=Math.floor(Math.random()*3);
- gold.push({x:W+30,lane,y:roadY-45-Math.random()*35,spin:0});
-}
-function burst(x,y,color){
- for(let i=0;i<12;i++)particles.push({x,y,vx:(Math.random()-.5)*7,vy:(Math.random()-.5)*7,life:35,color});
-}
-function drawSky(){
- let g=ctx.createLinearGradient(0,0,0,H);
- g.addColorStop(0,'#36a6f5');g.addColorStop(1,'#ffe0a1');
- ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
- ctx.fillStyle='#ffe66d';ctx.beginPath();ctx.arc(W*.82,H*.15,35,0,7);ctx.fill();
- for(let i=0;i<9;i++){
-  let x=((i*170-world*.35)%(W+200)+W+200)%(W+200)-80;
-  let h=90+(i*47)%160,y=roadY-h;
-  ctx.fillStyle=['#526b91','#415675','#60758e'][i%3];
-  ctx.fillRect(x,y,90,h);
-  for(let wy=y+15;wy<roadY-12;wy+=25)for(let wx=x+12;wx<x+80;wx+=25){
-   ctx.fillStyle=(Math.floor(wx+wy)%3)?'#ffe08a':'#a9e6ff';
-   ctx.fillRect(wx,wy,9,12);
-  }
- }
-}
-function drawRoad(){
- ctx.fillStyle='#48a83d';ctx.fillRect(0,roadY,W,H-roadY);
- ctx.fillStyle='#333b49';ctx.beginPath();
- ctx.moveTo(W*.17,roadY);ctx.lineTo(W*.83,roadY);ctx.lineTo(W,H);ctx.lineTo(0,H);ctx.fill();
- ctx.strokeStyle='#fff';ctx.lineWidth=5;ctx.beginPath();
- ctx.moveTo(W*.17,roadY);ctx.lineTo(0,H);ctx.moveTo(W*.83,roadY);ctx.lineTo(W,H);ctx.stroke();
- ctx.strokeStyle='#ffe45c';ctx.lineWidth=3;ctx.setLineDash([25,25]);
- for(let i=1;i<=2;i++){
-  let x=W*(.17+i*.22);ctx.beginPath();ctx.moveTo(x,roadY);ctx.lineTo(x,H);ctx.stroke();
- }
- ctx.setLineDash([]);
-}
-function drawPerson(x,y,isThief,t){
- ctx.save();ctx.translate(x,y);
- let run=Math.sin(t)*9;
- ctx.fillStyle='#0004';ctx.beginPath();ctx.ellipse(0,3,25,7,0,0,7);ctx.fill();
- ctx.strokeStyle=isThief?'#151515':'#15294a';ctx.lineWidth=9;ctx.lineCap='round';
- ctx.beginPath();ctx.moveTo(-8,-8);ctx.lineTo(-13+run,-32);
- ctx.moveTo(8,-8);ctx.lineTo(13-run,-32);ctx.stroke();
- ctx.strokeStyle='#f0bb90';ctx.lineWidth=7;ctx.beginPath();
- ctx.moveTo(-15,-51);ctx.lineTo(-26-run*.3,-34);
- ctx.moveTo(15,-51);ctx.lineTo(26+run*.3,-34);ctx.stroke();
- ctx.fillStyle=isThief?'#24252c':'#1976ff';
- ctx.beginPath();ctx.roundRect(-18,-66,36,48,8);ctx.fill();
- ctx.fillStyle='#f2c29b';ctx.beginPath();ctx.arc(0,-81,16,0,7);ctx.fill();
- ctx.fillStyle='#302017';ctx.beginPath();ctx.arc(0,-87,16,Math.PI,2*Math.PI);ctx.fill();
- if(isThief){
-  ctx.fillStyle='#111';ctx.fillRect(-16,-85,32,9);
-  ctx.fillStyle='white';ctx.fillRect(-8,-82,4,3);ctx.fillRect(5,-82,4,3);
-  ctx.fillStyle='#f5c542';ctx.beginPath();ctx.arc(27,-42,11,0,7);ctx.fill();
- }else{
-  ctx.fillStyle='white';ctx.font='bold 11px Arial';ctx.textAlign='center';ctx.fillText('E',0,-37);
- }
- ctx.restore();
-}
-function draw(){
- drawSky();drawRoad();
- gold.forEach(c=>{
-  ctx.save();ctx.translate(c.x,c.y);ctx.scale(Math.max(.15,Math.abs(Math.cos(c.spin))),1);
-  ctx.fillStyle='#ffd32a';ctx.beginPath();ctx.arc(0,0,13,0,7);ctx.fill();
-  ctx.strokeStyle='#fff5ae';ctx.lineWidth=3;ctx.stroke();ctx.restore();
- });
- obstacles.forEach(o=>{
-  let x=o.x,y=roadY;
-  ctx.fillStyle=o.type==='crate'?'#a56a32':'#ed4545';
-  ctx.fillRect(x-22,y-42,44,42);
-  ctx.strokeStyle='#ffe66d';ctx.lineWidth=3;ctx.strokeRect(x-22,y-42,44,42);
-  if(o.type==='crate'){ctx.beginPath();ctx.moveTo(x-20,y-40);ctx.lineTo(x+20,y-3);ctx.moveTo(x+20,y-40);ctx.lineTo(x-20,y-3);ctx.stroke()}
- });
- if(!player.inv||Math.floor(world*3)%2===0)drawPerson(player.x,player.y, false,player.anim);
- drawPerson(thief.x,roadY,true,thief.anim);
- particles.forEach(p=>{ctx.globalAlpha=p.life/35;ctx.fillStyle=p.color;ctx.fillRect(p.x,p.y,5,5);ctx.globalAlpha=1});
-}
-function askMath(){
- asking=true;paused=true;
- let a=2+Math.floor(Math.random()*12),b=2+Math.floor(Math.random()*10),ans=a*b;
- $('qtext').textContent=`What is ${a} × ${b}?`;
- $('feedback').textContent='';
- let opts=new Set([ans]);
- while(opts.size<4)opts.add(Math.max(1,ans+Math.floor(Math.random()*21)-10));
- let arr=[...opts].sort(()=>Math.random()-.5);
- $('answers').innerHTML='';
- arr.forEach(n=>{
-  let btn=document.createElement('button');btn.textContent=n;
-  btn.onclick=()=>{
-   if(n===ans){score+=250;$('feedback').textContent='✅ Correct! +250 points';}
-   else{$('feedback').textContent='❌ Correct answer: '+ans;}
-   setTimeout(()=>{
-    $('question').style.display='none';asking=false;paused=false;
-    last=performance.now();raf=requestAnimationFrame(loop);
-   },800);
-  };
-  $('answers').appendChild(btn);
- });
- $('question').style.display='flex';
+function gameOver(){
+live=false;cancelAnimationFrame(raf);best=Math.max(best,score);localStorage.setItem('dinoBest',best);
+$('best').textContent='🏆 Best score: '+best;
+overlay.style.display='flex';overlay.querySelector('h1').textContent='🏁 ADVENTURE OVER!';
+overlay.querySelector('p').innerHTML='Score: <b>'+score+'</b> · Gems: <b>'+gems+'</b><br>Try again and beat your best score!';
+$('start').textContent='↻ PLAY AGAIN';
 }
 function loop(now){
- if(!running||paused)return;
- let dt=Math.min(.04,(now-last)/1000);last=now;
- world+=dt*60;player.anim+=dt*13;thief.anim+=dt*15;
- player.vy+=.8;player.y+=player.vy;
- if(player.y>=roadY){player.y=roadY;player.vy=0;player.jumping=false}
- player.inv=Math.max(0,player.inv-dt);
- speed=Math.min(11,5+world/1500);
- score+=dt*speed*2;
- level=1+Math.floor(world/1800);
- spawn-=dt;coinSpawn-=dt;
- if(spawn<=0){spawnObstacle();spawn=1.15+Math.random()*.65}
- if(coinSpawn<=0){spawnCoin();coinSpawn=.65+Math.random()*.45}
- obstacles.forEach(o=>{
-  o.x-=speed*dt*60;
-  if(!o.hit&&o.lane===player.lane&&Math.abs(o.x-player.x)<34){
-   if(!player.jumping&&player.inv<=0){
-    lives--;player.inv=1.6;o.hit=true;burst(player.x,roadY-25,'#ff4c58');
-   }
-  }
- });
- gold.forEach(c=>{c.x-=speed*dt*60;c.spin+=dt*9});
- gold=gold.filter(c=>{
-  if(c.lane===player.lane&&Math.abs(c.x-player.x)<35&&Math.abs(c.y-(player.y-35))<65){
-   coins++;score+=100;burst(c.x,c.y,'#ffe66d');return false
-  }
-  return c.x>-50
- });
- obstacles=obstacles.filter(o=>o.x>-80);
- particles.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.life--});
- particles=particles.filter(p=>p.life>0);
- // Thief moves closer as the player survives.
- thief.x=Math.max(player.x+48,thief.x-dt*(8+level));
- if(thief.x-player.x<65){end(true);return}
- if(lives<=0){end(false);return}
- if(score>0&&Math.floor(score)%1800<speed*dt*2&&questionCount<Math.floor(score/1800)){
-  questionCount++;askMath();updateHud();draw();return;
- }
- updateHud();draw();raf=requestAnimationFrame(loop);
+if(!live)return;raf=requestAnimationFrame(loop);if(paused){last=now;return}
+let dt=Math.min(40,now-last);last=now;let mult=now<boostTo?1.7:1;
+score+=Math.floor(dt*.012*mult);level=1+Math.floor(score/450);speed=Math.min(13,5+level*.55);
+if(now-spawnAt>Math.max(470,1120-level*48)){spawn();spawnAt=now}
+if(now-qAt>17000&&question.style.display!=='block')ask();
+for(let o of [...objects]){
+o.x-=speed*dt*.025*mult;o.el.style.left=o.x+'%';
+if(o.x< -10){remove(o);continue}
+if(!o.hit&&overlap(dino,o.el)){
+if(o.type==='gem'){o.hit=true;gems++;score+=35;toast('+35 ✨');remove(o)}
+else if(now>invuln){
+if(o.type==='branch'&&dino.classList.contains('duck')){remove(o);score+=10}
+else if((o.type==='log'||o.type==='lava')&&dino.classList.contains('jump')){remove(o);score+=10}
+else{lives--;invuln=now+1200;dino.style.opacity='.35';setTimeout(()=>dino.style.opacity='1',250);toast('💥 Ouch!');remove(o);if(lives<=0){hud();gameOver();return}}
+}hud();
 }
-reset();drawSky();drawRoad();drawPerson(W*.32,roadY,false,0);drawPerson(W*.7,roadY,true,1);
+}
+hud();
+}
+$('start').onclick=()=>{overlay.querySelector('h1').textContent='🌴 DINO ADVENTURE!';$('start').textContent='▶ START ADVENTURE';start()};
+$('pause').onclick=()=>{if(!live)return;paused=!paused;if(paused){overlay.style.display='flex';overlay.querySelector('h1').textContent='⏸ PAUSED';overlay.querySelector('p').textContent='Your dinosaur is resting. Press Resume to continue.';$('start').textContent='▶ RESUME'}else{overlay.style.display='none';last=performance.now();$('pause').textContent='Ⅱ'}};
+$('jumpBtn').onclick=jump;$('duckBtn').onclick=duck;$('boostBtn').onclick=boost;
+document.addEventListener('keydown',e=>{
+if(['ArrowUp','ArrowDown',' ','Shift'].includes(e.key))e.preventDefault();
+if(e.key===' '||e.key==='ArrowUp'||e.key.toLowerCase()==='w')jump();
+if(e.key==='ArrowDown'||e.key.toLowerCase()==='s')duck();
+if(e.key==='Shift')boost();
+if(e.key.toLowerCase()==='p')$('pause').click();
+});
+hud();
 </script>
 </body>
 </html>
