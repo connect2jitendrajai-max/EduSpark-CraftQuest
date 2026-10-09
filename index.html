@@ -3,167 +3,337 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>EduSpark Dino Adventure</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>EduSpark Dino Adventure - 60 Level Quest</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#70dcff;overflow:hidden;color:white}
-#game{height:100vh;position:relative;overflow:hidden;background:linear-gradient(#60d7ff 0%,#d1f8ff 48%,#78df72 49%,#237b45 100%)}
-#sun{position:absolute;right:9%;top:10%;width:80px;height:80px;border-radius:50%;background:#fff5a3;box-shadow:0 0 45px #fff5a3}
-#mountains{position:absolute;bottom:25%;width:200%;height:40%;background:linear-gradient(135deg,transparent 25%,#69b5a1 25% 42%,transparent 42% 55%,#40937f 55% 75%,transparent 75%);animation:mountain 18s linear infinite}
-@keyframes mountain{to{transform:translateX(-50%)}}
-#trees{position:absolute;bottom:20%;width:200%;height:28%;background:repeating-linear-gradient(90deg,transparent 0 30px,#21844b 31px 43px,transparent 44px 78px);animation:trees 7s linear infinite}
-@keyframes trees{to{transform:translateX(-25%)}}
-#ground{position:absolute;bottom:0;width:100%;height:22%;background:linear-gradient(#55d64f 0 12%,#a66a3b 12% 20%,#6c4027 20%);border-top:6px solid #b4f65d}
-#ground:after{content:"";position:absolute;top:28%;width:200%;height:8px;background:repeating-linear-gradient(90deg,#ffdf83 0 30px,transparent 30px 80px);animation:road .5s linear infinite}
-@keyframes road{to{transform:translateX(-80px)}}
-#title{position:absolute;top:12%;width:100%;text-align:center;font-size:clamp(28px,5vw,54px);font-weight:1000;text-shadow:0 5px #237445}
-#subtitle{position:absolute;top:22%;width:100%;text-align:center;color:#174d45;font-weight:bold;letter-spacing:2px}
-#hud{position:absolute;z-index:5;top:10px;left:10px;right:10px;display:flex;justify-content:space-between;gap:7px;flex-wrap:wrap}
-.stat{background:#10294be8;border:2px solid white;border-radius:12px;padding:8px 12px;font-weight:bold}
-#dino{position:absolute;left:13%;bottom:19%;width:100px;height:95px;z-index:3}
-.body{position:absolute;left:10px;bottom:12px;width:72px;height:52px;border-radius:45%;background:#24b979;border:4px solid #12694c}
-.head{position:absolute;left:49px;top:4px;width:49px;height:44px;border-radius:45%;background:#42d88c;border:4px solid #12694c}
-.snout{position:absolute;right:-12px;top:21px;width:25px;height:14px;border-radius:12px;background:#42d88c}
-.eye{position:absolute;right:9px;top:8px;width:8px;height:9px;background:white;border-radius:50%;box-shadow:2px 1px #172b35}
-.tail{position:absolute;left:-18px;bottom:28px;width:35px;height:18px;background:#24b979;clip-path:polygon(100% 0,100% 100%,0 50%)}
-.spikes{position:absolute;left:27px;top:0;width:45px;height:20px;background:repeating-linear-gradient(90deg,transparent 0 8px,#ffcf45 8px 17px,transparent 17px 22px);clip-path:polygon(0 100%,12% 0,28% 100%,45% 0,61% 100%,78% 0,100% 100%)}
-.leg{position:absolute;bottom:0;width:21px;height:29px;background:#159764;border:3px solid #12694c;border-radius:7px;animation:run .2s infinite alternate}
-.leg.a{left:28px}.leg.b{left:58px;animation-delay:.1s}
-@keyframes run{to{transform:rotate(22deg)}}
-#dino.jump{animation:jump .7s ease-out}
-@keyframes jump{0%,100%{bottom:19%}50%{bottom:52%}}
-#dino.duck{transform:scaleY(.62);transform-origin:bottom}
-#items{position:absolute;inset:0;z-index:2;pointer-events:none}
-.item{position:absolute;font-size:42px;filter:drop-shadow(0 5px 3px #0005)}
-#overlay{position:absolute;inset:0;z-index:10;background:#10204bbd;display:flex;align-items:center;justify-content:center;padding:15px}
-.panel{width:min(620px,95vw);background:linear-gradient(140deg,#18466b,#562b83);border:3px solid #c0f8ff;border-radius:25px;padding:25px;text-align:center;box-shadow:0 0 40px #183d5c}
-.panel h1{font-size:clamp(27px,5vw,45px);margin:0 0 10px}
-.panel p{line-height:1.55}
-button{cursor:pointer;border:0;border-radius:13px;padding:12px 17px;font-size:16px;font-weight:bold;background:linear-gradient(90deg,#fff071,#ffad45);color:#38264c;margin:4px}
-#question{display:none;position:absolute;z-index:8;top:32%;left:50%;transform:translateX(-50%);width:min(500px,92vw);padding:18px;border:3px solid #ffe66d;border-radius:20px;background:#152752f5;text-align:center}
-#answers{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-#answers button{background:#31538b;color:white;border:1px solid #c0efff}
-#qmsg{min-height:22px;color:#ffe66d;margin-top:8px;font-weight:bold}
-#controls{position:absolute;bottom:12px;left:12px;right:12px;display:flex;justify-content:space-between;z-index:6}
-#controls button{background:#15355bdd;color:white;border:2px solid white;width:57px;height:53px;padding:0;font-size:22px}
-#toast{position:absolute;top:28%;width:100%;text-align:center;font-size:25px;font-weight:bold;color:white;text-shadow:0 3px #277343;z-index:7;pointer-events:none}
-.hidden{display:none!important}
+body{margin:0;background:#10162c;color:white;font-family:Arial,sans-serif;overflow:hidden}
+#game{position:relative;width:100vw;height:100dvh;overflow:hidden;background:linear-gradient(#58cfff,#d5faff 48%,#8be36e 49%,#21804b)}
+canvas{position:absolute;width:100%;height:100%;inset:0}
+#hud{position:absolute;z-index:3;top:8px;left:8px;right:8px;display:flex;justify-content:space-between;gap:5px;flex-wrap:wrap}
+.stat{padding:7px 10px;background:#101f42eF;border:2px solid #ffffff88;border-radius:12px;font-size:clamp(11px,2vw,15px);font-weight:bold}
+#bar{position:absolute;z-index:3;top:59px;left:10px;right:10px;height:8px;background:#17284b;border-radius:8px;overflow:hidden}
+#progress{height:100%;width:0;background:linear-gradient(90deg,#40ffb0,#ffe86a,#ff8c56)}
+#controls{position:absolute;bottom:10px;left:10px;right:10px;display:flex;justify-content:space-between;z-index:4;pointer-events:none}
+.controls{display:flex;gap:7px;pointer-events:auto}
+button{cursor:pointer;border:0;border-radius:13px;padding:12px 16px;font-size:15px;font-weight:900;background:linear-gradient(90deg,#ffe96d,#ffad4a);color:#282044}
+.ctrl{width:58px;height:52px;padding:0;font-size:23px;background:#132b52eF;color:white;border:2px solid white}
+#overlay{position:absolute;inset:0;z-index:10;display:flex;align-items:center;justify-content:center;padding:12px;background:#0a1638b9}
+.panel{width:min(690px,96vw);max-height:94dvh;overflow:auto;text-align:center;padding:clamp(16px,4vw,30px);border-radius:25px;background:linear-gradient(145deg,#16436c,#522b83);border:3px solid #c7f8ff;box-shadow:0 0 40px #12294b}
+.panel h1{font-size:clamp(25px,5vw,44px);margin:5px 0 12px}
+.panel p{line-height:1.5}
+button:hover{filter:brightness(1.12)}
+#question{display:none;position:absolute;z-index:8;left:50%;top:27%;transform:translateX(-50%);width:min(520px,94vw);padding:17px;border:3px solid #ffe86d;border-radius:20px;background:#10254df5;text-align:center}
+#answers{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+#answers button{background:#34588e;color:white;border:1px solid #d3faff}
+#qmsg{min-height:22px;color:#ffe86d;font-weight:bold;margin-top:8px}
+#toast{position:absolute;z-index:6;top:18%;left:0;width:100%;text-align:center;font-size:clamp(19px,4vw,30px);font-weight:1000;text-shadow:0 3px #174c37;pointer-events:none}
+#bossbar{display:none;position:absolute;top:79px;left:15%;width:70%;height:12px;background:#401d38;border:2px solid white;border-radius:9px;z-index:3;overflow:hidden}
+#bossfill{height:100%;width:100%;background:#ff4d78}
+@media(max-height:500px){#bar{top:54px}#bossbar{top:70px}.panel{padding:12px}#question{top:19%;padding:10px}}
 </style>
 </head>
 <body>
 <div id="game">
-<div id="sun"></div><div id="mountains"></div><div id="trees"></div><div id="ground"></div>
-<div id="title">🦖 DINO ADVENTURE</div>
-<div id="subtitle">RUN • JUMP • COLLECT • EXPLORE</div>
+<canvas id="c"></canvas>
 <div id="hud">
-<div class="stat">⭐ <span id="score">0</span></div>
-<div class="stat">💎 <span id="gems">0</span></div>
-<div class="stat">❤️ <span id="lives">3</span></div>
-<div class="stat">🌋 Level <span id="level">1</span></div>
-<button id="pause">Ⅱ</button>
+ <div class="stat">⭐ <span id="score">0</span></div>
+ <div class="stat">💎 <span id="coins">0</span></div>
+ <div class="stat">❤️ <span id="lives">5</span></div>
+ <div class="stat">🌍 <span id="world">World 1</span></div>
+ <div class="stat">🏆 Stage <span id="stage">1</span>/60</div>
+ <button id="pause" style="padding:7px 12px">Ⅱ</button>
 </div>
-<div id="dino">
-<div class="spikes"></div><div class="tail"></div><div class="body"></div>
-<div class="head"><div class="eye"></div><div class="snout"></div></div>
-<div class="leg a"></div><div class="leg b"></div>
-</div>
-<div id="items"></div><div id="toast"></div>
+<div id="bar"><div id="progress"></div></div>
+<div id="bossbar"><div id="bossfill"></div></div>
+<div id="toast"></div>
 <div id="question">
-<div id="qtext" style="font-size:22px;font-weight:bold;margin-bottom:12px"></div>
-<div id="answers"></div><div id="qmsg"></div>
+ <div id="qtext" style="font-size:21px;font-weight:bold"></div>
+ <div id="answers"></div><div id="qmsg"></div>
 </div>
 <div id="controls">
-<div><button id="jumpBtn">⬆ JUMP</button><button id="duckBtn">⬇ DUCK</button></div>
-<button id="boostBtn">⚡ BOOST</button>
+ <div class="controls">
+  <button class="ctrl" id="jump">⬆</button>
+  <button class="ctrl" id="slide">⬇</button>
+ </div>
+ <div class="controls">
+  <button class="ctrl" id="shield">🛡️</button>
+  <button class="ctrl" id="boost">⚡</button>
+ </div>
 </div>
 <div id="overlay"><div class="panel">
-<h1>🌴 DINO ADVENTURE!</h1>
-<p>Help your dinosaur explore a lost jungle! Jump over logs, dodge lava, collect gems and solve brain challenges.</p>
-<p><b>Controls:</b> SPACE / ↑ = Jump · ↓ = Duck · SHIFT = Boost · P = Pause</p>
-<button id="start">▶ START ADVENTURE</button>
-<p id="best">🏆 Best score: 0</p>
+ <h1>🦖 DINO ADVENTURE</h1>
+ <h2>THE 60-STAGE JUNGLE QUEST</h2>
+ <p>Explore 6 worlds, complete 60 stages, collect gems, solve puzzles, unlock checkpoints and challenge giant jungle bosses!</p>
+ <p>🌴 Green Jungle · 🏜️ Desert · ❄️ Ice World · 🌋 Volcano · 🌙 Night Forest · 💎 Crystal Kingdom</p>
+ <p><b>Controls:</b> SPACE/↑ jump · ↓ slide · X shield · SHIFT boost · P pause</p>
+ <p>Reach checkpoints to restore lives. Every world brings harder obstacles and new rewards. Your progress is saved on this device.</p>
+ <button id="start">▶ START NEW QUEST</button>
+ <button id="resume">↻ CONTINUE SAVED QUEST</button>
+ <p id="saved"></p>
 </div></div>
 </div>
 <script>
-const $=id=>document.getElementById(id);
-const dino=$('dino'),items=$('items'),overlay=$('overlay'),question=$('question');
-let live=false,paused=false,score=0,gems=0,lives=3,level=1,speed=5,last=0,spawnAt=0,qAt=0,boostTo=0,invuln=0,objects=[],raf=0;
-let best=Number(localStorage.getItem('dinoBest')||0);$('best').textContent='🏆 Best score: '+best;
-function hud(){$('score').textContent=score;$('gems').textContent=gems;$('lives').textContent='❤️'.repeat(Math.max(0,lives))+'🖤'.repeat(Math.max(0,3-lives));$('level').textContent=level}
-function toast(t){$('toast').textContent=t;setTimeout(()=>{$('toast').textContent=''},900)}
-function jump(){if(!live||paused||dino.classList.contains('jump'))return;dino.classList.add('jump');setTimeout(()=>dino.classList.remove('jump'),700)}
-function duck(){if(!live||paused)return;dino.classList.add('duck');setTimeout(()=>dino.classList.remove('duck'),600)}
-function boost(){if(!live||paused)return;boostTo=performance.now()+1500;score+=10;toast('⚡ SUPER SPEED!');hud()}
-function spawn(){
-let r=Math.random(),type=r<.48?'gem':r<.75?'log':r<.9?'lava':'branch';
-let el=document.createElement('div');el.className='item';
-el.textContent=type==='gem'?['💎','🪙','⭐'][Math.floor(Math.random()*3)]:type==='log'?'🪵':type==='lava'?'🌋':'🌿';
-el.style.left='105%';el.style.top=type==='branch'?'57%':type==='gem'?'62%':'auto';
-if(type==='log'||type==='lava')el.style.bottom='17%';
-items.appendChild(el);objects.push({el,type,x:105,hit:false});
-}
-function overlap(a,b){let x=a.getBoundingClientRect(),y=b.getBoundingClientRect();return x.left<y.right-8&&x.right>y.left+8&&x.top<y.bottom-8&&x.bottom>y.top+8}
-function remove(o){o.el.remove();objects=objects.filter(v=>v!==o)}
-function ask(){
-if(!live||paused||question.style.display==='block')return;
-let bank=[
-['What is 7 × 8?',['54','56','64','48'],1],
-['Which number is prime?',['21','25','27','31'],3],
-['Next: 3, 6, 12, 24, ...',['30','36','42','48'],3],
-['How many sides has a pentagon?',['4','5','6','8'],1],
-['What is 25% of 80?',['10','15','20','25'],2],
-['Perimeter of a square with side 6 cm?',['12 cm','18 cm','24 cm','36 cm'],2],
-['What is 144 ÷ 12?',['10','11','12','14'],2],
-['If x + 9 = 17, x = ?',['6','7','8','9'],2]
+(()=>{
+const $=id=>document.getElementById(id),canvas=$('c'),ctx=canvas.getContext('2d');
+let W=0,H=0,ground=0,raf=0,last=0;
+let active=false,paused=false,over=false;
+let score=0,coins=0,lives=5,stage=1,stageXP=0,totalRun=0;
+let speed=300,spawnTimer=0,coinTimer=0,questionTimer=0;
+let jumpY=0,vy=0,sliding=false,slideUntil=0;
+let objects=[],particles=[],boss=null,shieldUntil=0,boostUntil=0,invulnUntil=0;
+let questionOpen=false,questionLock=false,worldIndex=0,worldNames=['Green Jungle','Golden Desert','Frozen Peaks','Volcano Land','Night Forest','Crystal Kingdom'];
+let best=Number(localStorage.getItem('dino60best')||0);
+let saved=JSON.parse(localStorage.getItem('dino60save')||'null');
+let worldColors=[
+ ['#58cfff','#d5faff','#76db68','#29804b'],
+ ['#ffc46c','#fff0be','#e6bd67','#aa743e'],
+ ['#8ddfff','#efffff','#c7f5ff','#78b5da'],
+ ['#ff966d','#ffd6a0','#ff6b4e','#a93737'],
+ ['#172451','#423c82','#346b5a','#183e3e'],
+ ['#4939a7','#c5aaff','#56e7cb','#277e80']
 ];
-let q=bank[Math.floor(Math.random()*bank.length)];$('qtext').textContent='🧠 '+q[0];$('answers').innerHTML='';$('qmsg').textContent='';
-q[1].forEach((a,i)=>{let b=document.createElement('button');b.textContent=a;b.onclick=()=>{if(i===q[2]){score+=100;gems+=3;$('qmsg').textContent='🎉 Correct! +100 points +3 gems';}else $('qmsg').textContent='Keep going, adventurer!';hud();setTimeout(()=>{question.style.display='none';qAt=performance.now()},850)};$('answers').appendChild(b)});
-question.style.display='block';
+function resize(){W=canvas.width=Math.floor(innerWidth*devicePixelRatio);H=canvas.height=Math.floor(innerHeight*devicePixelRatio);canvas.style.width=innerWidth+'px';canvas.style.height=innerHeight+'px';ctx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);W=innerWidth;H=innerHeight;ground=H*.79}
+addEventListener('resize',resize);resize();
+function say(t){$('toast').textContent=t;setTimeout(()=>{if($('toast').textContent===t)$('toast').textContent=''},1300)}
+function hud(){
+ $('score').textContent=score;$('coins').textContent=coins;
+ $('lives').textContent='❤️'.repeat(Math.max(0,lives))+'🖤'.repeat(Math.max(0,5-lives));
+ $('stage').textContent=stage;$('world').textContent='World '+Math.ceil(stage/10);
+ $('progress').style.width=(((stage-1)%10+stageXP/100)/10*100)+'%';
+ $('bossbar').style.display=boss?'block':'none';
+ if(boss)$('bossfill').style.width=Math.max(0,boss.hp/boss.max*100)+'%';
 }
-function start(){
-objects.forEach(remove);objects=[];score=0;gems=0;lives=3;level=1;speed=5;live=true;paused=false;
-last=performance.now();spawnAt=last;qAt=last;boostTo=0;invuln=0;
-question.style.display='none';overlay.style.display='none';$('pause').textContent='Ⅱ';hud();raf=requestAnimationFrame(loop);
+function save(){
+ localStorage.setItem('dino60save',JSON.stringify({score,coins,lives,stage,stageXP,totalRun}));
+ localStorage.setItem('dino60best',Math.max(best,score));
 }
-function gameOver(){
-live=false;cancelAnimationFrame(raf);best=Math.max(best,score);localStorage.setItem('dinoBest',best);
-$('best').textContent='🏆 Best score: '+best;
-overlay.style.display='flex';overlay.querySelector('h1').textContent='🏁 ADVENTURE OVER!';
-overlay.querySelector('p').innerHTML='Score: <b>'+score+'</b> · Gems: <b>'+gems+'</b><br>Try again and beat your best score!';
-$('start').textContent='↻ PLAY AGAIN';
+function start(continueSave=false){
+ if(continueSave&&saved){score=saved.score||0;coins=saved.coins||0;lives=Math.max(1,saved.lives||5);stage=saved.stage||1;stageXP=saved.stageXP||0;totalRun=saved.totalRun||0}
+ else{score=0;coins=0;lives=5;stage=1;stageXP=0;totalRun=0}
+ objects=[];particles=[];boss=null;jumpY=0;vy=0;sliding=false;
+ speed=300;spawnTimer=.7;coinTimer=1;questionTimer=20;shieldUntil=0;boostUntil=0;invulnUntil=0;
+ active=true;paused=false;over=false;questionOpen=false;
+ $('question').style.display='none';$('overlay').style.display='none';last=performance.now();hud();
+ cancelAnimationFrame(raf);raf=requestAnimationFrame(loop);
+}
+function rand(a,b){return a+Math.random()*(b-a)}
+function spawn(){
+ let r=Math.random(),type=r<.55?'obstacle':r<.85?'coin':'power';
+ if(type==='obstacle'){
+  let choices=['log','rock','cactus','branch','lava'];
+  let allowed=stage<11?choices.slice(0,3):stage<21?choices.slice(0,4):choices;
+  type=allowed[Math.floor(Math.random()*allowed.length)];
+ }
+ let y=type==='branch'?ground-125:ground-28;
+ objects.push({type,x:W+40,y,w:type==='coin'?26: type==='power'?32:42,h:type==='coin'?30:type==='branch'?26:36,hit:false,spin:rand(0,6)});
+}
+function makeCoins(){
+ for(let i=0;i<5;i++)objects.push({type:'coin',x:W+30+i*38,y:ground-rand(65,145),w:25,h:25,hit:false,spin:0});
+}
+function startBoss(){
+ if(boss||stage%10!==0)return;
+ boss={x:W+50,y:ground-145,w:110,h:130,hp:100,max:100,hitTimer:0};
+ say('⚠️ BOSS CHALLENGE!');
+}
+function jumpNow(){if(!active||paused||questionOpen||jumpY>0)return;vy=-690}
+function slideNow(){if(!active||paused||questionOpen)return;sliding=true;slideUntil=performance.now()+750}
+function shieldNow(){if(!active||paused)return;shieldUntil=performance.now()+3000;say('🛡️ SHIELD ACTIVATED')}
+function boostNow(){if(!active||paused)return;boostUntil=performance.now()+2500;score+=15;say('⚡ SPEED BOOST!');hud()}
+function rectsOverlap(a,b){return a.x<b.x+b.w&&a.x+a.w>b.x&&a.y<b.y+b.h&&a.y+a.h>b.y}
+function playerRect(){return{x:W*.16,y:ground-70+jumpY+(sliding?25:0),w:sliding?65:58,h:sliding?40:65}}
+function hit(){
+ if(performance.now()<invulnUntil)return;
+ if(performance.now()<shieldUntil){shieldUntil=0;say('🛡️ SHIELD SAVED YOU!');return}
+ lives--;invulnUntil=performance.now()+1300;say('💥 Ouch! One life lost');
+ if(lives<=0){lives=0;endGame()}
+}
+function addParticles(x,y,color,n=12){
+ for(let i=0;i<n;i++)particles.push({x,y,vx:rand(-150,150),vy:rand(-200,40),life:rand(.35,.8),color});
+}
+function nextStage(){
+ stageXP=0;stage=Math.min(60,stage+1);score+=250;coins+=5;lives=Math.min(5,lives+1);
+ say('🎉 CHECKPOINT! +250 points · +5 gems · +1 life');
+ if(stage%10===0)startBoss();
+ if(stage>60){winGame();return}
+ save();hud();
+}
+function ask(){
+ if(!active||paused||questionOpen||questionLock)return;
+ questionOpen=true;questionLock=true;
+ const bank=[
+ ['What is 12 × 8?',['86','96','108','88'],1],
+ ['What is 15% of 200?',['15','20','30','45'],2],
+ ['Next number: 2, 4, 8, 16, ...',['18','24','30','32'],3],
+ ['How many sides has a hexagon?',['5','6','7','8'],1],
+ ['Square side = 7. Perimeter?',['14','21','28','49'],2],
+ ['Which is a prime number?',['21','27','29','33'],2],
+ ['What is ¾ of 40?',['20','25','30','35'],2],
+ ['If x + 9 = 21, x = ?',['10','11','12','13'],2],
+ ['Area of 8 × 5 rectangle?',['13','26','40','80'],2],
+ ['Angles in a triangle add up to?',['90°','180°','270°','360°'],1],
+ ['Odd one out: 2, 4, 8, 9',['2','4','8','9'],3],
+ ['What is 144 ÷ 12?',['10','11','12','14'],2]
+ ];
+ let q=bank[Math.floor(Math.random()*bank.length)];
+ $('qtext').textContent='🧠 Brain Challenge: '+q[0];$('answers').innerHTML='';$('qmsg').textContent='';
+ q[1].forEach((a,i)=>{let b=document.createElement('button');b.textContent=a;b.onclick=()=>{
+ if(!questionOpen)return;
+ if(i===q[2]){score+=150;coins+=3;stageXP+=12;$('qmsg').textContent='✅ Brilliant! +150 points +3 gems';addParticles(W/2,H*.4,'#ffe66d',18)}
+ else{$('qmsg').textContent='Almost! Keep exploring.'}
+ hud();setTimeout(()=>{questionOpen=false;$('question').style.display='none';questionTimer=24;questionLock=false;if(stageXP>=100)nextStage()},900)
+ };$('answers').appendChild(b)});
+ $('question').style.display='block';
+}
+function endGame(){
+ active=false;save();cancelAnimationFrame(raf);
+ $('overlay').style.display='flex';$('overlay').querySelector('h1').textContent='🏕️ REST TIME!';
+ $('overlay').querySelector('h2').textContent='Your dinosaur needs a rest';
+ $('overlay').querySelector('p').innerHTML='You reached Stage <b>'+stage+'</b> with <b>'+score+'</b> points and <b>'+coins+'</b> gems.<br>Your checkpoint is saved. Continue when you are ready.';
+ $('start').textContent='▶ NEW QUEST';$('resume').style.display='inline-block';
+}
+function winGame(){
+ active=false;save();cancelAnimationFrame(raf);
+ $('overlay').style.display='flex';$('overlay').querySelector('h1').textContent='👑 DINO CHAMPION!';
+ $('overlay').querySelector('h2').textContent='You completed all 60 stages!';
+ $('overlay').querySelector('p').textContent='Amazing adventurer! You explored every world and defeated every boss.';
+ $('start').textContent='↻ PLAY AGAIN';
+}
+function drawBackground(dt){
+ let wi=Math.min(5,Math.floor((stage-1)/10)),col=worldColors[wi];
+ let gr=ctx.createLinearGradient(0,0,0,H);gr.addColorStop(0,col[0]);gr.addColorStop(.48,col[1]);gr.addColorStop(.49,col[2]);gr.addColorStop(1,col[3]);
+ ctx.fillStyle=gr;ctx.fillRect(0,0,W,H);
+ ctx.fillStyle='#fff2a0';ctx.beginPath();ctx.arc(W*.82,H*.15,35,0,Math.PI*2);ctx.fill();
+ // moving distant hills
+ ctx.fillStyle=wi===4?'#24375c':'#65ad83';
+ for(let i=0;i<7;i++){let x=((i*W/5-(totalRun*speed*.08)%(W/2)+W*2)%(W*1.5))-W*.2;ctx.beginPath();ctx.moveTo(x,ground);ctx.lineTo(x+W*.12,ground-H*.34);ctx.lineTo(x+W*.28,ground);ctx.fill()}
+ // jungle trees
+ for(let i=0;i<14;i++){
+ let x=((i*130-(totalRun*speed*.32)%(W+140)+W+140)%(W+140))-50;
+ ctx.fillStyle=wi===2?'#77a6b6':wi===3?'#8e453d':wi===4?'#1d4948':'#27824c';
+ ctx.fillRect(x,ground-100,15,105);
+ ctx.beginPath();ctx.arc(x+7,ground-110,34,0,Math.PI*2);ctx.fill();
+ }
+ ctx.fillStyle=wi===3?'#9b3830':wi===2?'#a6d9f5':'#89572f';ctx.fillRect(0,ground,W,H-ground);
+ ctx.fillStyle='#52dc59';ctx.fillRect(0,ground,W,10);
+ ctx.fillStyle='#f7dc8a';
+ for(let i=0;i<12;i++){let x=((i*100-(totalRun*speed*.9)%(W+100)+W+100)%(W+100))-40;ctx.fillRect(x,ground+40,50,6)}
+}
+function drawDino(){
+ let p=playerRect(),blink=performance.now()<invulnUntil&&Math.floor(performance.now()/100)%2;
+ if(blink)return;
+ ctx.save();ctx.translate(p.x,p.y);
+ if(sliding)ctx.scale(1,.65);
+ // tail
+ ctx.fillStyle='#20b779';ctx.beginPath();ctx.moveTo(15,40);ctx.lineTo(-14,53);ctx.lineTo(18,58);ctx.fill();
+ // body
+ ctx.fillStyle='#24b979';ctx.strokeStyle='#12694c';ctx.lineWidth=4;
+ ctx.beginPath();ctx.ellipse(30,45,34,25,0,0,Math.PI*2);ctx.fill();ctx.stroke();
+ // head
+ ctx.fillStyle='#42d88c';ctx.beginPath();ctx.ellipse(53,18,25,22,-.2,0,Math.PI*2);ctx.fill();ctx.stroke();
+ ctx.fillRect(65,20,17,12);
+ ctx.fillStyle='white';ctx.beginPath();ctx.arc(60,11,5,0,Math.PI*2);ctx.fill();ctx.fillStyle='#172b35';ctx.beginPath();ctx.arc(62,11,2,0,Math.PI*2);ctx.fill();
+ ctx.fillStyle='#ffce4b';
+ for(let i=0;i<4;i++){ctx.beginPath();ctx.moveTo(22+i*10,23);ctx.lineTo(28+i*10,8);ctx.lineTo(34+i*10,24);ctx.fill()}
+ ctx.fillStyle='#137b59';
+ let leg=Math.sin(totalRun*20)*6;
+ ctx.fillRect(18,61,13,17+leg);ctx.fillRect(43,61,13,17-leg);
+ ctx.restore();
+}
+function drawBoss(dt){
+ if(!boss)return;
+ boss.x-=speed*dt*.08;
+ if(boss.x<W*.68)boss.x=W*.68;
+ let b=boss;
+ ctx.fillStyle='#bd386f';ctx.strokeStyle='#5b1749';ctx.lineWidth=5;
+ ctx.beginPath();ctx.ellipse(b.x,b.y+55,55,65,0,0,Math.PI*2);ctx.fill();ctx.stroke();
+ ctx.fillStyle='#ffcc68';ctx.beginPath();ctx.arc(b.x-15,b.y+35,8,0,Math.PI*2);ctx.arc(b.x+15,b.y+35,8,0,Math.PI*2);ctx.fill();
+ ctx.fillStyle='#fff';ctx.fillRect(b.x-25,b.y+70,50,12);
+ ctx.fillStyle='#ff4d78';ctx.fillRect(b.x-50,b.y-18,100,9);
 }
 function loop(now){
-if(!live)return;raf=requestAnimationFrame(loop);if(paused){last=now;return}
-let dt=Math.min(40,now-last);last=now;let mult=now<boostTo?1.7:1;
-score+=Math.floor(dt*.012*mult);level=1+Math.floor(score/450);speed=Math.min(13,5+level*.55);
-if(now-spawnAt>Math.max(470,1120-level*48)){spawn();spawnAt=now}
-if(now-qAt>17000&&question.style.display!=='block')ask();
-for(let o of [...objects]){
-o.x-=speed*dt*.025*mult;o.el.style.left=o.x+'%';
-if(o.x< -10){remove(o);continue}
-if(!o.hit&&overlap(dino,o.el)){
-if(o.type==='gem'){o.hit=true;gems++;score+=35;toast('+35 ✨');remove(o)}
-else if(now>invuln){
-if(o.type==='branch'&&dino.classList.contains('duck')){remove(o);score+=10}
-else if((o.type==='log'||o.type==='lava')&&dino.classList.contains('jump')){remove(o);score+=10}
-else{lives--;invuln=now+1200;dino.style.opacity='.35';setTimeout(()=>dino.style.opacity='1',250);toast('💥 Ouch!');remove(o);if(lives<=0){hud();gameOver();return}}
-}hud();
+ if(!active)return;
+ raf=requestAnimationFrame(loop);
+ let dt=Math.min(.04,(now-last)/1000||0);last=now;
+ if(paused){drawBackground(0);drawDino();drawBoss(0);return}
+ if(!questionOpen){
+ totalRun+=dt;
+ let mult=now<boostUntil?1.65:1;
+ speed=Math.min(720,300+stage*5+Math.floor(totalRun/45)*10);
+ spawnTimer-=dt;coinTimer-=dt;questionTimer-=dt;
+ if(spawnTimer<=0){spawn();spawnTimer=Math.max(.48,rand(.85,1.55)-stage*.009)}
+ if(coinTimer<=0){makeCoins();coinTimer=rand(4,7)}
+ if(questionTimer<=0){ask();questionTimer=30}
+ stageXP+=dt*(3.3+stage*.025)*mult;
+ if(stageXP>=100&&stage<60&&stage%10!==0)nextStage();
+ if(stage%10===0&&!boss)startBoss();
+ if(boss){
+  boss.hitTimer-=dt;
+  if(boss.hitTimer<=0&&Math.random()<dt*.7){objects.push({type:'fireball',x:boss.x-50,y:ground-60,w:35,h:35,hit:false});boss.hitTimer=1.5}
+  if(boss.hp<=0){boss=null;stageXP=0;stage=Math.min(60,stage+1);score+=600;coins+=10;lives=Math.min(5,lives+2);say('👑 BOSS DEFEATED! +600 points!');save()}
+ }
+ if(jumpY<0||vy<0){vy+=1500*dt;jumpY+=vy*dt;if(jumpY>0){jumpY=0;vy=0}}
+ if(sliding&&now>slideUntil)sliding=false;
+ for(let o of [...objects]){
+  o.x-=speed*dt*mult;
+  if(o.x< -80){objects=objects.filter(a=>a!==o);continue}
+  if(o.type==='coin'){
+   if(Math.abs(o.x-(W*.16+30))<30&&Math.abs(o.y-(ground-40+jumpY))<60){
+    coins++;score+=30;addParticles(o.x,o.y,'#ffe66d',7);objects=objects.filter(a=>a!==o);continue
+   }
+  }else{
+   let p=playerRect(),r={x:o.x,y:o.y,w:o.w,h:o.h};
+   if(rectsOverlap(p,r)){
+    if(o.type==='power'){shieldUntil=now+5000;boostUntil=now+2000;coins+=2;score+=80;say('✨ POWER-UP!');objects=objects.filter(a=>a!==o)}
+    else if(o.type==='fireball'){hit();objects=objects.filter(a=>a!==o)}
+    else if(o.type==='branch'&&sliding){score+=15;objects=objects.filter(a=>a!==o)}
+    else if((o.type==='log'||o.type==='rock'||o.type==='cactus'||o.type==='lava')&&jumpY< -20){score+=15;objects=objects.filter(a=>a!==o)}
+    else if(!o.hit){o.hit=true;hit();objects=objects.filter(a=>a!==o)}
+   }
+  }
+ }
+ score+=Math.floor(dt*8*mult);
+ }
+ drawBackground(dt);
+ // shield ring
+ if(now<shieldUntil){let p=playerRect();ctx.strokeStyle='#7dfbff';ctx.lineWidth=4;ctx.beginPath();ctx.arc(p.x+30,p.y+35,47,0,Math.PI*2);ctx.stroke()}
+ for(let o of objects){
+  ctx.save();ctx.font=(o.type==='coin'?30:o.type==='power'?32:38)+'px Arial';ctx.textAlign='center';
+  let emoji={coin:'💎',log:'🪵',rock:'🪨',cactus:'🌵',branch:'🌿',lava:'🌋',power:'✨',fireball:'🔥'}[o.type]||'🪵';
+  ctx.fillText(emoji,o.x,o.y+25);ctx.restore();
+ }
+ drawDino();drawBoss(dt);
+ for(let p of particles){p.x+=p.vx*dt;p.y+=p.vy*dt;p.vy+=400*dt;p.life-=dt;ctx.globalAlpha=Math.max(0,p.life);ctx.fillStyle=p.color;ctx.fillRect(p.x,p.y,5,5);ctx.globalAlpha=1}
+ particles=particles.filter(p=>p.life>0);
+ hud();
+ if(Math.floor(now/1000)%10===0&&Math.floor(now/1000)!==Math.floor((now-dt*1000)/1000))save();
 }
-}
-hud();
-}
-$('start').onclick=()=>{overlay.querySelector('h1').textContent='🌴 DINO ADVENTURE!';$('start').textContent='▶ START ADVENTURE';start()};
-$('pause').onclick=()=>{if(!live)return;paused=!paused;if(paused){overlay.style.display='flex';overlay.querySelector('h1').textContent='⏸ PAUSED';overlay.querySelector('p').textContent='Your dinosaur is resting. Press Resume to continue.';$('start').textContent='▶ RESUME'}else{overlay.style.display='none';last=performance.now();$('pause').textContent='Ⅱ'}};
-$('jumpBtn').onclick=jump;$('duckBtn').onclick=duck;$('boostBtn').onclick=boost;
-document.addEventListener('keydown',e=>{
-if(['ArrowUp','ArrowDown',' ','Shift'].includes(e.key))e.preventDefault();
-if(e.key===' '||e.key==='ArrowUp'||e.key.toLowerCase()==='w')jump();
-if(e.key==='ArrowDown'||e.key.toLowerCase()==='s')duck();
-if(e.key==='Shift')boost();
-if(e.key.toLowerCase()==='p')$('pause').click();
+$('start').onclick=()=>{saved=null;localStorage.removeItem('dino60save');start(false)};
+$('resume').onclick=()=>{if(saved)start(true);else start(false)};
+$('jump').onclick=jumpNow;$('slide').onclick=slideNow;$('shield').onclick=shieldNow;$('boost').onclick=boostNow;
+$('pause').onclick=()=>{
+ if(!active)return;paused=!paused;
+ if(paused){$('overlay').style.display='flex';$('overlay').querySelector('h1').textContent='⏸ QUEST PAUSED';$('overlay').querySelector('h2').textContent='Take a break, adventurer!';$('overlay').querySelector('p').textContent='Your progress is saved. Press RESUME QUEST when you are ready.';$('start').textContent='▶ RESUME QUEST';$('resume').style.display='none'}
+ else{$('overlay').style.display='none';last=performance.now()}
+};
+$('start').addEventListener('click',()=>{
+ if(active&&paused){paused=false;$('overlay').style.display='none';last=performance.now();return}
 });
-hud();
+document.addEventListener('keydown',e=>{
+ if([' ','ArrowUp','ArrowDown','Shift'].includes(e.key))e.preventDefault();
+ if(e.key===' '||e.key==='ArrowUp')jumpNow();
+ if(e.key==='ArrowDown')slideNow();
+ if(e.key.toLowerCase()==='x')shieldNow();
+ if(e.key==='Shift')boostNow();
+ if(e.key.toLowerCase()==='p')$('pause').click();
+});
+let touchStart=null;
+canvas.addEventListener('touchstart',e=>{touchStart=e.changedTouches[0].clientX},{passive:true});
+canvas.addEventListener('touchend',e=>{if(touchStart===null)return;let dx=e.changedTouches[0].clientX-touchStart;if(Math.abs(dx)>35){dx>0?jumpNow():slideNow()}else jumpNow();touchStart=null},{passive:true});
+if(saved){$('saved').textContent='Saved quest found: Stage '+saved.stage+' · Score '+saved.score+'. Press Continue to resume.';$('resume').style.display='inline-block'}
+else $('resume').style.display='none';
+drawBackground(0);drawDino();hud();
+})();
 </script>
 </body>
 </html>
